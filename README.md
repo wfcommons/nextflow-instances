@@ -1,4 +1,5 @@
 ![Build](https://github.com/wfcommons/nextflow-instances/workflows/Build/badge.svg)
+[![DOI](https://zenodo.org/badge/403473293.svg)](https://zenodo.org/badge/latestdoi/403473293)
 
 <a href="https://wfcommons.org" target="_blank"><img src="https://wfcommons.org/images/wfcommons-horizontal.png" width="350"/></a>
 
