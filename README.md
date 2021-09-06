@@ -1,3 +1,5 @@
+![Build](https://github.com/wfcommons/nextflow-instances/workflows/Build/badge.svg)
+
 <a href="https://wfcommons.org" target="_blank"><img src="https://wfcommons.org/images/wfcommons-horizontal.png" width="350"/></a>
 
 <img src="https://nextflow.io/img/nextflow2014_no-bg.png" width="180"/>
