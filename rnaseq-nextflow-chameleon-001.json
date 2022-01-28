@@ -2,7 +2,7 @@
     "name": "rnaseq-nextflow-chameleon",
     "description": "Instance generated with WfCommons - https://wfcommons.org",
     "createdAt": "2021-09-06T03:14:34.437876",
-    "schemaVersion": "1.2",
+    "schemaVersion": "1.3",
     "author": {
         "name": "cc",
         "email": "support@wfcommons.org"
@@ -15,7 +15,7 @@
     "workflow": {
         "executedAt": "20210906T031434+0000",
         "makespan": 781,
-        "jobs": [
+        "tasks": [
             {
                 "name": "samplesheet_check_samplesheet_test.csv",
                 "type": "compute",

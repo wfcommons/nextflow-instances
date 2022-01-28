@@ -2,7 +2,7 @@
     "name": "viralrecon-nextflow-chameleon",
     "description": "Instance generated with WfCommons - https://wfcommons.org",
     "createdAt": "2021-09-06T03:20:43.796701",
-    "schemaVersion": "1.2",
+    "schemaVersion": "1.3",
     "author": {
         "name": "cc",
         "email": "support@wfcommons.org"
@@ -15,7 +15,7 @@
     "workflow": {
         "executedAt": "20210906T032043+0000",
         "makespan": 971,
-        "jobs": [
+        "tasks": [
             {
                 "name": "samplesheet_check_samplesheet_test_illumina_amplicon.csv",
                 "type": "compute",
