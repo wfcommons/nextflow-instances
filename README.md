@@ -18,10 +18,20 @@ The workflow execution instances recorded in this repository are from
 open-source applications hosted at the [nf-co.re](https://nf-co.re)
 repository:
 
-- [eager](https://nf-co.re/eager)
+- [airrflow](https://nf-co.re/airrflow)
+- [atacseq](https://nf-co.re/atacseq)
+- [bacass](https://nf-co.re/bacass)
+- [chipseq](https://nf-co.re/chipseq)
+- [cutandrun](https://nf-co.re/cutandrun)
+- [fetchngs](https://nf-co.re/fetchngs)
+- [hic](https://nf-co.re/hic)
 - [mag](https://nf-co.re/mag)
-- [mhcquant](https://nf-co.re/mhcquant)
+- [methylseq](https://nf-co.re/methylseq)
 - [rnaseq](https://nf-co.re/rnaseq)
+- [sarek](https://nf-co.re/sarek)
+- [scrnaseq](https://nf-co.re/scrnaseq)
+- [smrnaseq](https://nf-co.re/smrnaseq)
+- [taxprofiler](https://nf-co.re/taxprofiler)
 - [viralrecon](https://nf-co.re/viralrecon)
 
 ### Workflow Simulator
