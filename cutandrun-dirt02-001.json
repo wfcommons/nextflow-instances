@@ -23,7 +23,6 @@
                 },
                 "parents": [],
                 "children": [
-                    "NFCORE_CUTANDRUN.CUTANDRUN.CAT_FASTQ",
                     "NFCORE_CUTANDRUN.CUTANDRUN.FASTQC_TRIMGALORE.FASTQC",
                     "NFCORE_CUTANDRUN.CUTANDRUN.FASTQC_TRIMGALORE.TRIMGALORE"
                 ],
@@ -326,7 +325,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_CUTANDRUN.CUTANDRUN.CAT_FASTQ",
                     "NFCORE_CUTANDRUN.CUTANDRUN.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -394,7 +392,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_CUTANDRUN.CUTANDRUN.CAT_FASTQ",
                     "NFCORE_CUTANDRUN.CUTANDRUN.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -462,7 +459,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_CUTANDRUN.CUTANDRUN.CAT_FASTQ",
                     "NFCORE_CUTANDRUN.CUTANDRUN.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -556,7 +552,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_CUTANDRUN.CUTANDRUN.CAT_FASTQ",
                     "NFCORE_CUTANDRUN.CUTANDRUN.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -4506,7 +4501,6 @@
                     "NFCORE_CUTANDRUN.CUTANDRUN.EXTRACT_FRAGMENTS.AWK"
                 ],
                 "children": [
-                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.PEAK_FRIP"
                 ],
                 "files": [
                     {
@@ -4706,7 +4700,6 @@
                     "NFCORE_CUTANDRUN.CUTANDRUN.DEDUPLICATE_PICARD.BAM_SORT_STATS_SAMTOOLS.SAMTOOLS_SORT"
                 ],
                 "children": [
-                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.PEAK_FRIP",
                     "NFCORE_CUTANDRUN.CUTANDRUN.CUSTOM_DUMPSOFTWAREVERSIONS",
                     "NFCORE_CUTANDRUN.CUTANDRUN.MULTIQC"
                 ],
@@ -5237,7 +5230,6 @@
                     "NFCORE_CUTANDRUN.CUTANDRUN.AWK_NAME_PEAK_BED",
                     "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.PRIMARY_PEAK_COUNTS",
                     "NFCORE_CUTANDRUN.CUTANDRUN.IGV_SESSION",
-                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.PEAK_FRIP",
                     "NFCORE_CUTANDRUN.CUTANDRUN.CUSTOM_DUMPSOFTWAREVERSIONS"
                 ],
                 "files": [
@@ -5700,7 +5692,6 @@
                     "NFCORE_CUTANDRUN.CUTANDRUN.AWK_NAME_PEAK_BED"
                 ],
                 "children": [
-                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.BEDTOOLS_INTERSECT",
                     "NFCORE_CUTANDRUN.CUTANDRUN.CUSTOM_DUMPSOFTWAREVERSIONS"
                 ],
                 "files": [
@@ -6026,7 +6017,6 @@
                     "NFCORE_CUTANDRUN.CUTANDRUN.AWK_EXTRACT_SUMMITS",
                     "NFCORE_CUTANDRUN.CUTANDRUN.SEACR_CALLPEAK_IGG",
                     "NFCORE_CUTANDRUN.CUTANDRUN.PRESEQ_LCEXTRAP",
-                    "NFCORE_CUTANDRUN.CUTANDRUN.CAT_FASTQ",
                     "NFCORE_CUTANDRUN.CUTANDRUN.PREPARE_GENOME.BLACKLIST_BEDTOOLS_COMPLEMENT",
                     "NFCORE_CUTANDRUN.CUTANDRUN.PREPARE_GENOME.BLACKLIST_BEDTOOLS_SORT",
                     "NFCORE_CUTANDRUN.CUTANDRUN.PREPARE_GENOME.BLACKLIST_BEDTOOLS_INTERSECT",
@@ -6080,12 +6070,9 @@
                     "NFCORE_CUTANDRUN.CUTANDRUN.DEEPTOOLS_QC.DEEPTOOLS_PLOTCORRELATION",
                     "NFCORE_CUTANDRUN.CUTANDRUN.DEEPTOOLS_QC.DEEPTOOLS_MULTIBAMSUMMARY",
                     "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.PLOT_CONSENSUS_PEAKS",
-                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.CALCULATE_PEAK_REPROD",
-                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.BEDTOOLS_INTERSECT",
                     "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.CUT_CALC_REPROD",
                     "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.CONSENSUS_PEAK_COUNTS",
-                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.PRIMARY_PEAK_COUNTS",
-                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.PEAK_FRIP"
+                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.PRIMARY_PEAK_COUNTS"
                 ],
                 "children": [
                     "NFCORE_CUTANDRUN.CUTANDRUN.MULTIQC"
@@ -6153,9 +6140,7 @@
                     "NFCORE_CUTANDRUN.CUTANDRUN.DEEPTOOLS_QC.DEEPTOOLS_PLOTPCA",
                     "NFCORE_CUTANDRUN.CUTANDRUN.DEEPTOOLS_QC.DEEPTOOLS_PLOTFINGERPRINT",
                     "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.PRIMARY_PEAK_COUNTS",
-                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.PEAK_FRIP",
                     "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.CONSENSUS_PEAK_COUNTS",
-                    "NFCORE_CUTANDRUN.CUTANDRUN.PEAK_QC.CALCULATE_PEAK_REPROD",
                     "NFCORE_CUTANDRUN.CUTANDRUN.FRAG_LEN_HIST"
                 ],
                 "children": [],

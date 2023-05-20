@@ -666,7 +666,6 @@
                 "parents": [
                     "NFCORE_BACASS.BACASS.FASTQC",
                     "NFCORE_BACASS.BACASS.SKEWER",
-                    "NFCORE_BACASS.BACASS.NANOPLOT",
                     "NFCORE_BACASS.BACASS.UNICYCLER",
                     "NFCORE_BACASS.BACASS.QUAST",
                     "NFCORE_BACASS.BACASS.PROKKA"

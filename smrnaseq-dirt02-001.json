@@ -23,7 +23,6 @@
                 },
                 "parents": [],
                 "children": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTQC_RAW",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP",
                     "NFCORE_SMRNASEQ.SMRNASEQ.MIRTRACE.MIRTRACE_RUN",
@@ -461,7 +460,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -511,7 +509,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -755,7 +752,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP"
                 ],
@@ -860,7 +856,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -910,7 +905,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -976,7 +970,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1042,7 +1035,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1092,7 +1084,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1142,7 +1133,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1208,7 +1198,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1274,7 +1263,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1457,7 +1445,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1523,7 +1510,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1573,7 +1559,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1623,7 +1608,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1689,7 +1673,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -1739,7 +1722,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK"
                 ],
                 "children": [
@@ -2069,7 +2051,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP"
                 ],
@@ -2352,7 +2333,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP"
                 ],
@@ -2635,7 +2615,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP"
                 ],
@@ -2918,7 +2897,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP"
                 ],
@@ -3378,7 +3356,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP"
                 ],
@@ -3661,7 +3638,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP"
                 ],
@@ -3944,7 +3920,6 @@
                     "arguments": []
                 },
                 "parents": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP"
                 ],
@@ -4974,7 +4949,6 @@
                 ],
                 "children": [
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_INDEX",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -6384,7 +6358,6 @@
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_SORT"
                 ],
                 "children": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -7129,7 +7102,6 @@
                 ],
                 "children": [
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_INDEX",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -7175,7 +7147,6 @@
                 ],
                 "children": [
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_INDEX",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -7266,7 +7237,6 @@
                 ],
                 "children": [
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_INDEX",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -7402,7 +7372,6 @@
                 ],
                 "children": [
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_INDEX",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -7493,7 +7462,6 @@
                 ],
                 "children": [
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_INDEX",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -7539,7 +7507,6 @@
                 ],
                 "children": [
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_INDEX",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -7672,7 +7639,6 @@
                 ],
                 "children": [
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_INDEX",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -9010,7 +8976,6 @@
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_SORT"
                 ],
                 "children": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -9055,7 +9020,6 @@
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_SORT"
                 ],
                 "children": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -9100,7 +9064,6 @@
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_SORT"
                 ],
                 "children": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -9145,7 +9108,6 @@
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_SORT"
                 ],
                 "children": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -9190,7 +9152,6 @@
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_SORT"
                 ],
                 "children": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -9235,7 +9196,6 @@
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_SORT"
                 ],
                 "children": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -9280,7 +9240,6 @@
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_SORT"
                 ],
                 "children": [
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -11624,7 +11583,6 @@
                 },
                 "parents": [
                     "NFCORE_SMRNASEQ.SMRNASEQ.INPUT_CHECK.SAMPLESHEET_CHECK",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.CAT_FASTQ",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTQC_RAW",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP",
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTQC_TRIM",
@@ -11655,7 +11613,6 @@
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.INDEX_GENOME",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_SORT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.SAMTOOLS_INDEX",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_FLAGSTAT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_IDXSTATS"
                 ],
@@ -11710,7 +11667,6 @@
                     "NFCORE_SMRNASEQ.SMRNASEQ.FASTQC_FASTP.FASTP",
                     "NFCORE_SMRNASEQ.SMRNASEQ.MIRNA_QUANT.BAM_STATS_MATURE.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.MIRNA_QUANT.BAM_STATS_HAIRPIN.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
-                    "NFCORE_SMRNASEQ.SMRNASEQ.GENOME_QUANT.BAM_SORT_SAMTOOLS.BAM_STATS_SAMTOOLS.SAMTOOLS_STATS",
                     "NFCORE_SMRNASEQ.SMRNASEQ.MIRNA_QUANT.MIRTOP_QUANT",
                     "NFCORE_SMRNASEQ.SMRNASEQ.MIRTRACE.MIRTRACE_RUN"
                 ],

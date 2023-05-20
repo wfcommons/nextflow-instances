@@ -532,7 +532,6 @@
                     "NFCORE_MAG.MAG.SPADES",
                     "NFCORE_MAG.MAG.FILTLONG",
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADESHYBRID",
                     "NFCORE_MAG.MAG.BINNING_PREPARATION.BOWTIE2_ASSEMBLY_ALIGN",
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS_PLOT",
                     "NFCORE_MAG.MAG.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -638,7 +637,6 @@
                     "NFCORE_MAG.MAG.SPADES",
                     "NFCORE_MAG.MAG.FILTLONG",
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADESHYBRID",
                     "NFCORE_MAG.MAG.BINNING_PREPARATION.BOWTIE2_ASSEMBLY_ALIGN",
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS_PLOT",
                     "NFCORE_MAG.MAG.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -1461,8 +1459,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING_PREPARATION.BOWTIE2_ASSEMBLY_ALIGN"
@@ -1541,8 +1538,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -1603,8 +1599,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.CUSTOM_DUMPSOFTWAREVERSIONS",
@@ -1726,8 +1721,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.CUSTOM_DUMPSOFTWAREVERSIONS",
@@ -1849,8 +1843,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -1911,8 +1904,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING_PREPARATION.BOWTIE2_ASSEMBLY_ALIGN"
@@ -1991,8 +1983,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.CUSTOM_DUMPSOFTWAREVERSIONS",
@@ -2114,8 +2105,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING_PREPARATION.BOWTIE2_ASSEMBLY_ALIGN"
@@ -2194,8 +2184,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -2256,8 +2245,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING_PREPARATION.BOWTIE2_ASSEMBLY_ALIGN"
@@ -2336,8 +2324,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.CUSTOM_DUMPSOFTWAREVERSIONS"
@@ -2398,8 +2385,7 @@
                 },
                 "parents": [
                     "NFCORE_MAG.MAG.MEGAHIT",
-                    "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID"
+                    "NFCORE_MAG.MAG.SPADES"
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.CUSTOM_DUMPSOFTWAREVERSIONS",
@@ -4297,7 +4283,6 @@
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS",
-                    "NFCORE_MAG.MAG.CAT",
                     "NFCORE_MAG.MAG.BUSCO_QC.BUSCO",
                     "NFCORE_MAG.MAG.QUAST_BINS",
                     "NFCORE_MAG.MAG.PROKKA",
@@ -4345,7 +4330,6 @@
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS",
-                    "NFCORE_MAG.MAG.CAT",
                     "NFCORE_MAG.MAG.BUSCO_QC.BUSCO",
                     "NFCORE_MAG.MAG.QUAST_BINS",
                     "NFCORE_MAG.MAG.PROKKA",
@@ -4709,7 +4693,6 @@
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS",
-                    "NFCORE_MAG.MAG.CAT",
                     "NFCORE_MAG.MAG.BUSCO_QC.BUSCO",
                     "NFCORE_MAG.MAG.QUAST_BINS",
                     "NFCORE_MAG.MAG.PROKKA",
@@ -4757,7 +4740,6 @@
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS",
-                    "NFCORE_MAG.MAG.CAT",
                     "NFCORE_MAG.MAG.BUSCO_QC.BUSCO",
                     "NFCORE_MAG.MAG.QUAST_BINS",
                     "NFCORE_MAG.MAG.PROKKA",
@@ -5615,7 +5597,6 @@
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS",
-                    "NFCORE_MAG.MAG.CAT",
                     "NFCORE_MAG.MAG.BUSCO_QC.BUSCO",
                     "NFCORE_MAG.MAG.QUAST_BINS",
                     "NFCORE_MAG.MAG.PROKKA",
@@ -5663,7 +5644,6 @@
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS",
-                    "NFCORE_MAG.MAG.CAT",
                     "NFCORE_MAG.MAG.BUSCO_QC.BUSCO",
                     "NFCORE_MAG.MAG.QUAST_BINS",
                     "NFCORE_MAG.MAG.PROKKA",
@@ -5711,7 +5691,6 @@
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS",
-                    "NFCORE_MAG.MAG.CAT",
                     "NFCORE_MAG.MAG.BUSCO_QC.BUSCO",
                     "NFCORE_MAG.MAG.QUAST_BINS",
                     "NFCORE_MAG.MAG.PROKKA",
@@ -5759,7 +5738,6 @@
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS",
-                    "NFCORE_MAG.MAG.CAT",
                     "NFCORE_MAG.MAG.BUSCO_QC.BUSCO",
                     "NFCORE_MAG.MAG.QUAST_BINS",
                     "NFCORE_MAG.MAG.PROKKA",
@@ -5807,7 +5785,6 @@
                 ],
                 "children": [
                     "NFCORE_MAG.MAG.BINNING.MAG_DEPTHS",
-                    "NFCORE_MAG.MAG.CAT",
                     "NFCORE_MAG.MAG.BUSCO_QC.BUSCO",
                     "NFCORE_MAG.MAG.QUAST_BINS",
                     "NFCORE_MAG.MAG.PROKKA",
@@ -11682,15 +11659,10 @@
                     "NFCORE_MAG.MAG.FASTQC_RAW",
                     "NFCORE_MAG.MAG.FASTP",
                     "NFCORE_MAG.MAG.BOWTIE2_PHIX_REMOVAL_ALIGN",
-                    "NFCORE_MAG.MAG.NANOPLOT_RAW",
-                    "NFCORE_MAG.MAG.PORECHOP",
-                    "NFCORE_MAG.MAG.NANOLYSE",
-                    "NFCORE_MAG.MAG.FILTLONG",
                     "NFCORE_MAG.MAG.CENTRIFUGE",
                     "NFCORE_MAG.MAG.KRAKEN2",
                     "NFCORE_MAG.MAG.MEGAHIT",
                     "NFCORE_MAG.MAG.SPADES",
-                    "NFCORE_MAG.MAG.SPADESHYBRID",
                     "NFCORE_MAG.MAG.QUAST",
                     "NFCORE_MAG.MAG.PRODIGAL",
                     "NFCORE_MAG.MAG.BINNING_PREPARATION.BOWTIE2_ASSEMBLY_ALIGN",
@@ -11706,7 +11678,6 @@
                     "NFCORE_MAG.MAG.BINNING.GUNZIP_UNBINS",
                     "NFCORE_MAG.MAG.BUSCO_QC.BUSCO",
                     "NFCORE_MAG.MAG.QUAST_BINS",
-                    "NFCORE_MAG.MAG.CAT",
                     "NFCORE_MAG.MAG.PROKKA"
                 ],
                 "children": [
