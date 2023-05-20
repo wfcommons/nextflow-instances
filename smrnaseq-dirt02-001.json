@@ -18,7 +18,7 @@
                 "id": "1",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "check_samplesheet.py \\\n        samplesheet.csv \\\n        samplesheet.valid.csv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:INPUT_CHECK:SAMPLESHEET_CHECK\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -62,7 +62,7 @@
                 "id": "2",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Uncompress FASTA reference files if necessary\n    FASTA=\"mature.fa\"\n    if [ ${FASTA: -3} == \".gz\" ]; then\n        gunzip -f $FASTA\n        FASTA=${FASTA%%.gz}\n    fi\n    # Remove spaces from miRBase FASTA files\n    # sed -i 's, ,_,g' $FASTA\n    sed '/^[^>]/s/[^AUGCaugc]/N/g' $FASTA > ${FASTA}_parsed.fa\n    # TODO perl -ane 's/[ybkmrsw]/N/ig;print;' ${FASTA}_parsed_tmp.fa > ${FASTA}_parsed.fa\n\n    sed -i 's/ .*//' ${FASTA}_parsed.fa\n    seqkit grep -r --pattern \".*hsa-.*\" ${FASTA}_parsed.fa > ${FASTA}_sps.fa\n    seqkit seq --rna2dna ${FASTA}_sps.fa > ${FASTA}_igenome.fa\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:PARSE_MATURE\":\n        seqkit: $(echo $(seqkit 2>&1) | sed 's/^.*Version: //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -103,7 +103,7 @@
                 "id": "3",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Uncompress FASTA reference files if necessary\n    FASTA=\"hairpin.fa\"\n    if [ ${FASTA: -3} == \".gz\" ]; then\n        gunzip -f $FASTA\n        FASTA=${FASTA%%.gz}\n    fi\n    # Remove spaces from miRBase FASTA files\n    # sed -i 's, ,_,g' $FASTA\n    sed '/^[^>]/s/[^AUGCaugc]/N/g' $FASTA > ${FASTA}_parsed.fa\n    # TODO perl -ane 's/[ybkmrsw]/N/ig;print;' ${FASTA}_parsed_tmp.fa > ${FASTA}_parsed.fa\n\n    sed -i 's/ .*//' ${FASTA}_parsed.fa\n    seqkit grep -r --pattern \".*hsa-.*\" ${FASTA}_parsed.fa > ${FASTA}_sps.fa\n    seqkit seq --rna2dna ${FASTA}_sps.fa > ${FASTA}_igenome.fa\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:PARSE_HAIRPIN\":\n        seqkit: $(echo $(seqkit 2>&1) | sed 's/^.*Version: //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -144,7 +144,7 @@
                 "id": "4",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Remove any special base characters from reference genome FASTA file\n    sed '/^[^>]/s/[^ATGCatgc]/N/g' genome.fa > genome.edited.fa\n    sed -i 's/ .*//' genome.edited.fa\n\n    # Build bowtie index\n    bowtie-build genome.edited.fa genome --threads 1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:INDEX_GENOME\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -221,7 +221,7 @@
                 "id": "5",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "fasta_formatter -w 0 -i mature.fa_igenome.fa -o mature.fa_igenome.fa_idx.fa\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:FORMAT_MATURE\":\n        fastx_toolkit:  $(echo \"0.0.14\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -265,7 +265,7 @@
                 "id": "6",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "fasta_formatter -w 0 -i hairpin.fa_igenome.fa -o hairpin.fa_igenome.fa_idx.fa\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:FORMAT_HAIRPIN\":\n        fastx_toolkit:  $(echo \"0.0.14\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -310,7 +310,7 @@
                 "id": "9",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bowtie-build mature.fa_igenome.fa_idx.fa fasta_bidx --threads 1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:INDEX_MATURE\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -383,7 +383,7 @@
                 "id": "10",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bowtie-build hairpin.fa_igenome.fa_idx.fa fasta_bidx --threads 1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:INDEX_HAIRPIN\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -457,7 +457,7 @@
                 "id": "11",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone1_N3.fastq.gz ] && ln -s C1-N3-R1_S6_L001_R1_001.fastq.gz Clone1_N3.fastq.gz\n        fastqc --quiet --threads 1 Clone1_N3.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_RAW\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -507,7 +507,7 @@
                 "id": "12",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone1_N3.fastq.gz ] && ln -sf C1-N3-R1_S6_L001_R1_001.fastq.gz Clone1_N3.fastq.gz\n\n        fastp \\\n            --stdout \\\n            --in1 Clone1_N3.fastq.gz \\\n            --out1  Clone1_N3.fastp.fastq.gz \\\n            --thread 1 \\\n            --json Clone1_N3.fastp.json \\\n            --html Clone1_N3.fastp.html \\\n             \\\n            -l 17 --max_len1 40  --adapter_fasta /home/kyle/.nextflow/assets/nf-core/smrnaseq/assets/known_adapters.fa \\\n            2> Clone1_N3.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -573,7 +573,7 @@
                 "id": "27",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone1_N3.fastq.gz ] && ln -s Clone1_N3.fastp.fastq.gz Clone1_N3.fastq.gz\n        fastqc --quiet --threads 1 Clone1_N3.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_TRIM\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -621,7 +621,7 @@
                 "id": "25",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone1_N3.fastp.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone1_N3_mature_unmapped.fq -S > Clone1_N3_mature.sam\n\n    samtools view -bS Clone1_N3_mature.sam > Clone1_N3_mature.bam\n\n    if [ ! -f  \"Clone1_N3_mature_unmapped.fq\" ]\n    then\n        touch Clone1_N3_mature_unmapped.fq\n    fi\n    gzip Clone1_N3_mature_unmapped.fq\n    mkdir unmapped\n    mv  Clone1_N3_mature_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_MATURE\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -708,7 +708,7 @@
                 "id": "26",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "seqcluster collapse -f Clone1_N3.fastp.fastq.gz -m 1 --min_size 15 -o collapsed\n    gzip collapsed/*_trimmed.fastq\n    mkdir final\n    mv collapsed/*.fastq.gz final/.\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:SEQCLUSTER_SEQUENCES\":\n        seqcluster: $(echo $(seqcluster --version 2>&1) | sed 's/^.*seqcluster //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -751,7 +751,7 @@
                 "id": "28",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "export mirtracejar=$(dirname $(which mirtrace))\n    for i in C1-N3-R1_S6_L001_R1_001.fastq.gz\n    do\n        path=$(realpath ${i})\n        prefix=$(echo ${i} | sed -e 's/.gz//' -e 's/.fastq//' -e 's/.fq//' -e 's/_val_1//' -e 's/_trimmed//' -e 's/_R1//' -e 's/.R1//')\n        echo $path\",\"$prefix\n    done > mirtrace_config\n\n    java -Xms6442450944 -Xmx6442450944 -jar $mirtracejar/mirtrace.jar --mirtrace-wrapper-name mirtrace qc  \\\n        --species hsa \\\n         \\\n        --protocol illumina \\\n        --config mirtrace_config \\\n        --write-fasta \\\n        --output-dir mirtrace \\\n        --force\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRTRACE:MIRTRACE_RUN\":\n        mirtrace: $(echo $(mirtrace -v 2>&1))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -856,7 +856,7 @@
                 "id": "15",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone9_N2.fastq.gz ] && ln -s C9-N2-R1_S8_L001_R1_001.fastq.gz Clone9_N2.fastq.gz\n        fastqc --quiet --threads 1 Clone9_N2.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_RAW\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -906,7 +906,7 @@
                 "id": "16",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone9_N2.fastq.gz ] && ln -sf C9-N2-R1_S8_L001_R1_001.fastq.gz Clone9_N2.fastq.gz\n\n        fastp \\\n            --stdout \\\n            --in1 Clone9_N2.fastq.gz \\\n            --out1  Clone9_N2.fastp.fastq.gz \\\n            --thread 1 \\\n            --json Clone9_N2.fastp.json \\\n            --html Clone9_N2.fastp.html \\\n             \\\n            -l 17 --max_len1 40  --adapter_fasta /home/kyle/.nextflow/assets/nf-core/smrnaseq/assets/known_adapters.fa \\\n            2> Clone9_N2.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -972,7 +972,7 @@
                 "id": "17",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone9_N3.fastq.gz ] && ln -sf C9-N3-R1_S9_L001_R1_001.fastq.gz Clone9_N3.fastq.gz\n\n        fastp \\\n            --stdout \\\n            --in1 Clone9_N3.fastq.gz \\\n            --out1  Clone9_N3.fastp.fastq.gz \\\n            --thread 1 \\\n            --json Clone9_N3.fastp.json \\\n            --html Clone9_N3.fastp.html \\\n             \\\n            -l 17 --max_len1 40  --adapter_fasta /home/kyle/.nextflow/assets/nf-core/smrnaseq/assets/known_adapters.fa \\\n            2> Clone9_N3.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1038,7 +1038,7 @@
                 "id": "18",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone9_N3.fastq.gz ] && ln -s C9-N3-R1_S9_L001_R1_001.fastq.gz Clone9_N3.fastq.gz\n        fastqc --quiet --threads 1 Clone9_N3.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_RAW\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1088,7 +1088,7 @@
                 "id": "14",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone9_N1.fastq.gz ] && ln -s C9-N1-R1_S7_L001_R1_001.fastq.gz Clone9_N1.fastq.gz\n        fastqc --quiet --threads 1 Clone9_N1.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_RAW\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1138,7 +1138,7 @@
                 "id": "13",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone9_N1.fastq.gz ] && ln -sf C9-N1-R1_S7_L001_R1_001.fastq.gz Clone9_N1.fastq.gz\n\n        fastp \\\n            --stdout \\\n            --in1 Clone9_N1.fastq.gz \\\n            --out1  Clone9_N1.fastp.fastq.gz \\\n            --thread 1 \\\n            --json Clone9_N1.fastp.json \\\n            --html Clone9_N1.fastp.html \\\n             \\\n            -l 17 --max_len1 40  --adapter_fasta /home/kyle/.nextflow/assets/nf-core/smrnaseq/assets/known_adapters.fa \\\n            2> Clone9_N1.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1204,7 +1204,7 @@
                 "id": "21",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Control_N2.fastq.gz ] && ln -sf Ctl-N2-R1_S2_L001_R1_001.fastq.gz Control_N2.fastq.gz\n\n        fastp \\\n            --stdout \\\n            --in1 Control_N2.fastq.gz \\\n            --out1  Control_N2.fastp.fastq.gz \\\n            --thread 1 \\\n            --json Control_N2.fastp.json \\\n            --html Control_N2.fastp.html \\\n             \\\n            -l 17 --max_len1 40  --adapter_fasta /home/kyle/.nextflow/assets/nf-core/smrnaseq/assets/known_adapters.fa \\\n            2> Control_N2.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1270,7 +1270,7 @@
                 "id": "22",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Control_N2.fastq.gz ] && ln -s Ctl-N2-R1_S2_L001_R1_001.fastq.gz Control_N2.fastq.gz\n        fastqc --quiet --threads 1 Control_N2.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_RAW\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1320,7 +1320,7 @@
                 "id": "29",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone1_N3_mature.sorted.bam -T Clone1_N3_mature.sorted Clone1_N3_mature.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1366,7 +1366,7 @@
                 "id": "30",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone1_N3_mature_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone1_N3_mature_hairpin_unmapped.fq -S > Clone1_N3_mature_hairpin.sam\n\n    samtools view -bS Clone1_N3_mature_hairpin.sam > Clone1_N3_mature_hairpin.bam\n\n    if [ ! -f  \"Clone1_N3_mature_hairpin_unmapped.fq\" ]\n    then\n        touch Clone1_N3_mature_hairpin_unmapped.fq\n    fi\n    gzip Clone1_N3_mature_hairpin_unmapped.fq\n    mkdir unmapped\n    mv  Clone1_N3_mature_hairpin_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_HAIRPIN\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1453,7 +1453,7 @@
                 "id": "20",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Control_N1.fastq.gz ] && ln -sf Ctl-N1-R1_S1_L001_R1_001.fastq.gz Control_N1.fastq.gz\n\n        fastp \\\n            --stdout \\\n            --in1 Control_N1.fastq.gz \\\n            --out1  Control_N1.fastp.fastq.gz \\\n            --thread 1 \\\n            --json Control_N1.fastp.json \\\n            --html Control_N1.fastp.html \\\n             \\\n            -l 17 --max_len1 40  --adapter_fasta /home/kyle/.nextflow/assets/nf-core/smrnaseq/assets/known_adapters.fa \\\n            2> Control_N1.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1519,7 +1519,7 @@
                 "id": "19",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Control_N1.fastq.gz ] && ln -s Ctl-N1-R1_S1_L001_R1_001.fastq.gz Control_N1.fastq.gz\n        fastqc --quiet --threads 1 Control_N1.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_RAW\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1569,7 +1569,7 @@
                 "id": "23",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Control_N3.fastq.gz ] && ln -s Ctl-N3-R1_S3_L001_R1_001.fastq.gz Control_N3.fastq.gz\n        fastqc --quiet --threads 1 Control_N3.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_RAW\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1619,7 +1619,7 @@
                 "id": "24",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Control_N3.fastq.gz ] && ln -sf Ctl-N3-R1_S3_L001_R1_001.fastq.gz Control_N3.fastq.gz\n\n        fastp \\\n            --stdout \\\n            --in1 Control_N3.fastq.gz \\\n            --out1  Control_N3.fastp.fastq.gz \\\n            --thread 1 \\\n            --json Control_N3.fastp.json \\\n            --html Control_N3.fastp.html \\\n             \\\n            -l 17 --max_len1 40  --adapter_fasta /home/kyle/.nextflow/assets/nf-core/smrnaseq/assets/known_adapters.fa \\\n            2> Control_N3.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1685,7 +1685,7 @@
                 "id": "8",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone1_N1.fastq.gz ] && ln -s C1-N1-R1_S4_L001_R1_001.fastq.gz Clone1_N1.fastq.gz\n        fastqc --quiet --threads 1 Clone1_N1.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_RAW\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1735,7 +1735,7 @@
                 "id": "7",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone1_N1.fastq.gz ] && ln -sf C1-N1-R1_S4_L001_R1_001.fastq.gz Clone1_N1.fastq.gz\n\n        fastp \\\n            --stdout \\\n            --in1 Clone1_N1.fastq.gz \\\n            --out1  Clone1_N1.fastp.fastq.gz \\\n            --thread 1 \\\n            --json Clone1_N1.fastp.json \\\n            --html Clone1_N1.fastp.html \\\n             \\\n            -l 17 --max_len1 40  --adapter_fasta /home/kyle/.nextflow/assets/nf-core/smrnaseq/assets/known_adapters.fa \\\n            2> Clone1_N1.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1801,7 +1801,7 @@
                 "id": "31",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone1_N3.fastp_trimmed.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone1_N3_seqcluster_unmapped.fq -S > Clone1_N3_seqcluster.sam\n\n    samtools view -bS Clone1_N3_seqcluster.sam > Clone1_N3_seqcluster.bam\n\n    if [ ! -f  \"Clone1_N3_seqcluster_unmapped.fq\" ]\n    then\n        touch Clone1_N3_seqcluster_unmapped.fq\n    fi\n    gzip Clone1_N3_seqcluster_unmapped.fq\n    mkdir unmapped\n    mv  Clone1_N3_seqcluster_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_SEQCLUSTER\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1887,7 +1887,7 @@
                 "id": "33",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone9_N2.fastq.gz ] && ln -s Clone9_N2.fastp.fastq.gz Clone9_N2.fastq.gz\n        fastqc --quiet --threads 1 Clone9_N2.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_TRIM\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1935,7 +1935,7 @@
                 "id": "35",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "seqcluster collapse -f Clone9_N2.fastp.fastq.gz -m 1 --min_size 15 -o collapsed\n    gzip collapsed/*_trimmed.fastq\n    mkdir final\n    mv collapsed/*.fastq.gz final/.\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:SEQCLUSTER_SEQUENCES\":\n        seqcluster: $(echo $(seqcluster --version 2>&1) | sed 's/^.*seqcluster //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1978,7 +1978,7 @@
                 "id": "34",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N2.fastp.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N2_mature_unmapped.fq -S > Clone9_N2_mature.sam\n\n    samtools view -bS Clone9_N2_mature.sam > Clone9_N2_mature.bam\n\n    if [ ! -f  \"Clone9_N2_mature_unmapped.fq\" ]\n    then\n        touch Clone9_N2_mature_unmapped.fq\n    fi\n    gzip Clone9_N2_mature_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N2_mature_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_MATURE\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2065,7 +2065,7 @@
                 "id": "32",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "export mirtracejar=$(dirname $(which mirtrace))\n    for i in C9-N2-R1_S8_L001_R1_001.fastq.gz\n    do\n        path=$(realpath ${i})\n        prefix=$(echo ${i} | sed -e 's/.gz//' -e 's/.fastq//' -e 's/.fq//' -e 's/_val_1//' -e 's/_trimmed//' -e 's/_R1//' -e 's/.R1//')\n        echo $path\",\"$prefix\n    done > mirtrace_config\n\n    java -Xms6442450944 -Xmx6442450944 -jar $mirtracejar/mirtrace.jar --mirtrace-wrapper-name mirtrace qc  \\\n        --species hsa \\\n         \\\n        --protocol illumina \\\n        --config mirtrace_config \\\n        --write-fasta \\\n        --output-dir mirtrace \\\n        --force\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRTRACE:MIRTRACE_RUN\":\n        mirtrace: $(echo $(mirtrace -v 2>&1))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2170,7 +2170,7 @@
                 "id": "38",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "seqcluster collapse -f Clone9_N3.fastp.fastq.gz -m 1 --min_size 15 -o collapsed\n    gzip collapsed/*_trimmed.fastq\n    mkdir final\n    mv collapsed/*.fastq.gz final/.\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:SEQCLUSTER_SEQUENCES\":\n        seqcluster: $(echo $(seqcluster --version 2>&1) | sed 's/^.*seqcluster //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2213,7 +2213,7 @@
                 "id": "37",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone9_N3.fastq.gz ] && ln -s Clone9_N3.fastp.fastq.gz Clone9_N3.fastq.gz\n        fastqc --quiet --threads 1 Clone9_N3.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_TRIM\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2261,7 +2261,7 @@
                 "id": "39",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N3.fastp.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N3_mature_unmapped.fq -S > Clone9_N3_mature.sam\n\n    samtools view -bS Clone9_N3_mature.sam > Clone9_N3_mature.bam\n\n    if [ ! -f  \"Clone9_N3_mature_unmapped.fq\" ]\n    then\n        touch Clone9_N3_mature_unmapped.fq\n    fi\n    gzip Clone9_N3_mature_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N3_mature_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_MATURE\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2348,7 +2348,7 @@
                 "id": "36",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "export mirtracejar=$(dirname $(which mirtrace))\n    for i in C9-N3-R1_S9_L001_R1_001.fastq.gz\n    do\n        path=$(realpath ${i})\n        prefix=$(echo ${i} | sed -e 's/.gz//' -e 's/.fastq//' -e 's/.fq//' -e 's/_val_1//' -e 's/_trimmed//' -e 's/_R1//' -e 's/.R1//')\n        echo $path\",\"$prefix\n    done > mirtrace_config\n\n    java -Xms6442450944 -Xmx6442450944 -jar $mirtracejar/mirtrace.jar --mirtrace-wrapper-name mirtrace qc  \\\n        --species hsa \\\n         \\\n        --protocol illumina \\\n        --config mirtrace_config \\\n        --write-fasta \\\n        --output-dir mirtrace \\\n        --force\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRTRACE:MIRTRACE_RUN\":\n        mirtrace: $(echo $(mirtrace -v 2>&1))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2453,7 +2453,7 @@
                 "id": "42",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N1.fastp.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N1_mature_unmapped.fq -S > Clone9_N1_mature.sam\n\n    samtools view -bS Clone9_N1_mature.sam > Clone9_N1_mature.bam\n\n    if [ ! -f  \"Clone9_N1_mature_unmapped.fq\" ]\n    then\n        touch Clone9_N1_mature_unmapped.fq\n    fi\n    gzip Clone9_N1_mature_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N1_mature_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_MATURE\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2540,7 +2540,7 @@
                 "id": "41",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "seqcluster collapse -f Clone9_N1.fastp.fastq.gz -m 1 --min_size 15 -o collapsed\n    gzip collapsed/*_trimmed.fastq\n    mkdir final\n    mv collapsed/*.fastq.gz final/.\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:SEQCLUSTER_SEQUENCES\":\n        seqcluster: $(echo $(seqcluster --version 2>&1) | sed 's/^.*seqcluster //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2583,7 +2583,7 @@
                 "id": "40",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone9_N1.fastq.gz ] && ln -s Clone9_N1.fastp.fastq.gz Clone9_N1.fastq.gz\n        fastqc --quiet --threads 1 Clone9_N1.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_TRIM\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2631,7 +2631,7 @@
                 "id": "43",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "export mirtracejar=$(dirname $(which mirtrace))\n    for i in C9-N1-R1_S7_L001_R1_001.fastq.gz\n    do\n        path=$(realpath ${i})\n        prefix=$(echo ${i} | sed -e 's/.gz//' -e 's/.fastq//' -e 's/.fq//' -e 's/_val_1//' -e 's/_trimmed//' -e 's/_R1//' -e 's/.R1//')\n        echo $path\",\"$prefix\n    done > mirtrace_config\n\n    java -Xms6442450944 -Xmx6442450944 -jar $mirtracejar/mirtrace.jar --mirtrace-wrapper-name mirtrace qc  \\\n        --species hsa \\\n         \\\n        --protocol illumina \\\n        --config mirtrace_config \\\n        --write-fasta \\\n        --output-dir mirtrace \\\n        --force\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRTRACE:MIRTRACE_RUN\":\n        mirtrace: $(echo $(mirtrace -v 2>&1))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2736,7 +2736,7 @@
                 "id": "46",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "seqcluster collapse -f Control_N2.fastp.fastq.gz -m 1 --min_size 15 -o collapsed\n    gzip collapsed/*_trimmed.fastq\n    mkdir final\n    mv collapsed/*.fastq.gz final/.\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:SEQCLUSTER_SEQUENCES\":\n        seqcluster: $(echo $(seqcluster --version 2>&1) | sed 's/^.*seqcluster //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2779,7 +2779,7 @@
                 "id": "44",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Control_N2.fastq.gz ] && ln -s Control_N2.fastp.fastq.gz Control_N2.fastq.gz\n        fastqc --quiet --threads 1 Control_N2.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_TRIM\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2827,7 +2827,7 @@
                 "id": "45",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N2.fastp.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N2_mature_unmapped.fq -S > Control_N2_mature.sam\n\n    samtools view -bS Control_N2_mature.sam > Control_N2_mature.bam\n\n    if [ ! -f  \"Control_N2_mature_unmapped.fq\" ]\n    then\n        touch Control_N2_mature_unmapped.fq\n    fi\n    gzip Control_N2_mature_unmapped.fq\n    mkdir unmapped\n    mv  Control_N2_mature_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_MATURE\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2914,7 +2914,7 @@
                 "id": "47",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "export mirtracejar=$(dirname $(which mirtrace))\n    for i in Ctl-N2-R1_S2_L001_R1_001.fastq.gz\n    do\n        path=$(realpath ${i})\n        prefix=$(echo ${i} | sed -e 's/.gz//' -e 's/.fastq//' -e 's/.fq//' -e 's/_val_1//' -e 's/_trimmed//' -e 's/_R1//' -e 's/.R1//')\n        echo $path\",\"$prefix\n    done > mirtrace_config\n\n    java -Xms6442450944 -Xmx6442450944 -jar $mirtracejar/mirtrace.jar --mirtrace-wrapper-name mirtrace qc  \\\n        --species hsa \\\n         \\\n        --protocol illumina \\\n        --config mirtrace_config \\\n        --write-fasta \\\n        --output-dir mirtrace \\\n        --force\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRTRACE:MIRTRACE_RUN\":\n        mirtrace: $(echo $(mirtrace -v 2>&1))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3019,7 +3019,7 @@
                 "id": "48",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone1_N3_mature.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3064,7 +3064,7 @@
                 "id": "49",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone1_N3_mature_hairpin.sorted.bam -T Clone1_N3_mature_hairpin.sorted Clone1_N3_mature_hairpin.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3110,7 +3110,7 @@
                 "id": "50",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone1_N3_mature_hairpin_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone1_N3_mature_hairpin_genome_unmapped.fq -S > Clone1_N3_mature_hairpin_genome.sam\n\n    samtools view -bS Clone1_N3_mature_hairpin_genome.sam > Clone1_N3_mature_hairpin_genome.bam\n\n    if [ ! -f  \"Clone1_N3_mature_hairpin_genome_unmapped.fq\" ]\n    then\n        touch Clone1_N3_mature_hairpin_genome_unmapped.fq\n    fi\n    gzip Clone1_N3_mature_hairpin_genome_unmapped.fq\n    mkdir unmapped\n    mv  Clone1_N3_mature_hairpin_genome_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BOWTIE_MAP_GENOME\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3196,7 +3196,7 @@
                 "id": "52",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "seqcluster collapse -f Control_N1.fastp.fastq.gz -m 1 --min_size 15 -o collapsed\n    gzip collapsed/*_trimmed.fastq\n    mkdir final\n    mv collapsed/*.fastq.gz final/.\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:SEQCLUSTER_SEQUENCES\":\n        seqcluster: $(echo $(seqcluster --version 2>&1) | sed 's/^.*seqcluster //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3239,7 +3239,7 @@
                 "id": "53",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N1.fastp.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N1_mature_unmapped.fq -S > Control_N1_mature.sam\n\n    samtools view -bS Control_N1_mature.sam > Control_N1_mature.bam\n\n    if [ ! -f  \"Control_N1_mature_unmapped.fq\" ]\n    then\n        touch Control_N1_mature_unmapped.fq\n    fi\n    gzip Control_N1_mature_unmapped.fq\n    mkdir unmapped\n    mv  Control_N1_mature_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_MATURE\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3326,7 +3326,7 @@
                 "id": "51",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Control_N1.fastq.gz ] && ln -s Control_N1.fastp.fastq.gz Control_N1.fastq.gz\n        fastqc --quiet --threads 1 Control_N1.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_TRIM\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -3374,7 +3374,7 @@
                 "id": "54",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "export mirtracejar=$(dirname $(which mirtrace))\n    for i in Ctl-N1-R1_S1_L001_R1_001.fastq.gz\n    do\n        path=$(realpath ${i})\n        prefix=$(echo ${i} | sed -e 's/.gz//' -e 's/.fastq//' -e 's/.fq//' -e 's/_val_1//' -e 's/_trimmed//' -e 's/_R1//' -e 's/.R1//')\n        echo $path\",\"$prefix\n    done > mirtrace_config\n\n    java -Xms6442450944 -Xmx6442450944 -jar $mirtracejar/mirtrace.jar --mirtrace-wrapper-name mirtrace qc  \\\n        --species hsa \\\n         \\\n        --protocol illumina \\\n        --config mirtrace_config \\\n        --write-fasta \\\n        --output-dir mirtrace \\\n        --force\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRTRACE:MIRTRACE_RUN\":\n        mirtrace: $(echo $(mirtrace -v 2>&1))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3479,7 +3479,7 @@
                 "id": "58",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "seqcluster collapse -f Control_N3.fastp.fastq.gz -m 1 --min_size 15 -o collapsed\n    gzip collapsed/*_trimmed.fastq\n    mkdir final\n    mv collapsed/*.fastq.gz final/.\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:SEQCLUSTER_SEQUENCES\":\n        seqcluster: $(echo $(seqcluster --version 2>&1) | sed 's/^.*seqcluster //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3522,7 +3522,7 @@
                 "id": "57",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N3.fastp.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N3_mature_unmapped.fq -S > Control_N3_mature.sam\n\n    samtools view -bS Control_N3_mature.sam > Control_N3_mature.bam\n\n    if [ ! -f  \"Control_N3_mature_unmapped.fq\" ]\n    then\n        touch Control_N3_mature_unmapped.fq\n    fi\n    gzip Control_N3_mature_unmapped.fq\n    mkdir unmapped\n    mv  Control_N3_mature_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_MATURE\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3609,7 +3609,7 @@
                 "id": "56",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Control_N3.fastq.gz ] && ln -s Control_N3.fastp.fastq.gz Control_N3.fastq.gz\n        fastqc --quiet --threads 1 Control_N3.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_TRIM\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -3657,7 +3657,7 @@
                 "id": "55",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "export mirtracejar=$(dirname $(which mirtrace))\n    for i in Ctl-N3-R1_S3_L001_R1_001.fastq.gz\n    do\n        path=$(realpath ${i})\n        prefix=$(echo ${i} | sed -e 's/.gz//' -e 's/.fastq//' -e 's/.fq//' -e 's/_val_1//' -e 's/_trimmed//' -e 's/_R1//' -e 's/.R1//')\n        echo $path\",\"$prefix\n    done > mirtrace_config\n\n    java -Xms6442450944 -Xmx6442450944 -jar $mirtracejar/mirtrace.jar --mirtrace-wrapper-name mirtrace qc  \\\n        --species hsa \\\n         \\\n        --protocol illumina \\\n        --config mirtrace_config \\\n        --write-fasta \\\n        --output-dir mirtrace \\\n        --force\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRTRACE:MIRTRACE_RUN\":\n        mirtrace: $(echo $(mirtrace -v 2>&1))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3762,7 +3762,7 @@
                 "id": "60",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "seqcluster collapse -f Clone1_N1.fastp.fastq.gz -m 1 --min_size 15 -o collapsed\n    gzip collapsed/*_trimmed.fastq\n    mkdir final\n    mv collapsed/*.fastq.gz final/.\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:SEQCLUSTER_SEQUENCES\":\n        seqcluster: $(echo $(seqcluster --version 2>&1) | sed 's/^.*seqcluster //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3805,7 +3805,7 @@
                 "id": "61",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone1_N1.fastp.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone1_N1_mature_unmapped.fq -S > Clone1_N1_mature.sam\n\n    samtools view -bS Clone1_N1_mature.sam > Clone1_N1_mature.bam\n\n    if [ ! -f  \"Clone1_N1_mature_unmapped.fq\" ]\n    then\n        touch Clone1_N1_mature_unmapped.fq\n    fi\n    gzip Clone1_N1_mature_unmapped.fq\n    mkdir unmapped\n    mv  Clone1_N1_mature_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_MATURE\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3892,7 +3892,7 @@
                 "id": "59",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Clone1_N1.fastq.gz ] && ln -s Clone1_N1.fastp.fastq.gz Clone1_N1.fastq.gz\n        fastqc --quiet --threads 1 Clone1_N1.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_SMRNASEQ:SMRNASEQ:FASTQC_FASTP:FASTQC_TRIM\":\n            fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -3940,7 +3940,7 @@
                 "id": "62",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "export mirtracejar=$(dirname $(which mirtrace))\n    for i in C1-N1-R1_S4_L001_R1_001.fastq.gz\n    do\n        path=$(realpath ${i})\n        prefix=$(echo ${i} | sed -e 's/.gz//' -e 's/.fastq//' -e 's/.fq//' -e 's/_val_1//' -e 's/_trimmed//' -e 's/_R1//' -e 's/.R1//')\n        echo $path\",\"$prefix\n    done > mirtrace_config\n\n    java -Xms6442450944 -Xmx6442450944 -jar $mirtracejar/mirtrace.jar --mirtrace-wrapper-name mirtrace qc  \\\n        --species hsa \\\n         \\\n        --protocol illumina \\\n        --config mirtrace_config \\\n        --write-fasta \\\n        --output-dir mirtrace \\\n        --force\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRTRACE:MIRTRACE_RUN\":\n        mirtrace: $(echo $(mirtrace -v 2>&1))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4045,7 +4045,7 @@
                 "id": "63",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N2.fastp_trimmed.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N2_seqcluster_unmapped.fq -S > Clone9_N2_seqcluster.sam\n\n    samtools view -bS Clone9_N2_seqcluster.sam > Clone9_N2_seqcluster.bam\n\n    if [ ! -f  \"Clone9_N2_seqcluster_unmapped.fq\" ]\n    then\n        touch Clone9_N2_seqcluster_unmapped.fq\n    fi\n    gzip Clone9_N2_seqcluster_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N2_seqcluster_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_SEQCLUSTER\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4131,7 +4131,7 @@
                 "id": "64",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone9_N2_mature.sorted.bam -T Clone9_N2_mature.sorted Clone9_N2_mature.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4177,7 +4177,7 @@
                 "id": "65",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N2_mature_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N2_mature_hairpin_unmapped.fq -S > Clone9_N2_mature_hairpin.sam\n\n    samtools view -bS Clone9_N2_mature_hairpin.sam > Clone9_N2_mature_hairpin.bam\n\n    if [ ! -f  \"Clone9_N2_mature_hairpin_unmapped.fq\" ]\n    then\n        touch Clone9_N2_mature_hairpin_unmapped.fq\n    fi\n    gzip Clone9_N2_mature_hairpin_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N2_mature_hairpin_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_HAIRPIN\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4264,7 +4264,7 @@
                 "id": "66",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N3.fastp_trimmed.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N3_seqcluster_unmapped.fq -S > Clone9_N3_seqcluster.sam\n\n    samtools view -bS Clone9_N3_seqcluster.sam > Clone9_N3_seqcluster.bam\n\n    if [ ! -f  \"Clone9_N3_seqcluster_unmapped.fq\" ]\n    then\n        touch Clone9_N3_seqcluster_unmapped.fq\n    fi\n    gzip Clone9_N3_seqcluster_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N3_seqcluster_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_SEQCLUSTER\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4350,7 +4350,7 @@
                 "id": "68",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N3_mature_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N3_mature_hairpin_unmapped.fq -S > Clone9_N3_mature_hairpin.sam\n\n    samtools view -bS Clone9_N3_mature_hairpin.sam > Clone9_N3_mature_hairpin.bam\n\n    if [ ! -f  \"Clone9_N3_mature_hairpin_unmapped.fq\" ]\n    then\n        touch Clone9_N3_mature_hairpin_unmapped.fq\n    fi\n    gzip Clone9_N3_mature_hairpin_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N3_mature_hairpin_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_HAIRPIN\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4437,7 +4437,7 @@
                 "id": "67",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone9_N3_mature.sorted.bam -T Clone9_N3_mature.sorted Clone9_N3_mature.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4483,7 +4483,7 @@
                 "id": "70",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N1_mature_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N1_mature_hairpin_unmapped.fq -S > Clone9_N1_mature_hairpin.sam\n\n    samtools view -bS Clone9_N1_mature_hairpin.sam > Clone9_N1_mature_hairpin.bam\n\n    if [ ! -f  \"Clone9_N1_mature_hairpin_unmapped.fq\" ]\n    then\n        touch Clone9_N1_mature_hairpin_unmapped.fq\n    fi\n    gzip Clone9_N1_mature_hairpin_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N1_mature_hairpin_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_HAIRPIN\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4570,7 +4570,7 @@
                 "id": "69",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone9_N1_mature.sorted.bam -T Clone9_N1_mature.sorted Clone9_N1_mature.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4616,7 +4616,7 @@
                 "id": "71",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N1.fastp_trimmed.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N1_seqcluster_unmapped.fq -S > Clone9_N1_seqcluster.sam\n\n    samtools view -bS Clone9_N1_seqcluster.sam > Clone9_N1_seqcluster.bam\n\n    if [ ! -f  \"Clone9_N1_seqcluster_unmapped.fq\" ]\n    then\n        touch Clone9_N1_seqcluster_unmapped.fq\n    fi\n    gzip Clone9_N1_seqcluster_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N1_seqcluster_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_SEQCLUSTER\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4702,7 +4702,7 @@
                 "id": "72",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N2.fastp_trimmed.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N2_seqcluster_unmapped.fq -S > Control_N2_seqcluster.sam\n\n    samtools view -bS Control_N2_seqcluster.sam > Control_N2_seqcluster.bam\n\n    if [ ! -f  \"Control_N2_seqcluster_unmapped.fq\" ]\n    then\n        touch Control_N2_seqcluster_unmapped.fq\n    fi\n    gzip Control_N2_seqcluster_unmapped.fq\n    mkdir unmapped\n    mv  Control_N2_seqcluster_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_SEQCLUSTER\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4788,7 +4788,7 @@
                 "id": "73",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Control_N2_mature.sorted.bam -T Control_N2_mature.sorted Control_N2_mature.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4834,7 +4834,7 @@
                 "id": "74",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N2_mature_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N2_mature_hairpin_unmapped.fq -S > Control_N2_mature_hairpin.sam\n\n    samtools view -bS Control_N2_mature_hairpin.sam > Control_N2_mature_hairpin.bam\n\n    if [ ! -f  \"Control_N2_mature_hairpin_unmapped.fq\" ]\n    then\n        touch Control_N2_mature_hairpin_unmapped.fq\n    fi\n    gzip Control_N2_mature_hairpin_unmapped.fq\n    mkdir unmapped\n    mv  Control_N2_mature_hairpin_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_HAIRPIN\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4921,7 +4921,7 @@
                 "id": "75",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone1_N3_mature_hairpin.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4966,7 +4966,7 @@
                 "id": "76",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone1_N3_mature_hairpin_genome.sorted.bam -T Clone1_N3_mature_hairpin_genome.sorted Clone1_N3_mature_hairpin_genome.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5012,7 +5012,7 @@
                 "id": "77",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N1.fastp_trimmed.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N1_seqcluster_unmapped.fq -S > Control_N1_seqcluster.sam\n\n    samtools view -bS Control_N1_seqcluster.sam > Control_N1_seqcluster.bam\n\n    if [ ! -f  \"Control_N1_seqcluster_unmapped.fq\" ]\n    then\n        touch Control_N1_seqcluster_unmapped.fq\n    fi\n    gzip Control_N1_seqcluster_unmapped.fq\n    mkdir unmapped\n    mv  Control_N1_seqcluster_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_SEQCLUSTER\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5098,7 +5098,7 @@
                 "id": "78",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Control_N1_mature.sorted.bam -T Control_N1_mature.sorted Control_N1_mature.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5144,7 +5144,7 @@
                 "id": "79",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N1_mature_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N1_mature_hairpin_unmapped.fq -S > Control_N1_mature_hairpin.sam\n\n    samtools view -bS Control_N1_mature_hairpin.sam > Control_N1_mature_hairpin.bam\n\n    if [ ! -f  \"Control_N1_mature_hairpin_unmapped.fq\" ]\n    then\n        touch Control_N1_mature_hairpin_unmapped.fq\n    fi\n    gzip Control_N1_mature_hairpin_unmapped.fq\n    mkdir unmapped\n    mv  Control_N1_mature_hairpin_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_HAIRPIN\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5231,7 +5231,7 @@
                 "id": "80",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N3.fastp_trimmed.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N3_seqcluster_unmapped.fq -S > Control_N3_seqcluster.sam\n\n    samtools view -bS Control_N3_seqcluster.sam > Control_N3_seqcluster.bam\n\n    if [ ! -f  \"Control_N3_seqcluster_unmapped.fq\" ]\n    then\n        touch Control_N3_seqcluster_unmapped.fq\n    fi\n    gzip Control_N3_seqcluster_unmapped.fq\n    mkdir unmapped\n    mv  Control_N3_seqcluster_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_SEQCLUSTER\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5317,7 +5317,7 @@
                 "id": "82",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N3_mature_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N3_mature_hairpin_unmapped.fq -S > Control_N3_mature_hairpin.sam\n\n    samtools view -bS Control_N3_mature_hairpin.sam > Control_N3_mature_hairpin.bam\n\n    if [ ! -f  \"Control_N3_mature_hairpin_unmapped.fq\" ]\n    then\n        touch Control_N3_mature_hairpin_unmapped.fq\n    fi\n    gzip Control_N3_mature_hairpin_unmapped.fq\n    mkdir unmapped\n    mv  Control_N3_mature_hairpin_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_HAIRPIN\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5404,7 +5404,7 @@
                 "id": "81",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Control_N3_mature.sorted.bam -T Control_N3_mature.sorted Control_N3_mature.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5450,7 +5450,7 @@
                 "id": "83",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone1_N1.fastp_trimmed.fastq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone1_N1_seqcluster_unmapped.fq -S > Clone1_N1_seqcluster.sam\n\n    samtools view -bS Clone1_N1_seqcluster.sam > Clone1_N1_seqcluster.bam\n\n    if [ ! -f  \"Clone1_N1_seqcluster_unmapped.fq\" ]\n    then\n        touch Clone1_N1_seqcluster_unmapped.fq\n    fi\n    gzip Clone1_N1_seqcluster_unmapped.fq\n    mkdir unmapped\n    mv  Clone1_N1_seqcluster_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_SEQCLUSTER\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5536,7 +5536,7 @@
                 "id": "85",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone1_N1_mature_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone1_N1_mature_hairpin_unmapped.fq -S > Clone1_N1_mature_hairpin.sam\n\n    samtools view -bS Clone1_N1_mature_hairpin.sam > Clone1_N1_mature_hairpin.bam\n\n    if [ ! -f  \"Clone1_N1_mature_hairpin_unmapped.fq\" ]\n    then\n        touch Clone1_N1_mature_hairpin_unmapped.fq\n    fi\n    gzip Clone1_N1_mature_hairpin_unmapped.fq\n    mkdir unmapped\n    mv  Clone1_N1_mature_hairpin_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BOWTIE_MAP_HAIRPIN\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5623,7 +5623,7 @@
                 "id": "84",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone1_N1_mature.sorted.bam -T Clone1_N1_mature.sorted Clone1_N1_mature.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5669,7 +5669,7 @@
                 "id": "86",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone9_N2_mature.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5714,7 +5714,7 @@
                 "id": "87",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone9_N2_mature_hairpin.sorted.bam -T Clone9_N2_mature_hairpin.sorted Clone9_N2_mature_hairpin.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5760,7 +5760,7 @@
                 "id": "88",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N2_mature_hairpin_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N2_mature_hairpin_genome_unmapped.fq -S > Clone9_N2_mature_hairpin_genome.sam\n\n    samtools view -bS Clone9_N2_mature_hairpin_genome.sam > Clone9_N2_mature_hairpin_genome.bam\n\n    if [ ! -f  \"Clone9_N2_mature_hairpin_genome_unmapped.fq\" ]\n    then\n        touch Clone9_N2_mature_hairpin_genome_unmapped.fq\n    fi\n    gzip Clone9_N2_mature_hairpin_genome_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N2_mature_hairpin_genome_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BOWTIE_MAP_GENOME\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5846,7 +5846,7 @@
                 "id": "90",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N3_mature_hairpin_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N3_mature_hairpin_genome_unmapped.fq -S > Clone9_N3_mature_hairpin_genome.sam\n\n    samtools view -bS Clone9_N3_mature_hairpin_genome.sam > Clone9_N3_mature_hairpin_genome.bam\n\n    if [ ! -f  \"Clone9_N3_mature_hairpin_genome_unmapped.fq\" ]\n    then\n        touch Clone9_N3_mature_hairpin_genome_unmapped.fq\n    fi\n    gzip Clone9_N3_mature_hairpin_genome_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N3_mature_hairpin_genome_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BOWTIE_MAP_GENOME\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5932,7 +5932,7 @@
                 "id": "89",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone9_N3_mature_hairpin.sorted.bam -T Clone9_N3_mature_hairpin.sorted Clone9_N3_mature_hairpin.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5978,7 +5978,7 @@
                 "id": "91",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone9_N3_mature.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6023,7 +6023,7 @@
                 "id": "93",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone9_N1_mature_hairpin_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone9_N1_mature_hairpin_genome_unmapped.fq -S > Clone9_N1_mature_hairpin_genome.sam\n\n    samtools view -bS Clone9_N1_mature_hairpin_genome.sam > Clone9_N1_mature_hairpin_genome.bam\n\n    if [ ! -f  \"Clone9_N1_mature_hairpin_genome_unmapped.fq\" ]\n    then\n        touch Clone9_N1_mature_hairpin_genome_unmapped.fq\n    fi\n    gzip Clone9_N1_mature_hairpin_genome_unmapped.fq\n    mkdir unmapped\n    mv  Clone9_N1_mature_hairpin_genome_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BOWTIE_MAP_GENOME\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6109,7 +6109,7 @@
                 "id": "92",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone9_N1_mature_hairpin.sorted.bam -T Clone9_N1_mature_hairpin.sorted Clone9_N1_mature_hairpin.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6155,7 +6155,7 @@
                 "id": "94",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone9_N1_mature.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6200,7 +6200,7 @@
                 "id": "95",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Control_N2_mature.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6245,7 +6245,7 @@
                 "id": "96",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Control_N2_mature_hairpin.sorted.bam -T Control_N2_mature_hairpin.sorted Control_N2_mature_hairpin.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6291,7 +6291,7 @@
                 "id": "97",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N2_mature_hairpin_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N2_mature_hairpin_genome_unmapped.fq -S > Control_N2_mature_hairpin_genome.sam\n\n    samtools view -bS Control_N2_mature_hairpin_genome.sam > Control_N2_mature_hairpin_genome.bam\n\n    if [ ! -f  \"Control_N2_mature_hairpin_genome_unmapped.fq\" ]\n    then\n        touch Control_N2_mature_hairpin_genome_unmapped.fq\n    fi\n    gzip Control_N2_mature_hairpin_genome_unmapped.fq\n    mkdir unmapped\n    mv  Control_N2_mature_hairpin_genome_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BOWTIE_MAP_GENOME\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6377,7 +6377,7 @@
                 "id": "98",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone1_N3_mature_hairpin_genome.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6422,7 +6422,7 @@
                 "id": "99",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Control_N1_mature.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6467,7 +6467,7 @@
                 "id": "100",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Control_N1_mature_hairpin.sorted.bam -T Control_N1_mature_hairpin.sorted Control_N1_mature_hairpin.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6513,7 +6513,7 @@
                 "id": "101",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N1_mature_hairpin_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N1_mature_hairpin_genome_unmapped.fq -S > Control_N1_mature_hairpin_genome.sam\n\n    samtools view -bS Control_N1_mature_hairpin_genome.sam > Control_N1_mature_hairpin_genome.bam\n\n    if [ ! -f  \"Control_N1_mature_hairpin_genome_unmapped.fq\" ]\n    then\n        touch Control_N1_mature_hairpin_genome_unmapped.fq\n    fi\n    gzip Control_N1_mature_hairpin_genome_unmapped.fq\n    mkdir unmapped\n    mv  Control_N1_mature_hairpin_genome_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BOWTIE_MAP_GENOME\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6599,7 +6599,7 @@
                 "id": "103",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Control_N3_mature_hairpin_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Control_N3_mature_hairpin_genome_unmapped.fq -S > Control_N3_mature_hairpin_genome.sam\n\n    samtools view -bS Control_N3_mature_hairpin_genome.sam > Control_N3_mature_hairpin_genome.bam\n\n    if [ ! -f  \"Control_N3_mature_hairpin_genome_unmapped.fq\" ]\n    then\n        touch Control_N3_mature_hairpin_genome_unmapped.fq\n    fi\n    gzip Control_N3_mature_hairpin_genome_unmapped.fq\n    mkdir unmapped\n    mv  Control_N3_mature_hairpin_genome_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BOWTIE_MAP_GENOME\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6685,7 +6685,7 @@
                 "id": "102",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Control_N3_mature_hairpin.sorted.bam -T Control_N3_mature_hairpin.sorted Control_N3_mature_hairpin.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6731,7 +6731,7 @@
                 "id": "104",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Control_N3_mature.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6776,7 +6776,7 @@
                 "id": "105",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "mirtop gff --hairpin hairpin.fa_igenome.fa_idx.fa --gtf hsa.gff3 -o mirtop --sps hsa ./bams/*\n    mirtop counts --hairpin hairpin.fa_igenome.fa_idx.fa --gtf hsa.gff3 -o mirtop --sps hsa --add-extra --gff mirtop/mirtop.gff\n    mirtop export --format isomir --hairpin hairpin.fa_igenome.fa_idx.fa --gtf hsa.gff3 --sps hsa -o mirtop mirtop/mirtop.gff\n    mirtop stats mirtop/mirtop.gff --out mirtop/stats\n    mv mirtop/stats/mirtop_stats.log mirtop/stats/full_mirtop_stats.log\n\n    cat <<-END_VERSIONS > versions.yml\n    NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:MIRTOP_QUANT\":\n        mirtop: $(echo $(mirtop --version 2>&1) | sed 's/^.*mirtop //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6899,7 +6899,7 @@
                 "id": "107",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.3.ebwt\" | sed 's/.3.ebwt//'`\n    bowtie \\\n        -x $INDEX \\\n        -q <(zcat Clone1_N1_mature_hairpin_unmapped.fq.gz) \\\n        -p 1 \\\n        -t \\\n        -k 50 \\\n        --best \\\n        --strata \\\n        -e 99999 \\\n        --chunkmbs 2048 \\\n        --un Clone1_N1_mature_hairpin_genome_unmapped.fq -S > Clone1_N1_mature_hairpin_genome.sam\n\n    samtools view -bS Clone1_N1_mature_hairpin_genome.sam > Clone1_N1_mature_hairpin_genome.bam\n\n    if [ ! -f  \"Clone1_N1_mature_hairpin_genome_unmapped.fq\" ]\n    then\n        touch Clone1_N1_mature_hairpin_genome_unmapped.fq\n    fi\n    gzip Clone1_N1_mature_hairpin_genome_unmapped.fq\n    mkdir unmapped\n    mv  Clone1_N1_mature_hairpin_genome_unmapped.fq.gz  unmapped/.\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BOWTIE_MAP_GENOME\":\n        bowtie: $(echo $(bowtie --version 2>&1) | sed 's/^.*bowtie-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6985,7 +6985,7 @@
                 "id": "106",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone1_N1_mature_hairpin.sorted.bam -T Clone1_N1_mature_hairpin.sorted Clone1_N1_mature_hairpin.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7031,7 +7031,7 @@
                 "id": "108",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone1_N1_mature.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7076,7 +7076,7 @@
                 "id": "109",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone9_N2_mature_hairpin.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7121,7 +7121,7 @@
                 "id": "110",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone9_N2_mature_hairpin_genome.sorted.bam -T Clone9_N2_mature_hairpin_genome.sorted Clone9_N2_mature_hairpin_genome.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7167,7 +7167,7 @@
                 "id": "111",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone9_N3_mature_hairpin_genome.sorted.bam -T Clone9_N3_mature_hairpin_genome.sorted Clone9_N3_mature_hairpin_genome.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7213,7 +7213,7 @@
                 "id": "112",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone9_N3_mature_hairpin.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7258,7 +7258,7 @@
                 "id": "113",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone9_N1_mature_hairpin_genome.sorted.bam -T Clone9_N1_mature_hairpin_genome.sorted Clone9_N1_mature_hairpin_genome.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7304,7 +7304,7 @@
                 "id": "114",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone9_N1_mature_hairpin.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7349,7 +7349,7 @@
                 "id": "115",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Control_N2_mature_hairpin.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7394,7 +7394,7 @@
                 "id": "116",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Control_N2_mature_hairpin_genome.sorted.bam -T Control_N2_mature_hairpin_genome.sorted Control_N2_mature_hairpin_genome.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7440,7 +7440,7 @@
                 "id": "117",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Control_N1_mature_hairpin.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7485,7 +7485,7 @@
                 "id": "118",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Control_N1_mature_hairpin_genome.sorted.bam -T Control_N1_mature_hairpin_genome.sorted Control_N1_mature_hairpin_genome.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7531,7 +7531,7 @@
                 "id": "119",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Control_N3_mature_hairpin_genome.sorted.bam -T Control_N3_mature_hairpin_genome.sorted Control_N3_mature_hairpin_genome.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7577,7 +7577,7 @@
                 "id": "120",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Control_N3_mature_hairpin.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7622,7 +7622,7 @@
                 "id": "121",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "collapse_mirtop.r mirtop.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:TABLE_MERGE\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7664,7 +7664,7 @@
                 "id": "122",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o Clone1_N1_mature_hairpin_genome.sorted.bam -T Clone1_N1_mature_hairpin_genome.sorted Clone1_N1_mature_hairpin_genome.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7710,7 +7710,7 @@
                 "id": "123",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone1_N1_mature_hairpin.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7755,7 +7755,7 @@
                 "id": "131",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone9_N1_mature.sorted.bam \\\n        > Clone9_N1_mature.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7804,7 +7804,7 @@
                 "id": "124",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone1_N3_mature.sorted.bam \\\n        > Clone1_N3_mature.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7854,7 +7854,7 @@
                 "id": "134",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference mature.fa_igenome.fa_idx.fa \\\n        Clone9_N1_mature.sorted.bam \\\n        > Clone9_N1_mature.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7911,7 +7911,7 @@
                 "id": "127",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone9_N2_mature.sorted.bam \\\n        > Clone9_N2_mature.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7960,7 +7960,7 @@
                 "id": "133",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone9_N3_mature.sorted.bam \\\n        > Clone9_N3_mature.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8010,7 +8010,7 @@
                 "id": "137",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference mature.fa_igenome.fa_idx.fa \\\n        Control_N1_mature.sorted.bam \\\n        > Control_N1_mature.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8067,7 +8067,7 @@
                 "id": "130",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone9_N2_mature.sorted.bam \\\n        > Clone9_N2_mature.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8117,7 +8117,7 @@
                 "id": "129",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference mature.fa_igenome.fa_idx.fa \\\n        Clone9_N2_mature.sorted.bam \\\n        > Clone9_N2_mature.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8174,7 +8174,7 @@
                 "id": "139",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference mature.fa_igenome.fa_idx.fa \\\n        Clone1_N1_mature.sorted.bam \\\n        > Clone1_N1_mature.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8231,7 +8231,7 @@
                 "id": "142",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Control_N2_mature.sorted.bam \\\n        > Control_N2_mature.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8280,7 +8280,7 @@
                 "id": "125",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone1_N3_mature.sorted.bam \\\n        > Clone1_N3_mature.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8329,7 +8329,7 @@
                 "id": "147",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone1_N1_mature.sorted.bam \\\n        > Clone1_N1_mature.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8379,7 +8379,7 @@
                 "id": "145",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Control_N3_mature.sorted.bam \\\n        > Control_N3_mature.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8428,7 +8428,7 @@
                 "id": "128",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone9_N3_mature.sorted.bam \\\n        > Clone9_N3_mature.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8477,7 +8477,7 @@
                 "id": "135",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference mature.fa_igenome.fa_idx.fa \\\n        Control_N2_mature.sorted.bam \\\n        > Control_N2_mature.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8534,7 +8534,7 @@
                 "id": "126",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference mature.fa_igenome.fa_idx.fa \\\n        Clone1_N3_mature.sorted.bam \\\n        > Clone1_N3_mature.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8591,7 +8591,7 @@
                 "id": "141",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Control_N1_mature.sorted.bam \\\n        > Control_N1_mature.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8641,7 +8641,7 @@
                 "id": "143",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Control_N1_mature.sorted.bam \\\n        > Control_N1_mature.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8690,7 +8690,7 @@
                 "id": "136",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone9_N1_mature.sorted.bam \\\n        > Clone9_N1_mature.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8740,7 +8740,7 @@
                 "id": "146",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone1_N1_mature.sorted.bam \\\n        > Clone1_N1_mature.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8789,7 +8789,7 @@
                 "id": "140",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Control_N2_mature.sorted.bam \\\n        > Control_N2_mature.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8839,7 +8839,7 @@
                 "id": "132",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference mature.fa_igenome.fa_idx.fa \\\n        Clone9_N3_mature.sorted.bam \\\n        > Clone9_N3_mature.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8896,7 +8896,7 @@
                 "id": "144",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Control_N3_mature.sorted.bam \\\n        > Control_N3_mature.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8946,7 +8946,7 @@
                 "id": "138",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference mature.fa_igenome.fa_idx.fa \\\n        Control_N3_mature.sorted.bam \\\n        > Control_N3_mature.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_MATURE:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9003,7 +9003,7 @@
                 "id": "148",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone9_N2_mature_hairpin_genome.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9048,7 +9048,7 @@
                 "id": "149",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone9_N3_mature_hairpin_genome.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9093,7 +9093,7 @@
                 "id": "150",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone9_N1_mature_hairpin_genome.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9138,7 +9138,7 @@
                 "id": "151",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Control_N2_mature_hairpin_genome.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9183,7 +9183,7 @@
                 "id": "152",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Control_N1_mature_hairpin_genome.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9228,7 +9228,7 @@
                 "id": "153",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Control_N3_mature_hairpin_genome.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9273,7 +9273,7 @@
                 "id": "154",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        Clone1_N1_mature_hairpin_genome.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9318,7 +9318,7 @@
                 "id": "162",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone9_N3_mature_hairpin.sorted.bam \\\n        > Clone9_N3_mature_hairpin.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9367,7 +9367,7 @@
                 "id": "160",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hairpin.fa_igenome.fa_idx.fa \\\n        Clone9_N2_mature_hairpin.sorted.bam \\\n        > Clone9_N2_mature_hairpin.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9424,7 +9424,7 @@
                 "id": "157",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hairpin.fa_igenome.fa_idx.fa \\\n        Clone1_N3_mature_hairpin.sorted.bam \\\n        > Clone1_N3_mature_hairpin.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9481,7 +9481,7 @@
                 "id": "172",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Control_N1_mature_hairpin.sorted.bam \\\n        > Control_N1_mature_hairpin.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9530,7 +9530,7 @@
                 "id": "168",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Control_N3_mature_hairpin.sorted.bam \\\n        > Control_N3_mature_hairpin.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9580,7 +9580,7 @@
                 "id": "167",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Control_N1_mature_hairpin.sorted.bam \\\n        > Control_N1_mature_hairpin.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9630,7 +9630,7 @@
                 "id": "161",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone9_N3_mature_hairpin.sorted.bam \\\n        > Clone9_N3_mature_hairpin.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9680,7 +9680,7 @@
                 "id": "170",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Control_N2_mature_hairpin.sorted.bam \\\n        > Control_N2_mature_hairpin.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9729,7 +9729,7 @@
                 "id": "164",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone9_N1_mature_hairpin.sorted.bam \\\n        > Clone9_N1_mature_hairpin.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9779,7 +9779,7 @@
                 "id": "169",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone1_N1_mature_hairpin.sorted.bam \\\n        > Clone1_N1_mature_hairpin.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9829,7 +9829,7 @@
                 "id": "173",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hairpin.fa_igenome.fa_idx.fa \\\n        Control_N2_mature_hairpin.sorted.bam \\\n        > Control_N2_mature_hairpin.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9886,7 +9886,7 @@
                 "id": "174",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Control_N3_mature_hairpin.sorted.bam \\\n        > Control_N3_mature_hairpin.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9935,7 +9935,7 @@
                 "id": "175",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hairpin.fa_igenome.fa_idx.fa \\\n        Control_N1_mature_hairpin.sorted.bam \\\n        > Control_N1_mature_hairpin.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9992,7 +9992,7 @@
                 "id": "177",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hairpin.fa_igenome.fa_idx.fa \\\n        Control_N3_mature_hairpin.sorted.bam \\\n        > Control_N3_mature_hairpin.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10049,7 +10049,7 @@
                 "id": "163",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hairpin.fa_igenome.fa_idx.fa \\\n        Clone9_N3_mature_hairpin.sorted.bam \\\n        > Clone9_N3_mature_hairpin.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10106,7 +10106,7 @@
                 "id": "176",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone1_N1_mature_hairpin.sorted.bam \\\n        > Clone1_N1_mature_hairpin.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10155,7 +10155,7 @@
                 "id": "156",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone1_N3_mature_hairpin.sorted.bam \\\n        > Clone1_N3_mature_hairpin.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10204,7 +10204,7 @@
                 "id": "155",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone1_N3_mature_hairpin.sorted.bam \\\n        > Clone1_N3_mature_hairpin.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10254,7 +10254,7 @@
                 "id": "166",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Control_N2_mature_hairpin.sorted.bam \\\n        > Control_N2_mature_hairpin.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10304,7 +10304,7 @@
                 "id": "165",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone9_N1_mature_hairpin.sorted.bam \\\n        > Clone9_N1_mature_hairpin.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10353,7 +10353,7 @@
                 "id": "158",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone9_N2_mature_hairpin.sorted.bam \\\n        > Clone9_N2_mature_hairpin.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10403,7 +10403,7 @@
                 "id": "159",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone9_N2_mature_hairpin.sorted.bam \\\n        > Clone9_N2_mature_hairpin.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10452,7 +10452,7 @@
                 "id": "178",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hairpin.fa_igenome.fa_idx.fa \\\n        Clone1_N1_mature_hairpin.sorted.bam \\\n        > Clone1_N1_mature_hairpin.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10509,7 +10509,7 @@
                 "id": "171",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hairpin.fa_igenome.fa_idx.fa \\\n        Clone9_N1_mature_hairpin.sorted.bam \\\n        > Clone9_N1_mature_hairpin.sorted.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:BAM_STATS_HAIRPIN:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10566,7 +10566,7 @@
                 "id": "185",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone9_N1_mature_hairpin_genome.sorted.bam \\\n        > Clone9_N1_mature_hairpin_genome.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10615,7 +10615,7 @@
                 "id": "188",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Control_N2_mature_hairpin_genome.sorted.bam \\\n        > Control_N2_mature_hairpin_genome.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10664,7 +10664,7 @@
                 "id": "183",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone9_N3_mature_hairpin_genome.sorted.bam \\\n        > Clone9_N3_mature_hairpin_genome.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10713,7 +10713,7 @@
                 "id": "180",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone1_N3_mature_hairpin_genome.sorted.bam \\\n        > Clone1_N3_mature_hairpin_genome.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10762,7 +10762,7 @@
                 "id": "193",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Control_N3_mature_hairpin_genome.sorted.bam \\\n        > Control_N3_mature_hairpin_genome.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10811,7 +10811,7 @@
                 "id": "192",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone1_N1_mature_hairpin_genome.sorted.bam \\\n        > Clone1_N1_mature_hairpin_genome.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10860,7 +10860,7 @@
                 "id": "182",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone9_N2_mature_hairpin_genome.sorted.bam \\\n        > Clone9_N2_mature_hairpin_genome.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10909,7 +10909,7 @@
                 "id": "187",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Control_N2_mature_hairpin_genome.sorted.bam \\\n        > Control_N2_mature_hairpin_genome.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10958,7 +10958,7 @@
                 "id": "186",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone9_N1_mature_hairpin_genome.sorted.bam \\\n        > Clone9_N1_mature_hairpin_genome.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11007,7 +11007,7 @@
                 "id": "191",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Control_N3_mature_hairpin_genome.sorted.bam \\\n        > Control_N3_mature_hairpin_genome.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11056,7 +11056,7 @@
                 "id": "184",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone9_N3_mature_hairpin_genome.sorted.bam \\\n        > Clone9_N3_mature_hairpin_genome.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11105,7 +11105,7 @@
                 "id": "190",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Control_N1_mature_hairpin_genome.sorted.bam \\\n        > Control_N1_mature_hairpin_genome.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11154,7 +11154,7 @@
                 "id": "194",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone1_N1_mature_hairpin_genome.sorted.bam \\\n        > Clone1_N1_mature_hairpin_genome.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11203,7 +11203,7 @@
                 "id": "179",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        Clone1_N3_mature_hairpin_genome.sorted.bam \\\n        > Clone1_N3_mature_hairpin_genome.sorted.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11252,7 +11252,7 @@
                 "id": "189",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Control_N1_mature_hairpin_genome.sorted.bam \\\n        > Control_N1_mature_hairpin_genome.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11301,7 +11301,7 @@
                 "id": "181",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        Clone9_N2_mature_hairpin_genome.sorted.bam \\\n        > Clone9_N2_mature_hairpin_genome.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:GENOME_QUANT:BAM_SORT_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11350,7 +11350,7 @@
                 "id": "195",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "edgeR_miRBase.r Clone1_N3_mature.sorted.idxstats Clone9_N3_mature.sorted.idxstats Clone9_N2_mature.sorted.idxstats Clone1_N1_mature.sorted.idxstats Control_N1_mature.sorted.idxstats Clone9_N1_mature.sorted.idxstats Control_N2_mature.sorted.idxstats Control_N3_mature.sorted.idxstats Control_N3_mature_hairpin.sorted.idxstats Control_N1_mature_hairpin.sorted.idxstats Clone9_N3_mature_hairpin.sorted.idxstats Clone9_N1_mature_hairpin.sorted.idxstats Clone1_N1_mature_hairpin.sorted.idxstats Clone1_N3_mature_hairpin.sorted.idxstats Control_N2_mature_hairpin.sorted.idxstats Clone9_N2_mature_hairpin.sorted.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MIRNA_QUANT:EDGER_QC\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        limma: $(Rscript -e \"library(limma); cat(as.character(packageVersion('limma')))\")\n        edgeR: $(Rscript -e \"library(edgeR); cat(as.character(packageVersion('edgeR')))\")\n        data.table: $(Rscript -e \"library(data.table); cat(as.character(packageVersion('data.table')))\")\n        gplots: $(Rscript -e \"library(gplots); cat(as.character(packageVersion('gplots')))\")\n        methods: $(Rscript -e \"library(methods); cat(as.character(packageVersion('methods')))\")\n        statmod: $(Rscript -e \"library(statmod); cat(as.character(packageVersion('statmod')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11619,7 +11619,7 @@
                 "id": "196",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "def args = task.ext.args ?: ''\ntemplate 'dumpsoftwareversions.py'"
                 },
                 "parents": [
@@ -11701,7 +11701,7 @@
                 "id": "197",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "multiqc \\\n        --force \\\n         \\\n        --config multiqc_config.yml \\\n         \\\n        .\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_SMRNASEQ:SMRNASEQ:MULTIQC\":\n        multiqc: $( multiqc --version | sed -e \"s/multiqc, version //g\" )\n    END_VERSIONS"
                 },
                 "parents": [

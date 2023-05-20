@@ -18,7 +18,7 @@
                 "id": "4",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "check_samplesheet.py test-GSE145187-small.csv samplesheet.valid.csv true\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:INPUT_CHECK:SAMPLESHEET_CHECK\":\n        python: $(python --version | grep -E -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -60,7 +60,7 @@
                 "id": "6",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip \\\n        -f \\\n         \\\n        hg38-chr20-genes.bed.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:GUNZIP_BED\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -97,7 +97,7 @@
                 "id": "7",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip \\\n        -f \\\n         \\\n        hg38-chr20-genes.gtf.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:GUNZIP_GTF\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -131,7 +131,7 @@
                 "id": "1",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip \\\n        -f \\\n         \\\n        e_coli_U00096_3.fa.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:GUNZIP_SPIKEIN_FASTA\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -167,7 +167,7 @@
                 "id": "3",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "mkdir e_coli_U00096_3\n\n    ## Ensures --strip-components only applied when top level of tar contents is a directory\n    ## If just files or multiple directories, place all in prefix\n    if [[ $(tar -taf e_coli_U00096_3.tar.gz | grep -o -P \"^.*?\\/\" | uniq | wc -l) -eq 1 ]]; then\n        tar \\\n            -C e_coli_U00096_3 --strip-components 1 \\\n            -xavf \\\n             \\\n            e_coli_U00096_3.tar.gz \\\n            --no-same-owner\n    else\n        tar \\\n            -C e_coli_U00096_3 \\\n            -xavf \\\n             \\\n            e_coli_U00096_3.tar.gz \\\n            --no-same-owner\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:UNTAR_INDEX_SPIKEIN\":\n        untar: $(echo $(tar --version 2>&1) | sed 's/^.*(GNU tar) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -202,7 +202,7 @@
                 "id": "5",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip \\\n        -f \\\n         \\\n        hg38-chr20.fa.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:GUNZIP_FASTA\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -245,7 +245,7 @@
                 "id": "12",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        sort \\\n        -i hg38-chr20-genes.bed \\\n         \\\n         \\\n        > hg38-chr20-genes.sorted.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:ANNOTATION_BEDTOOLS_SORT\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -287,7 +287,7 @@
                 "id": "2",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "mkdir hg38-chr20-bowtie2\n\n    ## Ensures --strip-components only applied when top level of tar contents is a directory\n    ## If just files or multiple directories, place all in prefix\n    if [[ $(tar -taf hg38-chr20-bowtie2.tar.gz | grep -o -P \"^.*?\\/\" | uniq | wc -l) -eq 1 ]]; then\n        tar \\\n            -C hg38-chr20-bowtie2 --strip-components 1 \\\n            -xavf \\\n             \\\n            hg38-chr20-bowtie2.tar.gz \\\n            --no-same-owner\n    else\n        tar \\\n            -C hg38-chr20-bowtie2 \\\n            -xavf \\\n             \\\n            hg38-chr20-bowtie2.tar.gz \\\n            --no-same-owner\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:UNTAR_INDEX_TARGET\":\n        untar: $(echo $(tar --version 2>&1) | sed 's/^.*(GNU tar) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -322,7 +322,7 @@
                 "id": "8",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" h3k27me3_rep1_r1.fastq.gz h3k27me3_R1_1.gz h3k27me3_rep1_r2.fastq.gz h3k27me3_R1_2.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 h3k27me3_R1_1.gz h3k27me3_R1_2.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FASTQC_TRIMGALORE:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -390,7 +390,7 @@
                 "id": "10",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" igg_rep1_r1.fastq.gz igg_ctrl_R1_1.gz igg_rep1_r2.fastq.gz igg_ctrl_R1_2.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 igg_ctrl_R1_1.gz igg_ctrl_R1_2.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FASTQC_TRIMGALORE:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -458,7 +458,7 @@
                 "id": "11",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  igg_ctrl_R1_1.fastq.gz ] && ln -s igg_rep1_r1.fastq.gz igg_ctrl_R1_1.fastq.gz\n        [ ! -f  igg_ctrl_R1_2.fastq.gz ] && ln -s igg_rep1_r2.fastq.gz igg_ctrl_R1_2.fastq.gz\n        trim_galore \\\n            --fastqc \\\n            --cores 1 \\\n            --paired \\\n            --gzip \\\n             \\\n             \\\n             \\\n             \\\n            igg_ctrl_R1_1.fastq.gz \\\n            igg_ctrl_R1_2.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_CUTANDRUN:CUTANDRUN:FASTQC_TRIMGALORE:TRIMGALORE\":\n            trim_galore: $(echo $(trim_galore --version 2>&1) | sed 's/^.*version //; s/Last.*$//')\n            cutadapt: $(cutadapt --version)\n        END_VERSIONS\n\n        mv igg_ctrl_R1_1_val_1.fq.gz igg_ctrl_R1_1.trimmed.fastq.gz\n        mv igg_ctrl_R1_2_val_2.fq.gz igg_ctrl_R1_2.trimmed.fastq.gz\n\n        [ ! -f  igg_ctrl_R1_1_val_1_fastqc.html ] || mv igg_ctrl_R1_1_val_1_fastqc.html igg_ctrl_R1_1.trimmed_fastqc.html\n        [ ! -f  igg_ctrl_R1_2_val_2_fastqc.html ] || mv igg_ctrl_R1_2_val_2_fastqc.html igg_ctrl_R1_2.trimmed_fastqc.html\n\n        [ ! -f  igg_ctrl_R1_1_val_1_fastqc.zip ] || mv igg_ctrl_R1_1_val_1_fastqc.zip igg_ctrl_R1_1.trimmed_fastqc.zip\n        [ ! -f  igg_ctrl_R1_2_val_2_fastqc.zip ] || mv igg_ctrl_R1_2_val_2_fastqc.zip igg_ctrl_R1_2.trimmed_fastqc.zip"
                 },
                 "parents": [
@@ -552,7 +552,7 @@
                 "id": "9",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  h3k27me3_R1_1.fastq.gz ] && ln -s h3k27me3_rep1_r1.fastq.gz h3k27me3_R1_1.fastq.gz\n        [ ! -f  h3k27me3_R1_2.fastq.gz ] && ln -s h3k27me3_rep1_r2.fastq.gz h3k27me3_R1_2.fastq.gz\n        trim_galore \\\n            --fastqc \\\n            --cores 1 \\\n            --paired \\\n            --gzip \\\n             \\\n             \\\n             \\\n             \\\n            h3k27me3_R1_1.fastq.gz \\\n            h3k27me3_R1_2.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_CUTANDRUN:CUTANDRUN:FASTQC_TRIMGALORE:TRIMGALORE\":\n            trim_galore: $(echo $(trim_galore --version 2>&1) | sed 's/^.*version //; s/Last.*$//')\n            cutadapt: $(cutadapt --version)\n        END_VERSIONS\n\n        mv h3k27me3_R1_1_val_1.fq.gz h3k27me3_R1_1.trimmed.fastq.gz\n        mv h3k27me3_R1_2_val_2.fq.gz h3k27me3_R1_2.trimmed.fastq.gz\n\n        [ ! -f  h3k27me3_R1_1_val_1_fastqc.html ] || mv h3k27me3_R1_1_val_1_fastqc.html h3k27me3_R1_1.trimmed_fastqc.html\n        [ ! -f  h3k27me3_R1_2_val_2_fastqc.html ] || mv h3k27me3_R1_2_val_2_fastqc.html h3k27me3_R1_2.trimmed_fastqc.html\n\n        [ ! -f  h3k27me3_R1_1_val_1_fastqc.zip ] || mv h3k27me3_R1_1_val_1_fastqc.zip h3k27me3_R1_1.trimmed_fastqc.zip\n        [ ! -f  h3k27me3_R1_2_val_2_fastqc.zip ] || mv h3k27me3_R1_2_val_2_fastqc.zip h3k27me3_R1_2.trimmed_fastqc.zip"
                 },
                 "parents": [
@@ -646,7 +646,7 @@
                 "id": "13",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools faidx e_coli_U00096_3.fa\n    cut -f 1,2 e_coli_U00096_3.fa.fai > e_coli_U00096_3.fa.sizes\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:SPIKEIN_CHROMSIZES\":\n        getchromsizes: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -692,7 +692,7 @@
                 "id": "14",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools faidx hg38-chr20.fa\n    cut -f 1,2 hg38-chr20.fa.fai > hg38-chr20.fa.sizes\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:TARGET_CHROMSIZES\":\n        getchromsizes: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -745,7 +745,7 @@
                 "id": "15",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        faidx \\\n         \\\n        hg38-chr20.fa\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:SAMTOOLS_FAIDX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -790,7 +790,7 @@
                 "id": "16",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bgzip  --threads 1 -c  hg38-chr20-genes.sorted.bed > hg38-chr20-genes.bed.gz\n    tabix  hg38-chr20-genes.bed.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:TABIX_BGZIPTABIX\":\n        tabix: $(echo $(tabix -h 2>&1) | sed 's/^.*Version: //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -839,7 +839,7 @@
                 "id": "18",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.rev.1.bt2\" | sed \"s/\\.rev.1.bt2$//\"`\n    [ -z \"$INDEX\" ] && INDEX=`find -L ./ -name \"*.rev.1.bt2l\" | sed \"s/\\.rev.1.bt2l$//\"`\n    [ -z \"$INDEX\" ] && echo \"Bowtie2 index files not found\" 1>&2 && exit 1\n\n    bowtie2 \\\n        -x $INDEX \\\n        -1 igg_ctrl_R1_1.trimmed.fastq.gz -2 igg_ctrl_R1_2.trimmed.fastq.gz \\\n        --threads 1 \\\n         \\\n        --local --very-sensitive --no-mixed --no-discordant --phred33 --minins 10 --maxins 700 --dovetail \\\n        2> igg_ctrl_R1.bowtie2.log \\\n        | samtools view  --threads 1 -o igg_ctrl_R1.bam -\n\n    if [ -f igg_ctrl_R1.unmapped.fastq.1.gz ]; then\n        mv igg_ctrl_R1.unmapped.fastq.1.gz igg_ctrl_R1.unmapped_1.fastq.gz\n    fi\n\n    if [ -f igg_ctrl_R1.unmapped.fastq.2.gz ]; then\n        mv igg_ctrl_R1.unmapped.fastq.2.gz igg_ctrl_R1.unmapped_2.fastq.gz\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BOWTIE2_TARGET_ALIGN\":\n        bowtie2: $(echo $(bowtie2 --version 2>&1) | sed 's/^.*bowtie2-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -903,7 +903,7 @@
                 "id": "17",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.rev.1.bt2\" | sed \"s/\\.rev.1.bt2$//\"`\n    [ -z \"$INDEX\" ] && INDEX=`find -L ./ -name \"*.rev.1.bt2l\" | sed \"s/\\.rev.1.bt2l$//\"`\n    [ -z \"$INDEX\" ] && echo \"Bowtie2 index files not found\" 1>&2 && exit 1\n\n    bowtie2 \\\n        -x $INDEX \\\n        -1 igg_ctrl_R1_1.trimmed.fastq.gz -2 igg_ctrl_R1_2.trimmed.fastq.gz \\\n        --threads 1 \\\n         \\\n        --local --very-sensitive --no-overlap --no-dovetail --no-mixed --no-discordant --phred33 --minins 10 --maxins 700 \\\n        2> igg_ctrl_R1.spikein.bowtie2.log \\\n        | samtools view  --threads 1 -o igg_ctrl_R1.spikein.bam -\n\n    if [ -f igg_ctrl_R1.spikein.unmapped.fastq.1.gz ]; then\n        mv igg_ctrl_R1.spikein.unmapped.fastq.1.gz igg_ctrl_R1.spikein.unmapped_1.fastq.gz\n    fi\n\n    if [ -f igg_ctrl_R1.spikein.unmapped.fastq.2.gz ]; then\n        mv igg_ctrl_R1.spikein.unmapped.fastq.2.gz igg_ctrl_R1.spikein.unmapped_2.fastq.gz\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BOWTIE2_SPIKEIN_ALIGN\":\n        bowtie2: $(echo $(bowtie2 --version 2>&1) | sed 's/^.*bowtie2-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -966,7 +966,7 @@
                 "id": "19",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.rev.1.bt2\" | sed \"s/\\.rev.1.bt2$//\"`\n    [ -z \"$INDEX\" ] && INDEX=`find -L ./ -name \"*.rev.1.bt2l\" | sed \"s/\\.rev.1.bt2l$//\"`\n    [ -z \"$INDEX\" ] && echo \"Bowtie2 index files not found\" 1>&2 && exit 1\n\n    bowtie2 \\\n        -x $INDEX \\\n        -1 h3k27me3_R1_1.trimmed.fastq.gz -2 h3k27me3_R1_2.trimmed.fastq.gz \\\n        --threads 1 \\\n         \\\n        --local --very-sensitive --no-overlap --no-dovetail --no-mixed --no-discordant --phred33 --minins 10 --maxins 700 \\\n        2> h3k27me3_R1.spikein.bowtie2.log \\\n        | samtools view  --threads 1 -o h3k27me3_R1.spikein.bam -\n\n    if [ -f h3k27me3_R1.spikein.unmapped.fastq.1.gz ]; then\n        mv h3k27me3_R1.spikein.unmapped.fastq.1.gz h3k27me3_R1.spikein.unmapped_1.fastq.gz\n    fi\n\n    if [ -f h3k27me3_R1.spikein.unmapped.fastq.2.gz ]; then\n        mv h3k27me3_R1.spikein.unmapped.fastq.2.gz h3k27me3_R1.spikein.unmapped_2.fastq.gz\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BOWTIE2_SPIKEIN_ALIGN\":\n        bowtie2: $(echo $(bowtie2 --version 2>&1) | sed 's/^.*bowtie2-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1029,7 +1029,7 @@
                 "id": "20",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.rev.1.bt2\" | sed \"s/\\.rev.1.bt2$//\"`\n    [ -z \"$INDEX\" ] && INDEX=`find -L ./ -name \"*.rev.1.bt2l\" | sed \"s/\\.rev.1.bt2l$//\"`\n    [ -z \"$INDEX\" ] && echo \"Bowtie2 index files not found\" 1>&2 && exit 1\n\n    bowtie2 \\\n        -x $INDEX \\\n        -1 h3k27me3_R1_1.trimmed.fastq.gz -2 h3k27me3_R1_2.trimmed.fastq.gz \\\n        --threads 1 \\\n         \\\n        --local --very-sensitive --no-mixed --no-discordant --phred33 --minins 10 --maxins 700 --dovetail \\\n        2> h3k27me3_R1.bowtie2.log \\\n        | samtools view  --threads 1 -o h3k27me3_R1.bam -\n\n    if [ -f h3k27me3_R1.unmapped.fastq.1.gz ]; then\n        mv h3k27me3_R1.unmapped.fastq.1.gz h3k27me3_R1.unmapped_1.fastq.gz\n    fi\n\n    if [ -f h3k27me3_R1.unmapped.fastq.2.gz ]; then\n        mv h3k27me3_R1.unmapped.fastq.2.gz h3k27me3_R1.unmapped_2.fastq.gz\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BOWTIE2_TARGET_ALIGN\":\n        bowtie2: $(echo $(bowtie2 --version 2>&1) | sed 's/^.*bowtie2-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1093,7 +1093,7 @@
                 "id": "21",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  '{OFS = \"\\t\"} {print $1, '0', $2}' hg38-chr20.fa.sizes  > chromsizes.awk.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:BLACKLIST_AWK\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1136,7 +1136,7 @@
                 "id": "23",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  -f bt2_report_to_csv.awk igg_ctrl_R1.bowtie2.log > igg_ctrl_R1_meta_bt2_target.awk.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:EXTRACT_BT2_TARGET_META:AWK_SCRIPT\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1184,7 +1184,7 @@
                 "id": "22",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o igg_ctrl_R1.target.sorted.bam -T igg_ctrl_R1.target.sorted igg_ctrl_R1.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1231,7 +1231,7 @@
                 "id": "25",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  -f bt2_report_to_csv.awk igg_ctrl_R1.spikein.bowtie2.log > igg_ctrl_R1_meta_bt2_spikein.awk.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:EXTRACT_BT2_SPIKEIN_META:AWK_SCRIPT\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1279,7 +1279,7 @@
                 "id": "24",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o igg_ctrl_R1.spikein.sorted.bam -T igg_ctrl_R1.spikein.sorted igg_ctrl_R1.spikein.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS_SPIKEIN:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1324,7 +1324,7 @@
                 "id": "26",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o h3k27me3_R1.spikein.sorted.bam -T h3k27me3_R1.spikein.sorted h3k27me3_R1.spikein.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS_SPIKEIN:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1369,7 +1369,7 @@
                 "id": "27",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  -f bt2_report_to_csv.awk h3k27me3_R1.spikein.bowtie2.log > h3k27me3_R1_meta_bt2_spikein.awk.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:EXTRACT_BT2_SPIKEIN_META:AWK_SCRIPT\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1417,7 +1417,7 @@
                 "id": "28",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o h3k27me3_R1.target.sorted.bam -T h3k27me3_R1.target.sorted h3k27me3_R1.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1464,7 +1464,7 @@
                 "id": "29",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  -f bt2_report_to_csv.awk h3k27me3_R1.bowtie2.log > h3k27me3_R1_meta_bt2_target.awk.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:EXTRACT_BT2_TARGET_META:AWK_SCRIPT\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1512,7 +1512,7 @@
                 "id": "30",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        intersect \\\n        -a hg38-blacklist.bed \\\n        -b chromsizes.awk.bed \\\n         \\\n        > blacklist.filtered.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:BLACKLIST_BEDTOOLS_INTERSECT\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1561,7 +1561,7 @@
                 "id": "31",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        igg_ctrl_R1.target.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1606,7 +1606,7 @@
                 "id": "32",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        igg_ctrl_R1.spikein.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS_SPIKEIN:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1650,7 +1650,7 @@
                 "id": "33",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        h3k27me3_R1.spikein.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS_SPIKEIN:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1694,7 +1694,7 @@
                 "id": "34",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        h3k27me3_R1.target.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1739,7 +1739,7 @@
                 "id": "35",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        sort \\\n        -i blacklist.filtered.bed \\\n        -g hg38-chr20.fa.sizes \\\n         \\\n        > blacklist.sorted.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:BLACKLIST_BEDTOOLS_SORT\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1789,7 +1789,7 @@
                 "id": "37",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        igg_ctrl_R1.spikein.sorted.bam \\\n        > igg_ctrl_R1.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS_SPIKEIN:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1836,7 +1836,7 @@
                 "id": "38",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference e_coli_U00096_3.fa \\\n        igg_ctrl_R1.spikein.sorted.bam \\\n        > igg_ctrl_R1.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS_SPIKEIN:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1890,7 +1890,7 @@
                 "id": "41",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference e_coli_U00096_3.fa \\\n        h3k27me3_R1.spikein.sorted.bam \\\n        > h3k27me3_R1.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS_SPIKEIN:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1944,7 +1944,7 @@
                 "id": "36",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        igg_ctrl_R1.spikein.sorted.bam \\\n        > igg_ctrl_R1.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS_SPIKEIN:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1991,7 +1991,7 @@
                 "id": "40",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        h3k27me3_R1.spikein.sorted.bam \\\n        > h3k27me3_R1.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS_SPIKEIN:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2038,7 +2038,7 @@
                 "id": "39",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        h3k27me3_R1.spikein.sorted.bam \\\n        > h3k27me3_R1.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS_SPIKEIN:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2085,7 +2085,7 @@
                 "id": "43",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        igg_ctrl_R1.target.sorted.bam \\\n        > igg_ctrl_R1.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2134,7 +2134,7 @@
                 "id": "46",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        h3k27me3_R1.target.sorted.bam \\\n        > h3k27me3_R1.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2183,7 +2183,7 @@
                 "id": "47",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hg38-chr20.fa \\\n        h3k27me3_R1.target.sorted.bam \\\n        > h3k27me3_R1.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2239,7 +2239,7 @@
                 "id": "44",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hg38-chr20.fa \\\n        igg_ctrl_R1.target.sorted.bam \\\n        > igg_ctrl_R1.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2295,7 +2295,7 @@
                 "id": "45",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        h3k27me3_R1.target.sorted.bam \\\n        > h3k27me3_R1.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2344,7 +2344,7 @@
                 "id": "42",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        igg_ctrl_R1.target.sorted.bam \\\n        > igg_ctrl_R1.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:ALIGN_BOWTIE2:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2393,7 +2393,7 @@
                 "id": "48",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        complement \\\n        -i blacklist.sorted.bed \\\n        -g hg38-chr20.fa.sizes \\\n         \\\n        > blacklist.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_GENOME:BLACKLIST_BEDTOOLS_COMPLEMENT\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2443,7 +2443,7 @@
                 "id": "50",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        view \\\n        --threads 0 \\\n         \\\n        -L blacklist.bed \\\n        -b -q 20 -F 0x004 -F 0x0008 -f 0x001 \\\n        h3k27me3_R1.target.sorted.bam \\\n         \\\n        > h3k27me3_R1.target.filtered.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:SAMTOOLS_VIEW\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2493,7 +2493,7 @@
                 "id": "49",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        view \\\n        --threads 0 \\\n         \\\n        -L blacklist.bed \\\n        -b -q 20 -F 0x004 -F 0x0008 -f 0x001 \\\n        igg_ctrl_R1.target.sorted.bam \\\n         \\\n        > igg_ctrl_R1.target.filtered.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:SAMTOOLS_VIEW\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2543,7 +2543,7 @@
                 "id": "51",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o h3k27me3_R1.target.filtered.sorted.bam -T h3k27me3_R1.target.filtered.sorted h3k27me3_R1.target.filtered.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2591,7 +2591,7 @@
                 "id": "52",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o igg_ctrl_R1.target.filtered.sorted.bam -T igg_ctrl_R1.target.filtered.sorted igg_ctrl_R1.target.filtered.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2639,7 +2639,7 @@
                 "id": "55",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "picard \\\n        -Xmx6g \\\n        MarkDuplicates \\\n        --ASSUME_SORT_ORDER coordinate --REMOVE_DUPLICATES false --VALIDATION_STRINGENCY LENIENT --TMP_DIR tmp \\\n        --INPUT h3k27me3_R1.target.filtered.sorted.bam \\\n        --OUTPUT h3k27me3_R1.target.markdup.bam \\\n        --REFERENCE_SEQUENCE hg38-chr20.fa \\\n        --METRICS_FILE h3k27me3_R1.target.markdup.MarkDuplicates.metrics.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:PICARD_MARKDUPLICATES\":\n        picard: $(echo $(picard MarkDuplicates --version 2>&1) | grep -o 'Version:.*' | cut -f2- -d:)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2704,7 +2704,7 @@
                 "id": "54",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "preseq \\\n        lc_extrap \\\n        -v -B \\\n        -pe \\\n        -output h3k27me3_R1.lc_extrap.txt \\\n        h3k27me3_R1.target.filtered.sorted.bam \\\n    && cp .command.log h3k27me3_R1.command.log || cp .command.log h3k27me3_R1.command.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PRESEQ_LCEXTRAP\":\n        preseq: $(echo $(preseq 2>&1) | sed 's/^.*Version: //; s/Usage:.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2747,7 +2747,7 @@
                 "id": "53",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        h3k27me3_R1.target.filtered.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2792,7 +2792,7 @@
                 "id": "56",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        igg_ctrl_R1.target.filtered.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2837,7 +2837,7 @@
                 "id": "57",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "preseq \\\n        lc_extrap \\\n        -v -B \\\n        -pe \\\n        -output igg_ctrl_R1.lc_extrap.txt \\\n        igg_ctrl_R1.target.filtered.sorted.bam \\\n    && cp .command.log igg_ctrl_R1.command.log || cp .command.log igg_ctrl_R1.command.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PRESEQ_LCEXTRAP\":\n        preseq: $(echo $(preseq 2>&1) | sed 's/^.*Version: //; s/Usage:.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2880,7 +2880,7 @@
                 "id": "58",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "picard \\\n        -Xmx6g \\\n        MarkDuplicates \\\n        --ASSUME_SORT_ORDER coordinate --REMOVE_DUPLICATES false --VALIDATION_STRINGENCY LENIENT --TMP_DIR tmp \\\n        --INPUT igg_ctrl_R1.target.filtered.sorted.bam \\\n        --OUTPUT igg_ctrl_R1.target.markdup.bam \\\n        --REFERENCE_SEQUENCE hg38-chr20.fa \\\n        --METRICS_FILE igg_ctrl_R1.target.markdup.MarkDuplicates.metrics.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:PICARD_MARKDUPLICATES\":\n        picard: $(echo $(picard MarkDuplicates --version 2>&1) | grep -o 'Version:.*' | cut -f2- -d:)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2945,7 +2945,7 @@
                 "id": "60",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  '/^[^#]/{print}' h3k27me3_R1.target.markdup.MarkDuplicates.metrics.txt  > int1.txt && head -2 int1.txt > int2.txt && sed 's/\\t/,/g' int2.txt > int3.txt && sed 's/.*/\\L&/g' int3.txt  > h3k27me3_R1_meta_picard_dups.awk.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:EXTRACT_PICARD_DUP_META:AWK\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2987,7 +2987,7 @@
                 "id": "59",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o h3k27me3_R1.target.markdup.sorted.bam -T h3k27me3_R1.target.markdup.sorted h3k27me3_R1.target.markdup.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3039,7 +3039,7 @@
                 "id": "63",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        h3k27me3_R1.target.filtered.sorted.bam \\\n        > h3k27me3_R1.target.filtered.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3088,7 +3088,7 @@
                 "id": "62",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hg38-chr20.fa \\\n        h3k27me3_R1.target.filtered.sorted.bam \\\n        > h3k27me3_R1.target.filtered.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3144,7 +3144,7 @@
                 "id": "61",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        h3k27me3_R1.target.filtered.sorted.bam \\\n        > h3k27me3_R1.target.filtered.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3193,7 +3193,7 @@
                 "id": "66",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        igg_ctrl_R1.target.filtered.sorted.bam \\\n        > igg_ctrl_R1.target.filtered.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3242,7 +3242,7 @@
                 "id": "65",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        igg_ctrl_R1.target.filtered.sorted.bam \\\n        > igg_ctrl_R1.target.filtered.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3291,7 +3291,7 @@
                 "id": "64",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hg38-chr20.fa \\\n        igg_ctrl_R1.target.filtered.sorted.bam \\\n        > igg_ctrl_R1.target.filtered.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FILTER_READS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3347,7 +3347,7 @@
                 "id": "68",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  '/^[^#]/{print}' igg_ctrl_R1.target.markdup.MarkDuplicates.metrics.txt  > int1.txt && head -2 int1.txt > int2.txt && sed 's/\\t/,/g' int2.txt > int3.txt && sed 's/.*/\\L&/g' int3.txt  > igg_ctrl_R1_meta_picard_dups.awk.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:EXTRACT_PICARD_DUP_META:AWK\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3389,7 +3389,7 @@
                 "id": "67",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o igg_ctrl_R1.target.markdup.sorted.bam -T igg_ctrl_R1.target.markdup.sorted igg_ctrl_R1.target.markdup.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3441,7 +3441,7 @@
                 "id": "69",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        h3k27me3_R1.target.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3489,7 +3489,7 @@
                 "id": "70",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n            genomecov \\\n            -ibam h3k27me3_R1.target.markdup.sorted.bam \\\n            -bg -pc \\\n            > h3k27me3_R1.bedGraph\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_PEAKCALLING:BEDTOOLS_GENOMECOV\":\n            bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -3540,7 +3540,7 @@
                 "id": "71",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort -n -@ 1 -o h3k27me3_R1.sortedbyname.bam -T h3k27me3_R1.sortedbyname h3k27me3_R1.target.markdup.sorted.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:EXTRACT_FRAGMENTS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3583,7 +3583,7 @@
                 "id": "73",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "picard \\\n        -Xmx6g \\\n        MarkDuplicates \\\n        --ASSUME_SORT_ORDER coordinate --REMOVE_DUPLICATES true --VALIDATION_STRINGENCY LENIENT --TMP_DIR tmp \\\n        --INPUT igg_ctrl_R1.target.markdup.sorted.bam \\\n        --OUTPUT igg_ctrl_R1.target.dedup.bam \\\n        --REFERENCE_SEQUENCE hg38-chr20.fa \\\n        --METRICS_FILE igg_ctrl_R1.target.dedup.MarkDuplicates.metrics.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEDUPLICATE_PICARD:PICARD_MARKDUPLICATES\":\n        picard: $(echo $(picard MarkDuplicates --version 2>&1) | grep -o 'Version:.*' | cut -f2- -d:)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3646,7 +3646,7 @@
                 "id": "72",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        igg_ctrl_R1.target.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3694,7 +3694,7 @@
                 "id": "74",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools view -F 0x04 -@ 1 h3k27me3_R1.target.markdup.sorted.bam | awk -F'\\t' 'function abs(x){return ((x < 0.0) ? -x : x)} {print abs($9)}' | sort -T '.' | uniq -c | awk -v OFS=\"\\t\" '{print $2, $1/2}' > h3k27me3_R1.frags.len.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:SAMTOOLS_CUSTOMVIEW\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3746,7 +3746,7 @@
                 "id": "75",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "plotFingerprint \\\n        --skipZeros \\\n         \\\n        --bamfiles h3k27me3_R1.target.markdup.sorted.bam \\\n        --plotFile h3k27me3_R1.plotFingerprint.pdf \\\n        --outRawCounts h3k27me3_R1.plotFingerprint.raw.txt \\\n        --outQualityMetrics h3k27me3_R1.plotFingerprint.qcmetrics.txt \\\n        --numberOfProcessors 1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_QC:DEEPTOOLS_PLOTFINGERPRINT\":\n        deeptools: $(plotFingerprint --version | sed -e \"s/plotFingerprint //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3810,7 +3810,7 @@
                 "id": "76",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        sort \\\n        -i h3k27me3_R1.bedGraph \\\n         \\\n         \\\n        > h3k27me3_R1.sorted.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_PEAKCALLING:BEDTOOLS_SORT\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3853,7 +3853,7 @@
                 "id": "77",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        bamtobed \\\n        -bedpe \\\n        -i h3k27me3_R1.sortedbyname.bam \\\n        > h3k27me3_R1.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:EXTRACT_FRAGMENTS:BEDTOOLS_BAMTOBED\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3895,7 +3895,7 @@
                 "id": "78",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o igg_ctrl_R1.target.dedup.sorted.bam -T igg_ctrl_R1.target.dedup.sorted igg_ctrl_R1.target.dedup.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEDUPLICATE_PICARD:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3946,7 +3946,7 @@
                 "id": "80",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hg38-chr20.fa \\\n        h3k27me3_R1.target.markdup.sorted.bam \\\n        > h3k27me3_R1.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4002,7 +4002,7 @@
                 "id": "83",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        igg_ctrl_R1.target.markdup.sorted.bam \\\n        > igg_ctrl_R1.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4051,7 +4051,7 @@
                 "id": "82",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hg38-chr20.fa \\\n        igg_ctrl_R1.target.markdup.sorted.bam \\\n        > igg_ctrl_R1.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4107,7 +4107,7 @@
                 "id": "81",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        h3k27me3_R1.target.markdup.sorted.bam \\\n        > h3k27me3_R1.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4156,7 +4156,7 @@
                 "id": "79",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        h3k27me3_R1.target.markdup.sorted.bam \\\n        > h3k27me3_R1.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4205,7 +4205,7 @@
                 "id": "84",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        igg_ctrl_R1.target.markdup.sorted.bam \\\n        > igg_ctrl_R1.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MARK_DUPLICATES_PICARD:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4254,7 +4254,7 @@
                 "id": "85",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        h3k27me3_R1.sorted.bedGraph \\\n        hg38-chr20.fa.sizes \\\n        h3k27me3_R1.clipped.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_PEAKCALLING:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4305,7 +4305,7 @@
                 "id": "86",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  '$1==$4 && $6-$2 < 1000 {print $0}' h3k27me3_R1.bed  > h3k27me3_R1.filt.awk.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:EXTRACT_FRAGMENTS:AWK\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4347,7 +4347,7 @@
                 "id": "88",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n            genomecov \\\n            -ibam igg_ctrl_R1.target.dedup.sorted.bam \\\n            -bg -pc -scale 35.7142857143 \\\n            > igg_ctrl_R1.bedGraph\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_PEAKCALLING:BEDTOOLS_GENOMECOV\":\n            bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -4398,7 +4398,7 @@
                 "id": "87",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        igg_ctrl_R1.target.dedup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEDUPLICATE_PICARD:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4446,7 +4446,7 @@
                 "id": "89",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        h3k27me3_R1.clipped.bedGraph \\\n        hg38-chr20.fa.sizes \\\n        h3k27me3_R1.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_PEAKCALLING:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4499,7 +4499,7 @@
                 "id": "90",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cut -f 1,2,6 h3k27me3_R1.filt.awk.bed | sort -T '.' -k1,1 -k2,2n -k3,3n > h3k27me3_R1.frags.cut.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:EXTRACT_FRAGMENTS:CUT\":\n        cut: $(cut --version | head -n 1 | awk '{print $4;}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4541,7 +4541,7 @@
                 "id": "91",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        sort \\\n        -i igg_ctrl_R1.bedGraph \\\n         \\\n         \\\n        > igg_ctrl_R1.sorted.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_PEAKCALLING:BEDTOOLS_SORT\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4584,7 +4584,7 @@
                 "id": "95",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        igg_ctrl_R1.target.dedup.sorted.bam \\\n        > igg_ctrl_R1.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEDUPLICATE_PICARD:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4634,7 +4634,7 @@
                 "id": "92",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "plotFingerprint \\\n        --skipZeros \\\n         \\\n        --bamfiles igg_ctrl_R1.target.dedup.sorted.bam \\\n        --plotFile igg_ctrl_R1.plotFingerprint.pdf \\\n        --outRawCounts igg_ctrl_R1.plotFingerprint.raw.txt \\\n        --outQualityMetrics igg_ctrl_R1.plotFingerprint.qcmetrics.txt \\\n        --numberOfProcessors 1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_QC:DEEPTOOLS_PLOTFINGERPRINT\":\n        deeptools: $(plotFingerprint --version | sed -e \"s/plotFingerprint //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4698,7 +4698,7 @@
                 "id": "93",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        igg_ctrl_R1.target.dedup.sorted.bam \\\n        > igg_ctrl_R1.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEDUPLICATE_PICARD:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4749,7 +4749,7 @@
                 "id": "96",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "multiBamSummary bins \\\n        --smartLabels --binSize 500 \\\n        --labels h3k27me3_R1 igg_ctrl_R1 \\\n        --bamfiles h3k27me3_R1.target.markdup.sorted.bam igg_ctrl_R1.target.dedup.sorted.bam \\\n        --numberOfProcessors 1 \\\n        --outFileName all_bam.bamSummary.npz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_QC:DEEPTOOLS_MULTIBAMSUMMARY\":\n        deeptools: $(multiBamSummary --version | sed -e \"s/multiBamSummary //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4814,7 +4814,7 @@
                 "id": "94",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference hg38-chr20.fa \\\n        igg_ctrl_R1.target.dedup.sorted.bam \\\n        > igg_ctrl_R1.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEDUPLICATE_PICARD:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4871,7 +4871,7 @@
                 "id": "97",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "calc_frag_hist.py \\\n        --frag_path \"*len.txt\" \\\n        --output frag_len_hist.txt\n\n    if [ -f \"frag_len_hist.txt\" ]; then\n        cat frag_len_header.txt frag_len_hist.txt > frag_len_mqc.yml\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:FRAG_LEN_HIST\":\n        python: $(python --version | grep -E -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n        numpy: $(python -c 'import numpy; print(numpy.__version__)')\n        pandas: $(python -c 'import pandas; print(pandas.__version__)')\n        seaborn: $(python -c 'import seaborn; print(seaborn.__version__)')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4920,7 +4920,7 @@
                 "id": "98",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "computeMatrix \\\n        scale-regions --beforeRegionStartLength 3000 --regionBodyLength 5000 --afterRegionStartLength 3000 --skipZeros --missingDataAsZero \\\n        --regionsFileName hg38-chr20-genes.bed \\\n        --scoreFileName h3k27me3_R1.bigWig \\\n        --outFileName h3k27me3_R1.computeMatrix.mat.gz \\\n        --outFileNameMatrix h3k27me3_R1.computeMatrix.vals.mat.tab \\\n        --numberOfProcessors 1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_COMPUTEMATRIX_GENE\":\n        deeptools: $(computeMatrix --version | sed -e \"s/computeMatrix //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4976,7 +4976,7 @@
                 "id": "99",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        igg_ctrl_R1.sorted.bedGraph \\\n        hg38-chr20.fa.sizes \\\n        igg_ctrl_R1.clipped.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_PEAKCALLING:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5027,7 +5027,7 @@
                 "id": "100",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "plotPCA \\\n         \\\n        --corData all_bam.bamSummary.npz \\\n        --plotFile all_target_bams.plotPCA.pdf \\\n        --outFileNameData all_target_bams.plotPCA.tab\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_QC:DEEPTOOLS_PLOTPCA\":\n        deeptools: $(plotPCA --version | sed -e \"s/plotPCA //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5076,7 +5076,7 @@
                 "id": "101",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "plotCorrelation \\\n        --skipZeros --removeOutliers \\\n        --corData all_bam.bamSummary.npz \\\n        --corMethod pearson \\\n        --whatToPlot heatmap \\\n        --plotFile all_target_bams.plotCorrelation.pdf \\\n        --outFileCorMatrix all_target_bams.plotCorrelation.mat.tab\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_QC:DEEPTOOLS_PLOTCORRELATION\":\n        deeptools: $(plotCorrelation --version | sed -e \"s/plotCorrelation //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5125,7 +5125,7 @@
                 "id": "102",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "plotHeatmap \\\n        --sortUsing sum \\\n        --matrixFile h3k27me3_R1.computeMatrix.mat.gz \\\n        --outFileName h3k27me3_R1.plotHeatmap.pdf \\\n        --outFileNameMatrix h3k27me3_R1.plotHeatmap.mat.tab\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_PLOTHEATMAP_GENE\":\n        deeptools: $(plotHeatmap --version | sed -e \"s/plotHeatmap //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5173,7 +5173,7 @@
                 "id": "103",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        igg_ctrl_R1.clipped.bedGraph \\\n        hg38-chr20.fa.sizes \\\n        igg_ctrl_R1.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PREPARE_PEAKCALLING:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5226,7 +5226,7 @@
                 "id": "104",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "SEACR_1.3.sh \\\n        h3k27me3_R1.clipped.bedGraph \\\n        igg_ctrl_R1.clipped.bedGraph \\\n        non stringent \\\n        h3k27me3_R1.seacr.peaks\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:SEACR_CALLPEAK_IGG\":\n        seacr: 1.3\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5279,7 +5279,7 @@
                 "id": "105",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "computeMatrix \\\n        scale-regions --beforeRegionStartLength 3000 --regionBodyLength 5000 --afterRegionStartLength 3000 --skipZeros --missingDataAsZero \\\n        --regionsFileName hg38-chr20-genes.bed \\\n        --scoreFileName h3k27me3_R1.bigWig \\\n        --outFileName all_genes.computeMatrix.mat.gz \\\n        --outFileNameMatrix all_genes.computeMatrix.vals.mat.tab \\\n        --numberOfProcessors 1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_COMPUTEMATRIX_GENE_ALL\":\n        deeptools: $(computeMatrix --version | sed -e \"s/computeMatrix //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5334,7 +5334,7 @@
                 "id": "107",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  '{OFS = \"\\t\"} {print $0, FILENAME}' h3k27me3_R1.seacr.peaks.stringent.bed  > h3k27me3_R1.awk.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:AWK_NAME_PEAK_BED\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5378,7 +5378,7 @@
                 "id": "108",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  '{split($6, summit, \":\"); split(summit[2], region, \"-\"); print summit[1]\"\\t\"region[1]\"\\t\"region[2]}' h3k27me3_R1.seacr.peaks.stringent.bed  > h3k27me3_R1.max_signal.awk.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:AWK_EXTRACT_SUMMITS\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5421,7 +5421,7 @@
                 "id": "106",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cat h3k27me3_R1.seacr.peaks.stringent.bed | wc -l | awk -v OFS='\t' '{ print \"Peak Count\", $1 }' | cat peak_counts_header.txt - > h3k27me3_R1_mqc.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PEAK_QC:PRIMARY_PEAK_COUNTS\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5470,7 +5470,7 @@
                 "id": "109",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "echo \"h3k27me3_R1.bigWig\t38,70,83\nigg_ctrl_R1.bigWig\t231,111,81\" > exp_files.txt\n    find -L * -iname \"*.gtf\" -exec echo -e {}\"\\t0,48,73\" \\; > gtf.igv.txt\n    find -L * -iname \"*.gff\" -exec echo -e {}\"\\t0,48,73\" \\; > gff.igv.txt\n    cat *.txt > igv_files.txt\n    igv_files_to_session.py igv_session.xml igv_files.txt hg38-chr20.fa hg38-chr20-genes.bed.gz --path_prefix './'\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:IGV_SESSION\":\n        python: $(python --version | grep -E -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5604,7 +5604,7 @@
                 "id": "110",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "plotHeatmap \\\n        --sortUsing sum \\\n        --matrixFile all_genes.computeMatrix.mat.gz \\\n        --outFileName all_genes.plotHeatmap.pdf \\\n        --outFileNameMatrix all_genes.plotHeatmap.mat.tab\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_PLOTHEATMAP_GENE_ALL\":\n        deeptools: $(plotHeatmap --version | sed -e \"s/plotHeatmap //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5650,7 +5650,7 @@
                 "id": "112",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "sort -T '.' -k1,1 -k2,2n h3k27me3_R1.awk.bed > h3k27me3.sort.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:CONSENSUS_PEAKS:SORT\":\n        sort: $(sort --version | head -n 1 | awk '{print $4;}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5693,7 +5693,7 @@
                 "id": "111",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cut -f 1,2,3,6 h3k27me3_R1.awk.bed  > h3k27me3_R1.repro.cut.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PEAK_QC:CUT_CALC_REPROD\":\n        cut: $(cut --version | head -n 1 | awk '{print $4;}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5736,7 +5736,7 @@
                 "id": "113",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "computeMatrix \\\n        reference-point -a 3000 -b 3000 --referencePoint center --skipZeros --missingDataAsZero \\\n        --regionsFileName h3k27me3_R1.max_signal.awk.txt \\\n        --scoreFileName h3k27me3_R1.bigWig \\\n        --outFileName h3k27me3_R1.computeMatrix.mat.gz \\\n        --outFileNameMatrix h3k27me3_R1.computeMatrix.vals.mat.tab \\\n        --numberOfProcessors 1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_COMPUTEMATRIX_PEAKS\":\n        deeptools: $(computeMatrix --version | sed -e \"s/computeMatrix //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5792,7 +5792,7 @@
                 "id": "114",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        merge \\\n        -i h3k27me3.sort.bed \\\n         -c 2,3,4,5,6,7,7 -o collapse,collapse,collapse,collapse,collapse,collapse,count_distinct \\\n        > h3k27me3.consensus.peak_counts.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:CONSENSUS_PEAKS:BEDTOOLS_MERGE\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5836,7 +5836,7 @@
                 "id": "115",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "plotHeatmap \\\n        --sortUsing sum --startLabel \"Peak Start\" --endLabel \"Peak End\" --xAxisLabel \"\" --regionsLabel \"Peaks\" \\\n        --matrixFile h3k27me3_R1.computeMatrix.mat.gz \\\n        --outFileName h3k27me3_R1.plotHeatmap.pdf \\\n        --outFileNameMatrix h3k27me3_R1.plotHeatmap.mat.tab\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:DEEPTOOLS_PLOTHEATMAP_PEAKS\":\n        deeptools: $(plotHeatmap --version | sed -e \"s/plotHeatmap //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5884,7 +5884,7 @@
                 "id": "116",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "awk  ' $10 >= 1 {print $0}' h3k27me3.consensus.peak_counts.bed  > h3k27me3.consensus.peaks.awk.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:CONSENSUS_PEAKS:AWK\":\n        awk: $(awk -Wversion 2>/dev/null | head -n 1 | awk '{split($0,a,\",\"); print a[1];}' | egrep -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5927,7 +5927,7 @@
                 "id": "117",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "plot_consensus_peaks.py \\\n        --peaks \"*.peaks.bed\" \\\n        --outpath .\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PEAK_QC:PLOT_CONSENSUS_PEAKS\":\n        python: $(python --version | grep -E -o \"([0-9]{1,}\\.)+[0-9]{1,}\")\n        numpy: $(python -c 'import numpy; print(numpy.__version__)')\n        pandas: $(python -c 'import pandas; print(pandas.__version__)')\n        upsetplot: $(python -c 'import upsetplot; print(upsetplot.__version__)')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5963,7 +5963,7 @@
                 "id": "118",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cat h3k27me3.consensus.peaks.awk.bed | wc -l | awk -v OFS='\t' '{ print \"Peak Count\", $1 }' | cat peak_counts_consensus_header.txt - > h3k27me3_mqc.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:PEAK_QC:CONSENSUS_PEAK_COUNTS\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6012,7 +6012,7 @@
                 "id": "119",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "#!/usr/bin/env python\n\n    import yaml\n    import platform\n    from textwrap import dedent\n\n    def _make_versions_html(versions):\n        html = [\n            dedent(\n                '''\\\n                <style>\n                #nf-core-versions tbody:nth-child(even) {\n                    background-color: #f2f2f2;\n                }\n                </style>\n                <table class=\"table\" style=\"width:100%\" id=\"nf-core-versions\">\n                    <thead>\n                        <tr>\n                            <th> Process Name </th>\n                            <th> Software </th>\n                            <th> Version  </th>\n                        </tr>\n                    </thead>\n                '''\n            )\n        ]\n        for process, tmp_versions in sorted(versions.items()):\n            html.append(\"<tbody>\")\n            for i, (tool, version) in enumerate(sorted(tmp_versions.items())):\n                html.append(\n                    dedent(\n                        f'''\\\n                        <tr>\n                            <td><samp>{process if (i == 0) else ''}</samp></td>\n                            <td><samp>{tool}</samp></td>\n                            <td><samp>{version}</samp></td>\n                        </tr>\n                        '''\n                    )\n                )\n            html.append(\"</tbody>\")\n        html.append(\"</table>\")\n        return \"\\n\".join(html)\n\n    def _make_versions_unique_html(versions):\n        unique_versions = []\n\n        for process, tmp_versions in sorted(versions.items()):\n            for i, (tool, version) in enumerate(sorted(tmp_versions.items())):\n                tool_version = tool + \"=\" + version\n                if tool_version not in unique_versions:\n                    unique_versions.append(tool_version)\n\n        unique_versions.sort()\n\n        html = [\n            dedent(\n                '''\\\n                <style>\n                #nf-core-versions-unique tbody:nth-child(even) {\n                    background-color: #f2f2f2;\n                }\n                </style>\n                <table class=\"table\" style=\"width:100%\" id=\"nf-core-versions-unique\">\n                    <thead>\n                        <tr>\n                            <th> Software </th>\n                            <th> Version  </th>\n                        </tr>\n                    </thead>\n                '''\n            )\n        ]\n\n        for tool_version in unique_versions:\n            tool_version_split = tool_version.split('=')\n            html.append(\"<tbody>\")\n            html.append(\n                dedent(\n                    f'''\\\n                    <tr>\n                        <td><samp>{tool_version_split[0]}</samp></td>\n                        <td><samp>{tool_version_split[1]}</samp></td>\n                    </tr>\n                    '''\n                )\n            )\n            html.append(\"</tbody>\")\n        html.append(\"</table>\")\n        return \"\\n\".join(html)\n\n    module_versions = {}\n    module_versions[\"NFCORE_CUTANDRUN:CUTANDRUN:CUSTOM_DUMPSOFTWAREVERSIONS\"] = {\n        'python': platform.python_version(),\n        'yaml': yaml.__version__\n    }\n\n    with open(\"versions.yml\") as f:\n        workflow_versions = yaml.load(f, Loader=yaml.BaseLoader) | module_versions\n\n    workflow_versions[\"Workflow\"] = {\n        \"Nextflow\": \"22.10.7\",\n        \"nf-core/cutandrun\": \"3.1\"\n    }\n\n    versions_mqc = {\n        'parent_id': 'software_versions',\n        'parent_name': 'Software Versions',\n        'parent_description': 'Details software versions used in the pipeline run',\n        'id': 'software-versions-by-process',\n        'section_name': 'nf-core/cutandrun software versions by process',\n        'section_href': 'https://github.com/nf-core/cutandrun',\n        'plot_type': 'html',\n        'description': 'are collected at run time from the software output.',\n        'data': _make_versions_html(workflow_versions)\n    }\n\n    versions_mqc_unique = {\n        'parent_id': 'software_versions',\n        'parent_name': 'Software Versions',\n        'parent_description': 'Details software versions used in the pipeline run',\n        'id': 'software-versions-unique',\n        'section_name': 'nf-core/cutandrun Software Versions',\n        'section_href': 'https://github.com/nf-core/cutandrun',\n        'plot_type': 'html',\n        'description': 'are collected at run time from the software output.',\n        'data': _make_versions_unique_html(workflow_versions)\n    }\n\n    with open(\"software_versions.yml\", 'w') as f:\n        yaml.dump(workflow_versions, f, default_flow_style=False)\n\n    with open(\"software_versions_mqc.yml\", 'w') as f:\n        yaml.dump(versions_mqc, f, default_flow_style=False)\n\n    with open(\"software_versions_unique_mqc.yml\", 'w') as f:\n        yaml.dump(versions_mqc_unique, f, default_flow_style=False)\n\n    with open('local_versions.yml', 'w') as f:\n        yaml.dump(module_versions, f, default_flow_style=False)"
                 },
                 "parents": [
@@ -6135,7 +6135,7 @@
                 "id": "120",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "multiqc -f -v  .\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_CUTANDRUN:CUTANDRUN:MULTIQC\":\n        multiqc: $( multiqc --version | sed -e \"s/multiqc, version //g\" )\n    END_VERSIONS"
                 },
                 "parents": [

@@ -18,7 +18,7 @@
                 "id": "2",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "check_samplesheet.py \\\n        samplesheet.csv \\\n        samplesheet.valid.csv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:INPUT_CHECK:SAMPLESHEET_CHECK\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -70,7 +70,7 @@
                 "id": "3",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "mkdir bowtie2\n    bowtie2-build  --threads 1 genome.fasta bowtie2/genome\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:BOWTIE2_BUILD\":\n        bowtie2: $(echo $(bowtie2 --version 2>&1) | sed 's/^.*bowtie2-align-s version //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -111,7 +111,7 @@
                 "id": "1",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "minimap2 \\\n        -t 1 \\\n        -d genome.mmi \\\n        -x map-ont \\\n        genome.fasta\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:LONGREAD_HOSTREMOVAL:MINIMAP2_INDEX\":\n        minimap2: $(minimap2 --version 2>&1)\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -152,7 +152,7 @@
                 "id": "4",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "mkdir output\n\n    ## Ensures --strip-components only applied when top level of tar contents is a directory\n    ## If just files or multiple directories, place all in output\n    if [[ $(tar -tzf testdb-bracken.tar.gz | grep -o -P \"^.*?\\/\" | uniq | wc -l) -eq 1 ]]; then\n        tar \\\n            -C output --strip-components 1 \\\n            -xzvf \\\n             \\\n            testdb-bracken.tar.gz \\\n            \n    else\n        tar \\\n            -C output \\\n            -xzvf \\\n             \\\n            testdb-bracken.tar.gz \\\n            \n    fi\n\n    mv output testdb-bracken\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:DB_CHECK:UNTAR\":\n        untar: $(echo $(tar --version 2>&1) | sed 's/^.*(GNU tar) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -204,7 +204,7 @@
                 "id": "7",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "mkdir output\n\n    ## Ensures --strip-components only applied when top level of tar contents is a directory\n    ## If just files or multiple directories, place all in output\n    if [[ $(tar -tzf metaphlan_database.tar.gz | grep -o -P \"^.*?\\/\" | uniq | wc -l) -eq 1 ]]; then\n        tar \\\n            -C output --strip-components 1 \\\n            -xzvf \\\n             \\\n            metaphlan_database.tar.gz \\\n            \n    else\n        tar \\\n            -C output \\\n            -xzvf \\\n             \\\n            metaphlan_database.tar.gz \\\n            \n    fi\n\n    mv output metaphlan_database\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:DB_CHECK:UNTAR\":\n        untar: $(echo $(tar --version 2>&1) | sed 's/^.*(GNU tar) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -256,7 +256,7 @@
                 "id": "5",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "mkdir output\n\n    ## Ensures --strip-components only applied when top level of tar contents is a directory\n    ## If just files or multiple directories, place all in output\n    if [[ $(tar -tzf testdb-kraken2.tar.gz | grep -o -P \"^.*?\\/\" | uniq | wc -l) -eq 1 ]]; then\n        tar \\\n            -C output --strip-components 1 \\\n            -xzvf \\\n             \\\n            testdb-kraken2.tar.gz \\\n            \n    else\n        tar \\\n            -C output \\\n            -xzvf \\\n             \\\n            testdb-kraken2.tar.gz \\\n            \n    fi\n\n    mv output testdb-kraken2\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:DB_CHECK:UNTAR\":\n        untar: $(echo $(tar --version 2>&1) | sed 's/^.*(GNU tar) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -308,7 +308,7 @@
                 "id": "6",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "mkdir output\n\n    ## Ensures --strip-components only applied when top level of tar contents is a directory\n    ## If just files or multiple directories, place all in output\n    if [[ $(tar -tzf test-db-centrifuge.tar.gz | grep -o -P \"^.*?\\/\" | uniq | wc -l) -eq 1 ]]; then\n        tar \\\n            -C output --strip-components 1 \\\n            -xzvf \\\n             \\\n            test-db-centrifuge.tar.gz \\\n            \n    else\n        tar \\\n            -C output \\\n            -xzvf \\\n             \\\n            test-db-centrifuge.tar.gz \\\n            \n    fi\n\n    mv output test-db-centrifuge\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:DB_CHECK:UNTAR\":\n        untar: $(echo $(tar --version 2>&1) | sed 's/^.*(GNU tar) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -360,7 +360,7 @@
                 "id": "8",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "mkdir output\n\n    ## Ensures --strip-components only applied when top level of tar contents is a directory\n    ## If just files or multiple directories, place all in output\n    if [[ $(tar -tzf kaiju.tar.gz | grep -o -P \"^.*?\\/\" | uniq | wc -l) -eq 1 ]]; then\n        tar \\\n            -C output --strip-components 1 \\\n            -xzvf \\\n             \\\n            kaiju.tar.gz \\\n            \n    else\n        tar \\\n            -C output \\\n            -xzvf \\\n             \\\n            kaiju.tar.gz \\\n            \n    fi\n\n    mv output kaiju\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:DB_CHECK:UNTAR\":\n        untar: $(echo $(tar --version 2>&1) | sed 's/^.*(GNU tar) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -412,7 +412,7 @@
                 "id": "10",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" ERR3201952.fastq.gz ERR3201952_ERR3201952_raw.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 ERR3201952_ERR3201952_raw.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -461,7 +461,7 @@
                 "id": "9",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "## To ensure ID matches rest of pipeline based on meta.id rather than input file name\n    \n    [[ -f ERR3201952_ERR3201952.fastq.gz   ]] || ln -s ERR3201952.fastq.gz ERR3201952_ERR3201952.fastq.gz\n\n    porechop \\\n        -i ERR3201952_ERR3201952.fastq.gz \\\n        -t 1 \\\n         \\\n        -o ERR3201952_ERR3201952_porechopped.fastq.gz \\\n        > ERR3201952_ERR3201952.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:LONGREAD_PREPROCESSING:PORECHOP_PORECHOP\":\n        porechop: $( porechop --version )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -511,7 +511,7 @@
                 "id": "14",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kraken2 \\\n        --db testdb-bracken \\\n        --threads 1 \\\n        --report 2611_se_db1.bracken.kraken2.report.txt \\\n        --gzip-compressed \\\n        --unclassified-out 2611_se_db1.bracken.unclassified.fastq \\\n        --classified-out 2611_se_db1.bracken.classified.fastq \\\n         \\\n         \\\n         \\\n        ERX5474930_ERR5766174_1.fa.gz\n\n    pigz -p 1 *.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KRAKEN2_KRAKEN2\":\n        kraken2: $(echo $(kraken2 --version 2>&1) | sed 's/^.*Kraken version //; s/ .*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -587,7 +587,7 @@
                 "id": "11",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "DB=`find -L ./ -name \"*.dmnd\" | sed 's/\\.dmnd$//'`\n\n    diamond \\\n        blastx \\\n        --threads 1 \\\n        --db $DB \\\n        --query ERX5474930_ERR5766174_1.fa.gz \\\n        --outfmt 102  \\\n         \\\n        --out 2611_se_db1.diamond.tsv \\\n        --log\n\n    mv diamond.log 2611_se_db1.diamond.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:DIAMOND_BLASTX\":\n        diamond: $(diamond --version 2>&1 | tail -n 1 | sed 's/^diamond version //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -653,7 +653,7 @@
                 "id": "12",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" ERX5474932_ERR5766176_1.fastq.gz 2612_ERR5766176_raw_1.gz ERX5474932_ERR5766176_2.fastq.gz 2612_ERR5766176_raw_2.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 2612_ERR5766176_raw_1.gz 2612_ERR5766176_raw_2.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -720,7 +720,7 @@
                 "id": "13",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  2612_ERR5766176_1.fastq.gz ] && ln -sf ERX5474932_ERR5766176_1.fastq.gz 2612_ERR5766176_1.fastq.gz\n        [ ! -f  2612_ERR5766176_2.fastq.gz ] && ln -sf ERX5474932_ERR5766176_2.fastq.gz 2612_ERR5766176_2.fastq.gz\n        fastp \\\n            --in1 2612_ERR5766176_1.fastq.gz \\\n            --in2 2612_ERR5766176_2.fastq.gz \\\n            --out1 2612_ERR5766176_1.fastp.fastq.gz \\\n            --out2 2612_ERR5766176_2.fastp.fastq.gz \\\n            --json 2612_ERR5766176.fastp.json \\\n            --html 2612_ERR5766176.fastp.html \\\n             \\\n             \\\n            -m --merged_out 2612_ERR5766176.merged.fastq.gz \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --detect_adapter_for_pe --length_required 15 \\\n            2> 2612_ERR5766176.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_PREPROCESSING:SHORTREAD_FASTP:FASTP_PAIRED\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -801,7 +801,7 @@
                 "id": "19",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kraken2 \\\n        --db testdb-kraken2 \\\n        --threads 1 \\\n        --report 2611_se_db2.kraken2.kraken2.report.txt \\\n        --gzip-compressed \\\n        --unclassified-out 2611_se_db2.kraken2.unclassified.fastq \\\n        --classified-out 2611_se_db2.kraken2.classified.fastq \\\n         \\\n         \\\n        --quick \\\n        ERX5474930_ERR5766174_1.fa.gz\n\n    pigz -p 1 *.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KRAKEN2_KRAKEN2\":\n        kraken2: $(echo $(kraken2 --version 2>&1) | sed 's/^.*Kraken version //; s/ .*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -877,7 +877,7 @@
                 "id": "15",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" ERX5474932_ERR5766176_B_1.fastq.gz 2612_ERR5766176_B_raw_1.gz ERX5474932_ERR5766176_B_2.fastq.gz 2612_ERR5766176_B_raw_2.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 2612_ERR5766176_B_raw_1.gz 2612_ERR5766176_B_raw_2.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -944,7 +944,7 @@
                 "id": "16",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  2612_ERR5766176_B_1.fastq.gz ] && ln -sf ERX5474932_ERR5766176_B_1.fastq.gz 2612_ERR5766176_B_1.fastq.gz\n        [ ! -f  2612_ERR5766176_B_2.fastq.gz ] && ln -sf ERX5474932_ERR5766176_B_2.fastq.gz 2612_ERR5766176_B_2.fastq.gz\n        fastp \\\n            --in1 2612_ERR5766176_B_1.fastq.gz \\\n            --in2 2612_ERR5766176_B_2.fastq.gz \\\n            --out1 2612_ERR5766176_B_1.fastp.fastq.gz \\\n            --out2 2612_ERR5766176_B_2.fastp.fastq.gz \\\n            --json 2612_ERR5766176_B.fastp.json \\\n            --html 2612_ERR5766176_B.fastp.html \\\n             \\\n             \\\n            -m --merged_out 2612_ERR5766176_B.merged.fastq.gz \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --detect_adapter_for_pe --length_required 15 \\\n            2> 2612_ERR5766176_B.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_PREPROCESSING:SHORTREAD_FASTP:FASTP_PAIRED\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1025,7 +1025,7 @@
                 "id": "18",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  2612_ERR5766180.fastq.gz ] && ln -sf ERX5474936_ERR5766180_1.fastq.gz 2612_ERR5766180.fastq.gz\n\n        fastp \\\n            --stdout \\\n            --in1 2612_ERR5766180.fastq.gz \\\n            --out1  2612_ERR5766180.fastp.fastq.gz \\\n            --thread 1 \\\n            --json 2612_ERR5766180.fastp.json \\\n            --html 2612_ERR5766180.fastp.html \\\n             \\\n             \\\n            --length_required 15 \\\n            2> 2612_ERR5766180.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_PREPROCESSING:SHORTREAD_FASTP:FASTP_SINGLE\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1088,7 +1088,7 @@
                 "id": "17",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" ERX5474936_ERR5766180_1.fastq.gz 2612_ERR5766180_raw.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 2612_ERR5766180_raw.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1137,7 +1137,7 @@
                 "id": "22",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbname=`find -L kaiju -name \"*.fmi\" -not -name \"._*\"`\n    kaiju \\\n         \\\n        -z 1 \\\n        -t $dbnodes \\\n        -f $dbname \\\n        -o 2611_se_db5.kaiju.tsv \\\n        -i ERX5474930_ERR5766174_1.fa.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KAIJU_KAIJU\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1193,7 +1193,7 @@
                 "id": "21",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  2613_ERR5766181_1.fastq.gz ] && ln -sf ERX5474937_ERR5766181_1.fastq.gz 2613_ERR5766181_1.fastq.gz\n        [ ! -f  2613_ERR5766181_2.fastq.gz ] && ln -sf ERX5474937_ERR5766181_2.fastq.gz 2613_ERR5766181_2.fastq.gz\n        fastp \\\n            --in1 2613_ERR5766181_1.fastq.gz \\\n            --in2 2613_ERR5766181_2.fastq.gz \\\n            --out1 2613_ERR5766181_1.fastp.fastq.gz \\\n            --out2 2613_ERR5766181_2.fastp.fastq.gz \\\n            --json 2613_ERR5766181.fastp.json \\\n            --html 2613_ERR5766181.fastp.html \\\n             \\\n             \\\n            -m --merged_out 2613_ERR5766181.merged.fastq.gz \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --detect_adapter_for_pe --length_required 15 \\\n            2> 2613_ERR5766181.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_PREPROCESSING:SHORTREAD_FASTP:FASTP_PAIRED\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1274,7 +1274,7 @@
                 "id": "20",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" ERX5474937_ERR5766181_1.fastq.gz 2613_ERR5766181_raw_1.gz ERX5474937_ERR5766181_2.fastq.gz 2613_ERR5766181_raw_2.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 2613_ERR5766181_raw_1.gz 2613_ERR5766181_raw_2.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1341,7 +1341,7 @@
                 "id": "23",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "filtlong \\\n         \\\n        --min_length 1000 --keep_percent 90 --target_bases 500000000 \\\n        ERR3201952_ERR3201952_porechopped.fastq.gz \\\n        2> ERR3201952_ERR3201952_filtered.log \\\n        | gzip -n > ERR3201952_ERR3201952_filtered.fastq.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:LONGREAD_PREPROCESSING:FILTLONG\":\n        filtlong: $( filtlong --version | sed -e \"s/Filtlong v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1392,7 +1392,7 @@
                 "id": "24",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bracken \\\n         \\\n        -d 'testdb-bracken' \\\n        -i '2611_se_db1.bracken.kraken2.report.txt' \\\n        -o '2611_se_db1.bracken.tsv'\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:BRACKEN_BRACKEN\":\n        bracken: 2.7\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1448,7 +1448,7 @@
                 "id": "25",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r 2611_se_db1.bracken.kraken2.report.txt \\\n        -o 2611_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1497,7 +1497,7 @@
                 "id": "26",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "maxmem=$(echo \"6 GB\"| sed 's/ GB/g/g')\n    bbduk.sh \\\n        -Xmx$maxmem \\\n        in=2612_ERR5766176.merged.fastq.gz \\\n        out=2612_ERR5766176.fastq.gz \\\n        threads=1 \\\n        entropy=0.3 entropywindow=50 entropymask=f \\\n         \\\n        &> 2612_ERR5766176.bbduk.log\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_COMPLEXITYFILTERING:BBMAP_BBDUK\":\n        bbmap: $(bbversion.sh | grep -v \"Duplicate cpuset\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1548,7 +1548,7 @@
                 "id": "27",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" 2612_ERR5766176.merged.fastq.gz 2612_ERR5766176_processed.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 2612_ERR5766176_processed.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_PREPROCESSING:FASTQC_PROCESSED\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1598,7 +1598,7 @@
                 "id": "28",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r 2611_se_db2.kraken2.kraken2.report.txt \\\n        -o 2611_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1647,7 +1647,7 @@
                 "id": "29",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" 2612_ERR5766176_B.merged.fastq.gz 2612_ERR5766176_B_processed.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 2612_ERR5766176_B_processed.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_PREPROCESSING:FASTQC_PROCESSED\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1697,7 +1697,7 @@
                 "id": "30",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "maxmem=$(echo \"6 GB\"| sed 's/ GB/g/g')\n    bbduk.sh \\\n        -Xmx$maxmem \\\n        in=2612_ERR5766176_B.merged.fastq.gz \\\n        out=2612_ERR5766176_B.fastq.gz \\\n        threads=1 \\\n        entropy=0.3 entropywindow=50 entropymask=f \\\n         \\\n        &> 2612_ERR5766176_B.bbduk.log\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_COMPLEXITYFILTERING:BBMAP_BBDUK\":\n        bbmap: $(bbversion.sh | grep -v \"Duplicate cpuset\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1748,7 +1748,7 @@
                 "id": "31",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "maxmem=$(echo \"6 GB\"| sed 's/ GB/g/g')\n    bbduk.sh \\\n        -Xmx$maxmem \\\n        in=2612_ERR5766180.fastp.fastq.gz \\\n        out=2612_ERR5766180.fastq.gz \\\n        threads=1 \\\n        entropy=0.3 entropywindow=50 entropymask=f \\\n         \\\n        &> 2612_ERR5766180.bbduk.log\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_COMPLEXITYFILTERING:BBMAP_BBDUK\":\n        bbmap: $(bbversion.sh | grep -v \"Duplicate cpuset\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1799,7 +1799,7 @@
                 "id": "32",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" 2612_ERR5766180.fastp.fastq.gz 2612_ERR5766180_processed.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 2612_ERR5766180_processed.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_PREPROCESSING:FASTQC_PROCESSED\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1849,7 +1849,7 @@
                 "id": "34",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbnames=`find -L kaiju -name \"*names.dmp\"`\n    kaiju2krona \\\n        -v -u \\\n        -t $dbnodes \\\n        -n $dbnames \\\n        -i 2611_se_db5.kaiju.tsv \\\n        -o 2611_se.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KAIJU_KAIJU2KRONA\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1902,7 +1902,7 @@
                 "id": "33",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbname=`find -L kaiju -name \"*.fmi\" -not -name \"._*\"`\n    kaiju2table    \\\n        -t $dbnodes \\\n        -n $dbname \\\n        -r species \\\n        -o 2611_se_db5.kaijutable.txt \\\n        2611_se_db5.kaiju.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KAIJU_KAIJU2TABLE_SINGLE\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1963,7 +1963,7 @@
                 "id": "35",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "maxmem=$(echo \"6 GB\"| sed 's/ GB/g/g')\n    bbduk.sh \\\n        -Xmx$maxmem \\\n        in=2613_ERR5766181.merged.fastq.gz \\\n        out=2613_ERR5766181.fastq.gz \\\n        threads=1 \\\n        entropy=0.3 entropywindow=50 entropymask=f \\\n         \\\n        &> 2613_ERR5766181.bbduk.log\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_COMPLEXITYFILTERING:BBMAP_BBDUK\":\n        bbmap: $(bbversion.sh | grep -v \"Duplicate cpuset\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2014,7 +2014,7 @@
                 "id": "36",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" 2613_ERR5766181.merged.fastq.gz 2613_ERR5766181_processed.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 2613_ERR5766181_processed.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_PREPROCESSING:FASTQC_PROCESSED\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2064,7 +2064,7 @@
                 "id": "38",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "minimap2 \\\n         \\\n        -t 1 \\\n        \"genome.mmi\" \\\n        \"ERR3201952_ERR3201952_filtered.fastq.gz\" \\\n         \\\n         \\\n        -a | samtools sort | samtools view -@ 1 -b -h -o ERR3201952_ERR3201952.bam\n\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:LONGREAD_HOSTREMOVAL:MINIMAP2_ALIGN\":\n        minimap2: $(minimap2 --version 2>&1)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2116,7 +2116,7 @@
                 "id": "37",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" ERR3201952_ERR3201952_filtered.fastq.gz ERR3201952_ERR3201952_processed.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 ERR3201952_ERR3201952_processed.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:LONGREAD_PREPROCESSING:FASTQC_PROCESSED\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2165,7 +2165,7 @@
                 "id": "39",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2611_se_db1.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2611_se_db1.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2611_se_db1.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2209,7 +2209,7 @@
                 "id": "40",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.rev.1.bt2\" | sed \"s/\\.rev.1.bt2$//\"`\n    [ -z \"$INDEX\" ] && INDEX=`find -L ./ -name \"*.rev.1.bt2l\" | sed \"s/\\.rev.1.bt2l$//\"`\n    [ -z \"$INDEX\" ] && echo \"Bowtie2 index files not found\" 1>&2 && exit 1\n\n    bowtie2 \\\n        -x $INDEX \\\n        -U 2612_ERR5766176.fastq.gz \\\n        --threads 1 \\\n        --un-gz 2612_ERR5766176.unmapped.fastq.gz \\\n         \\\n        2> 2612_ERR5766176.bowtie2.log \\\n        | samtools sort  --threads 1 -o 2612_ERR5766176.bam -\n\n    if [ -f 2612_ERR5766176.unmapped.fastq.1.gz ]; then\n        mv 2612_ERR5766176.unmapped.fastq.1.gz 2612_ERR5766176.unmapped_1.fastq.gz\n    fi\n\n    if [ -f 2612_ERR5766176.unmapped.fastq.2.gz ]; then\n        mv 2612_ERR5766176.unmapped.fastq.2.gz 2612_ERR5766176.unmapped_2.fastq.gz\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:BOWTIE2_ALIGN\":\n        bowtie2: $(echo $(bowtie2 --version 2>&1) | sed 's/^.*bowtie2-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2282,7 +2282,7 @@
                 "id": "41",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2611_se_db2.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2611_se_db2.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2611_se_db2.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2326,7 +2326,7 @@
                 "id": "42",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.rev.1.bt2\" | sed \"s/\\.rev.1.bt2$//\"`\n    [ -z \"$INDEX\" ] && INDEX=`find -L ./ -name \"*.rev.1.bt2l\" | sed \"s/\\.rev.1.bt2l$//\"`\n    [ -z \"$INDEX\" ] && echo \"Bowtie2 index files not found\" 1>&2 && exit 1\n\n    bowtie2 \\\n        -x $INDEX \\\n        -U 2612_ERR5766176_B.fastq.gz \\\n        --threads 1 \\\n        --un-gz 2612_ERR5766176_B.unmapped.fastq.gz \\\n         \\\n        2> 2612_ERR5766176_B.bowtie2.log \\\n        | samtools sort  --threads 1 -o 2612_ERR5766176_B.bam -\n\n    if [ -f 2612_ERR5766176_B.unmapped.fastq.1.gz ]; then\n        mv 2612_ERR5766176_B.unmapped.fastq.1.gz 2612_ERR5766176_B.unmapped_1.fastq.gz\n    fi\n\n    if [ -f 2612_ERR5766176_B.unmapped.fastq.2.gz ]; then\n        mv 2612_ERR5766176_B.unmapped.fastq.2.gz 2612_ERR5766176_B.unmapped_2.fastq.gz\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:BOWTIE2_ALIGN\":\n        bowtie2: $(echo $(bowtie2 --version 2>&1) | sed 's/^.*bowtie2-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2399,7 +2399,7 @@
                 "id": "43",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.rev.1.bt2\" | sed \"s/\\.rev.1.bt2$//\"`\n    [ -z \"$INDEX\" ] && INDEX=`find -L ./ -name \"*.rev.1.bt2l\" | sed \"s/\\.rev.1.bt2l$//\"`\n    [ -z \"$INDEX\" ] && echo \"Bowtie2 index files not found\" 1>&2 && exit 1\n\n    bowtie2 \\\n        -x $INDEX \\\n        -U 2612_ERR5766180.fastq.gz \\\n        --threads 1 \\\n        --un-gz 2612_ERR5766180.unmapped.fastq.gz \\\n         \\\n        2> 2612_ERR5766180.bowtie2.log \\\n        | samtools sort  --threads 1 -o 2612_ERR5766180.bam -\n\n    if [ -f 2612_ERR5766180.unmapped.fastq.1.gz ]; then\n        mv 2612_ERR5766180.unmapped.fastq.1.gz 2612_ERR5766180.unmapped_1.fastq.gz\n    fi\n\n    if [ -f 2612_ERR5766180.unmapped.fastq.2.gz ]; then\n        mv 2612_ERR5766180.unmapped.fastq.2.gz 2612_ERR5766180.unmapped_2.fastq.gz\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:BOWTIE2_ALIGN\":\n        bowtie2: $(echo $(bowtie2 --version 2>&1) | sed 's/^.*bowtie2-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2472,7 +2472,7 @@
                 "id": "44",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2611_se_db5.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2611_se_db5.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2611_se_db5.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2516,7 +2516,7 @@
                 "id": "45",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "INDEX=`find -L ./ -name \"*.rev.1.bt2\" | sed \"s/\\.rev.1.bt2$//\"`\n    [ -z \"$INDEX\" ] && INDEX=`find -L ./ -name \"*.rev.1.bt2l\" | sed \"s/\\.rev.1.bt2l$//\"`\n    [ -z \"$INDEX\" ] && echo \"Bowtie2 index files not found\" 1>&2 && exit 1\n\n    bowtie2 \\\n        -x $INDEX \\\n        -U 2613_ERR5766181.fastq.gz \\\n        --threads 1 \\\n        --un-gz 2613_ERR5766181.unmapped.fastq.gz \\\n         \\\n        2> 2613_ERR5766181.bowtie2.log \\\n        | samtools sort  --threads 1 -o 2613_ERR5766181.bam -\n\n    if [ -f 2613_ERR5766181.unmapped.fastq.1.gz ]; then\n        mv 2613_ERR5766181.unmapped.fastq.1.gz 2613_ERR5766181.unmapped_1.fastq.gz\n    fi\n\n    if [ -f 2613_ERR5766181.unmapped.fastq.2.gz ]; then\n        mv 2613_ERR5766181.unmapped.fastq.2.gz 2613_ERR5766181.unmapped_2.fastq.gz\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:BOWTIE2_ALIGN\":\n        bowtie2: $(echo $(bowtie2 --version 2>&1) | sed 's/^.*bowtie2-align-s version //; s/ .*$//')\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2589,7 +2589,7 @@
                 "id": "47",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        view \\\n        --threads 0 \\\n         \\\n         \\\n        -f 4 \\\n        -o ERR3201952_ERR3201952.unmapped.bam \\\n        ERR3201952_ERR3201952.bam \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:LONGREAD_HOSTREMOVAL:SAMTOOLS_VIEW\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2632,7 +2632,7 @@
                 "id": "46",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        ERR3201952_ERR3201952.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:LONGREAD_HOSTREMOVAL:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2675,7 +2675,7 @@
                 "id": "48",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        2612_ERR5766176.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2718,7 +2718,7 @@
                 "id": "49",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        2612_ERR5766176_B.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2761,7 +2761,7 @@
                 "id": "50",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        2612_ERR5766180.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2804,7 +2804,7 @@
                 "id": "51",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        2613_ERR5766181.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2847,7 +2847,7 @@
                 "id": "52",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n            bam2fq \\\n             \\\n            -@ 1 \\\n            ERR3201952_ERR3201952.unmapped.bam | gzip --no-name > ERR3201952_ERR3201952.unmapped_interleaved.fq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_TAXPROFILER:TAXPROFILER:LONGREAD_HOSTREMOVAL:SAMTOOLS_BAM2FQ\":\n            samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2898,7 +2898,7 @@
                 "id": "53",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome.fasta \\\n        ERR3201952_ERR3201952.bam \\\n        > ERR3201952_ERR3201952.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:LONGREAD_HOSTREMOVAL:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2954,7 +2954,7 @@
                 "id": "54",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome.fasta \\\n        2612_ERR5766176.bam \\\n        > 2612_ERR5766176.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3010,7 +3010,7 @@
                 "id": "55",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome.fasta \\\n        2612_ERR5766176_B.bam \\\n        > 2612_ERR5766176_B.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3066,7 +3066,7 @@
                 "id": "56",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome.fasta \\\n        2612_ERR5766180.bam \\\n        > 2612_ERR5766180.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3122,7 +3122,7 @@
                 "id": "57",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome.fasta \\\n        2613_ERR5766181.bam \\\n        > 2613_ERR5766181.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:SHORTREAD_HOSTREMOVAL:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3178,7 +3178,7 @@
                 "id": "58",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cat input1/2612_ERR5766176.unmapped.fastq.gz input2/2612_ERR5766176_B.unmapped.fastq.gz input3/2612_ERR5766180.unmapped.fastq.gz > 2612.merged.fastq.gz\n\n            cat <<-END_VERSIONS > versions.yml\n            \"NFCORE_TAXPROFILER:TAXPROFILER:CAT_FASTQ\":\n                cat: $(echo $(cat --version 2>&1) | sed 's/^.*coreutils) //; s/ .*$//')\n            END_VERSIONS"
                 },
                 "parents": [
@@ -3241,7 +3241,7 @@
                 "id": "69",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kraken2 \\\n        --db testdb-kraken2 \\\n        --threads 1 \\\n        --report ERR3201952_se_db2.kraken2.kraken2.report.txt \\\n        --gzip-compressed \\\n        --unclassified-out ERR3201952_se_db2.kraken2.unclassified.fastq \\\n        --classified-out ERR3201952_se_db2.kraken2.classified.fastq \\\n         \\\n         \\\n        --quick \\\n        ERR3201952_ERR3201952.unmapped_interleaved.fq.gz\n\n    pigz -p 1 *.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KRAKEN2_KRAKEN2\":\n        kraken2: $(echo $(kraken2 --version 2>&1) | sed 's/^.*Kraken version //; s/ .*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3317,7 +3317,7 @@
                 "id": "67",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kraken2 \\\n        --db testdb-bracken \\\n        --threads 1 \\\n        --report ERR3201952_se_db1.bracken.kraken2.report.txt \\\n        --gzip-compressed \\\n        --unclassified-out ERR3201952_se_db1.bracken.unclassified.fastq \\\n        --classified-out ERR3201952_se_db1.bracken.classified.fastq \\\n         \\\n         \\\n         \\\n        ERR3201952_ERR3201952.unmapped_interleaved.fq.gz\n\n    pigz -p 1 *.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KRAKEN2_KRAKEN2\":\n        kraken2: $(echo $(kraken2 --version 2>&1) | sed 's/^.*Kraken version //; s/ .*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3393,7 +3393,7 @@
                 "id": "62",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BT2_DB=`find -L \"metaphlan_database\" -name \"*rev.1.bt2\" -exec dirname {} \\;`\n\n    metaphlan \\\n        --nproc 1 \\\n        --input_type fastq \\\n        2613_ERR5766181.unmapped.fastq.gz \\\n         \\\n        --bowtie2out 2613_se_db4.metaphlan3.bowtie2out.txt \\\n        --bowtie2db $BT2_DB \\\n        --biom 2613_se_db4.metaphlan3.biom \\\n        --output_file 2613_se_db4.metaphlan3_profile.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:METAPHLAN3_METAPHLAN3\":\n        metaphlan3: $(metaphlan --version 2>&1 | awk '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3464,7 +3464,7 @@
                 "id": "66",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BT2_DB=`find -L \"metaphlan_database\" -name \"*rev.1.bt2\" -exec dirname {} \\;`\n\n    metaphlan \\\n        --nproc 1 \\\n        --input_type fastq \\\n        ERR3201952_ERR3201952.unmapped_interleaved.fq.gz \\\n         \\\n        --bowtie2out ERR3201952_se_db4.metaphlan3.bowtie2out.txt \\\n        --bowtie2db $BT2_DB \\\n        --biom ERR3201952_se_db4.metaphlan3.biom \\\n        --output_file ERR3201952_se_db4.metaphlan3_profile.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:METAPHLAN3_METAPHLAN3\":\n        metaphlan3: $(metaphlan --version 2>&1 | awk '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3535,7 +3535,7 @@
                 "id": "64",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbname=`find -L kaiju -name \"*.fmi\" -not -name \"._*\"`\n    kaiju \\\n         \\\n        -z 1 \\\n        -t $dbnodes \\\n        -f $dbname \\\n        -o 2613_se_db5.kaiju.tsv \\\n        -i 2613_ERR5766181.unmapped.fastq.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KAIJU_KAIJU\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3591,7 +3591,7 @@
                 "id": "60",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kraken2 \\\n        --db testdb-bracken \\\n        --threads 1 \\\n        --report 2613_se_db1.bracken.kraken2.report.txt \\\n        --gzip-compressed \\\n        --unclassified-out 2613_se_db1.bracken.unclassified.fastq \\\n        --classified-out 2613_se_db1.bracken.classified.fastq \\\n         \\\n         \\\n         \\\n        2613_ERR5766181.unmapped.fastq.gz\n\n    pigz -p 1 *.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KRAKEN2_KRAKEN2\":\n        kraken2: $(echo $(kraken2 --version 2>&1) | sed 's/^.*Kraken version //; s/ .*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3667,7 +3667,7 @@
                 "id": "65",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kraken2 \\\n        --db testdb-kraken2 \\\n        --threads 1 \\\n        --report 2613_se_db2.kraken2.kraken2.report.txt \\\n        --gzip-compressed \\\n        --unclassified-out 2613_se_db2.kraken2.unclassified.fastq \\\n        --classified-out 2613_se_db2.kraken2.classified.fastq \\\n         \\\n         \\\n        --quick \\\n        2613_ERR5766181.unmapped.fastq.gz\n\n    pigz -p 1 *.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KRAKEN2_KRAKEN2\":\n        kraken2: $(echo $(kraken2 --version 2>&1) | sed 's/^.*Kraken version //; s/ .*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3743,7 +3743,7 @@
                 "id": "63",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "## we add \"-no-name ._\" to ensure silly Mac OSX metafiles files aren't included\n    db_name=`find -L test-db-centrifuge -name \"*.1.cf\" -not -name \"._*\"  | sed 's/\\.1.cf$//'`\n    centrifuge \\\n        -x $db_name \\\n        -p 1 \\\n        -U 2613_ERR5766181.unmapped.fastq.gz \\\n        --report-file 2613_se_db3.centrifuge.report.txt \\\n        -S 2613_se_db3.centrifuge.results.txt \\\n        --un-gz 2613_se_db3.centrifuge.unmapped.fastq.gz \\\n        --al-gz 2613_se_db3.centrifuge.mapped.fastq.gz \\\n        --out-fmt 'sam' \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:CENTRIFUGE_CENTRIFUGE\":\n        centrifuge: $( centrifuge --version  | sed -n 1p | sed 's/^.*centrifuge-class version //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3817,7 +3817,7 @@
                 "id": "70",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "## we add \"-no-name ._\" to ensure silly Mac OSX metafiles files aren't included\n    db_name=`find -L test-db-centrifuge -name \"*.1.cf\" -not -name \"._*\"  | sed 's/\\.1.cf$//'`\n    centrifuge \\\n        -x $db_name \\\n        -p 1 \\\n        -U ERR3201952_ERR3201952.unmapped_interleaved.fq.gz \\\n        --report-file ERR3201952_se_db3.centrifuge.report.txt \\\n        -S ERR3201952_se_db3.centrifuge.results.txt \\\n        --un-gz ERR3201952_se_db3.centrifuge.unmapped.fastq.gz \\\n        --al-gz ERR3201952_se_db3.centrifuge.mapped.fastq.gz \\\n        --out-fmt 'sam' \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:CENTRIFUGE_CENTRIFUGE\":\n        centrifuge: $( centrifuge --version  | sed -n 1p | sed 's/^.*centrifuge-class version //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3891,7 +3891,7 @@
                 "id": "68",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbname=`find -L kaiju -name \"*.fmi\" -not -name \"._*\"`\n    kaiju \\\n         \\\n        -z 1 \\\n        -t $dbnodes \\\n        -f $dbname \\\n        -o ERR3201952_se_db5.kaiju.tsv \\\n        -i ERR3201952_ERR3201952.unmapped_interleaved.fq.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KAIJU_KAIJU\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3947,7 +3947,7 @@
                 "id": "61",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "DB=`find -L ./ -name \"*.dmnd\" | sed 's/\\.dmnd$//'`\n\n    diamond \\\n        blastx \\\n        --threads 1 \\\n        --db $DB \\\n        --query ERR3201952_ERR3201952.unmapped_interleaved.fq.gz \\\n        --outfmt 102  \\\n         \\\n        --out ERR3201952_se_db1.diamond.tsv \\\n        --log\n\n    mv diamond.log ERR3201952_se_db1.diamond.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:DIAMOND_BLASTX\":\n        diamond: $(diamond --version 2>&1 | tail -n 1 | sed 's/^diamond version //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4013,7 +4013,7 @@
                 "id": "59",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "DB=`find -L ./ -name \"*.dmnd\" | sed 's/\\.dmnd$//'`\n\n    diamond \\\n        blastx \\\n        --threads 1 \\\n        --db $DB \\\n        --query 2613_ERR5766181.unmapped.fastq.gz \\\n        --outfmt 102  \\\n         \\\n        --out 2613_se_db1.diamond.tsv \\\n        --log\n\n    mv diamond.log 2613_se_db1.diamond.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:DIAMOND_BLASTX\":\n        diamond: $(diamond --version 2>&1 | tail -n 1 | sed 's/^diamond version //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4079,7 +4079,7 @@
                 "id": "76",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kraken2 \\\n        --db testdb-kraken2 \\\n        --threads 1 \\\n        --report 2612_se_db2.kraken2.kraken2.report.txt \\\n        --gzip-compressed \\\n        --unclassified-out 2612_se_db2.kraken2.unclassified.fastq \\\n        --classified-out 2612_se_db2.kraken2.classified.fastq \\\n         \\\n         \\\n        --quick \\\n        2612.merged.fastq.gz\n\n    pigz -p 1 *.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KRAKEN2_KRAKEN2\":\n        kraken2: $(echo $(kraken2 --version 2>&1) | sed 's/^.*Kraken version //; s/ .*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4155,7 +4155,7 @@
                 "id": "75",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbname=`find -L kaiju -name \"*.fmi\" -not -name \"._*\"`\n    kaiju \\\n         \\\n        -z 1 \\\n        -t $dbnodes \\\n        -f $dbname \\\n        -o 2612_se_db5.kaiju.tsv \\\n        -i 2612.merged.fastq.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KAIJU_KAIJU\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4211,7 +4211,7 @@
                 "id": "72",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BT2_DB=`find -L \"metaphlan_database\" -name \"*rev.1.bt2\" -exec dirname {} \\;`\n\n    metaphlan \\\n        --nproc 1 \\\n        --input_type fastq \\\n        2612.merged.fastq.gz \\\n         \\\n        --bowtie2out 2612_se_db4.metaphlan3.bowtie2out.txt \\\n        --bowtie2db $BT2_DB \\\n        --biom 2612_se_db4.metaphlan3.biom \\\n        --output_file 2612_se_db4.metaphlan3_profile.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:METAPHLAN3_METAPHLAN3\":\n        metaphlan3: $(metaphlan --version 2>&1 | awk '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4282,7 +4282,7 @@
                 "id": "73",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kraken2 \\\n        --db testdb-bracken \\\n        --threads 1 \\\n        --report 2612_se_db1.bracken.kraken2.report.txt \\\n        --gzip-compressed \\\n        --unclassified-out 2612_se_db1.bracken.unclassified.fastq \\\n        --classified-out 2612_se_db1.bracken.classified.fastq \\\n         \\\n         \\\n         \\\n        2612.merged.fastq.gz\n\n    pigz -p 1 *.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KRAKEN2_KRAKEN2\":\n        kraken2: $(echo $(kraken2 --version 2>&1) | sed 's/^.*Kraken version //; s/ .*$//')\n        pigz: $( pigz --version 2>&1 | sed 's/pigz //g' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4358,7 +4358,7 @@
                 "id": "74",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "## we add \"-no-name ._\" to ensure silly Mac OSX metafiles files aren't included\n    db_name=`find -L test-db-centrifuge -name \"*.1.cf\" -not -name \"._*\"  | sed 's/\\.1.cf$//'`\n    centrifuge \\\n        -x $db_name \\\n        -p 1 \\\n        -U 2612.merged.fastq.gz \\\n        --report-file 2612_se_db3.centrifuge.report.txt \\\n        -S 2612_se_db3.centrifuge.results.txt \\\n        --un-gz 2612_se_db3.centrifuge.unmapped.fastq.gz \\\n        --al-gz 2612_se_db3.centrifuge.mapped.fastq.gz \\\n        --out-fmt 'sam' \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:CENTRIFUGE_CENTRIFUGE\":\n        centrifuge: $( centrifuge --version  | sed -n 1p | sed 's/^.*centrifuge-class version //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4432,7 +4432,7 @@
                 "id": "71",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "DB=`find -L ./ -name \"*.dmnd\" | sed 's/\\.dmnd$//'`\n\n    diamond \\\n        blastx \\\n        --threads 1 \\\n        --db $DB \\\n        --query 2612.merged.fastq.gz \\\n        --outfmt 102  \\\n         \\\n        --out 2612_se_db1.diamond.tsv \\\n        --log\n\n    mv diamond.log 2612_se_db1.diamond.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:DIAMOND_BLASTX\":\n        diamond: $(diamond --version 2>&1 | tail -n 1 | sed 's/^diamond version //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4498,7 +4498,7 @@
                 "id": "77",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r ERR3201952_se_db2.kraken2.kraken2.report.txt \\\n        -o ERR3201952_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4547,7 +4547,7 @@
                 "id": "78",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r ERR3201952_se_db1.bracken.kraken2.report.txt \\\n        -o ERR3201952_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4596,7 +4596,7 @@
                 "id": "79",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbname=`find -L kaiju -name \"*.fmi\" -not -name \"._*\"`\n    kaiju2table    \\\n        -t $dbnodes \\\n        -n $dbname \\\n        -r species \\\n        -o 2613_se_db5.kaijutable.txt \\\n        2613_se_db5.kaiju.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KAIJU_KAIJU2TABLE_SINGLE\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4657,7 +4657,7 @@
                 "id": "80",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbnames=`find -L kaiju -name \"*names.dmp\"`\n    kaiju2krona \\\n        -v -u \\\n        -t $dbnodes \\\n        -n $dbnames \\\n        -i 2613_se_db5.kaiju.tsv \\\n        -o 2613_se.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KAIJU_KAIJU2KRONA\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4710,7 +4710,7 @@
                 "id": "82",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bracken \\\n         \\\n        -d 'testdb-bracken' \\\n        -i '2613_se_db1.bracken.kraken2.report.txt' \\\n        -o '2613_se_db1.bracken.tsv'\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:BRACKEN_BRACKEN\":\n        bracken: 2.7\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4766,7 +4766,7 @@
                 "id": "81",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r 2613_se_db1.bracken.kraken2.report.txt \\\n        -o 2613_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4815,7 +4815,7 @@
                 "id": "83",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r 2613_se_db2.kraken2.kraken2.report.txt \\\n        -o 2613_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4864,7 +4864,7 @@
                 "id": "84",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "db_name=`find -L test-db-centrifuge -name \"*.1.cf\" -not -name \"._*\"  | sed 's/\\.1.cf$//'`\n    centrifuge-kreport -x $db_name 2613_se_db3.centrifuge.report.txt > 2613_se_db3.centrifuge.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:CENTRIFUGE_KREPORT\":\n        centrifuge: $( centrifuge --version  | sed -n 1p | sed 's/^.*centrifuge-class version //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4924,7 +4924,7 @@
                 "id": "85",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "db_name=`find -L test-db-centrifuge -name \"*.1.cf\" -not -name \"._*\"  | sed 's/\\.1.cf$//'`\n    centrifuge-kreport -x $db_name ERR3201952_se_db3.centrifuge.report.txt > ERR3201952_se_db3.centrifuge.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:CENTRIFUGE_KREPORT\":\n        centrifuge: $( centrifuge --version  | sed -n 1p | sed 's/^.*centrifuge-class version //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4984,7 +4984,7 @@
                 "id": "86",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbname=`find -L kaiju -name \"*.fmi\" -not -name \"._*\"`\n    kaiju2table    \\\n        -t $dbnodes \\\n        -n $dbname \\\n        -r species \\\n        -o ERR3201952_se_db5.kaijutable.txt \\\n        ERR3201952_se_db5.kaiju.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KAIJU_KAIJU2TABLE_SINGLE\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5045,7 +5045,7 @@
                 "id": "87",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbnames=`find -L kaiju -name \"*names.dmp\"`\n    kaiju2krona \\\n        -v -u \\\n        -t $dbnodes \\\n        -n $dbnames \\\n        -i ERR3201952_se_db5.kaiju.tsv \\\n        -o ERR3201952_se.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KAIJU_KAIJU2KRONA\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5098,7 +5098,7 @@
                 "id": "88",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r 2612_se_db2.kraken2.kraken2.report.txt \\\n        -o 2612_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5147,7 +5147,7 @@
                 "id": "89",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbname=`find -L kaiju -name \"*.fmi\" -not -name \"._*\"`\n    kaiju2table    \\\n        -t $dbnodes \\\n        -n $dbname \\\n        -r species \\\n        -o 2612_se_db5.kaijutable.txt \\\n        2612_se_db5.kaiju.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:KAIJU_KAIJU2TABLE_SINGLE\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5208,7 +5208,7 @@
                 "id": "90",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbnames=`find -L kaiju -name \"*names.dmp\"`\n    kaiju2krona \\\n        -v -u \\\n        -t $dbnodes \\\n        -n $dbnames \\\n        -i 2612_se_db5.kaiju.tsv \\\n        -o 2612_se.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KAIJU_KAIJU2KRONA\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5261,7 +5261,7 @@
                 "id": "91",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bracken \\\n         \\\n        -d 'testdb-bracken' \\\n        -i '2612_se_db1.bracken.kraken2.report.txt' \\\n        -o '2612_se_db1.bracken.tsv'\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:BRACKEN_BRACKEN\":\n        bracken: 2.7\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5317,7 +5317,7 @@
                 "id": "92",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r 2612_se_db1.bracken.kraken2.report.txt \\\n        -o 2612_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5366,7 +5366,7 @@
                 "id": "93",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "db_name=`find -L test-db-centrifuge -name \"*.1.cf\" -not -name \"._*\"  | sed 's/\\.1.cf$//'`\n    centrifuge-kreport -x $db_name 2612_se_db3.centrifuge.report.txt > 2612_se_db3.centrifuge.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:PROFILING:CENTRIFUGE_KREPORT\":\n        centrifuge: $( centrifuge --version  | sed -n 1p | sed 's/^.*centrifuge-class version //')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5426,7 +5426,7 @@
                 "id": "94",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dbnodes=`find -L kaiju -name \"*nodes.dmp\"`\n    dbname=`find -L kaiju -name \"*.fmi\" -not -name \"._*\"`\n    kaiju2table    \\\n        -t $dbnodes \\\n        -n $dbname \\\n        -r species \\\n        -o kaiju_db5_combined_reports.txt \\\n        2611_se_db5.kaiju.tsv 2613_se_db5.kaiju.tsv ERR3201952_se_db5.kaiju.tsv 2612_se_db5.kaiju.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:KAIJU_KAIJU2TABLE_COMBINED\":\n        kaiju: $(echo $( kaiju -h 2>&1 | sed -n 1p | sed 's/^.*Kaiju //' ))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5497,7 +5497,7 @@
                 "id": "95",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt ERR3201952_se_db2.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" ERR3201952_se_db2.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" ERR3201952_se_db2.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5541,7 +5541,7 @@
                 "id": "96",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt ERR3201952_se_db1.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" ERR3201952_se_db1.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" ERR3201952_se_db1.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5585,7 +5585,7 @@
                 "id": "97",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2613_se_db5.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2613_se_db5.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2613_se_db5.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5629,7 +5629,7 @@
                 "id": "98",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2613_se_db1.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2613_se_db1.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2613_se_db1.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5673,7 +5673,7 @@
                 "id": "99",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2613_se_db2.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2613_se_db2.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2613_se_db2.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5717,7 +5717,7 @@
                 "id": "100",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r 2613_se_db3.centrifuge.txt \\\n        -o 2613_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5766,7 +5766,7 @@
                 "id": "101",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r ERR3201952_se_db3.centrifuge.txt \\\n        -o ERR3201952_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5815,7 +5815,7 @@
                 "id": "102",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt ERR3201952_se_db5.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" ERR3201952_se_db5.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" ERR3201952_se_db5.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5859,7 +5859,7 @@
                 "id": "103",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2612_se_db2.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2612_se_db2.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2612_se_db2.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5903,7 +5903,7 @@
                 "id": "104",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2612_se_db5.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2612_se_db5.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2612_se_db5.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5947,7 +5947,7 @@
                 "id": "105",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2612_se_db1.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2612_se_db1.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2612_se_db1.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5991,7 +5991,7 @@
                 "id": "109",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "merge_metaphlan_tables.py \\\n         \\\n        -o metaphlan3_db4_combined_reports.txt \\\n        2613_se_db4.metaphlan3_profile.txt ERR3201952_se_db4.metaphlan3_profile.txt 2612_se_db4.metaphlan3_profile.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:METAPHLAN3_MERGEMETAPHLANTABLES\":\n        metaphlan3: $(metaphlan --version 2>&1 | awk '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6052,7 +6052,7 @@
                 "id": "110",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "taxpasta merge \\\n        -p diamond -o diamond_db1.tsv \\\n         \\\n         \\\n        2611_se_db1.diamond.tsv ERR3201952_se_db1.diamond.tsv 2613_se_db1.diamond.tsv 2612_se_db1.diamond.tsv\n\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:TAXPASTA_MERGE\":\n        taxpasta: $(taxpasta --version)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6116,7 +6116,7 @@
                 "id": "108",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "taxpasta merge \\\n        -p kraken2 -o kraken2_db1.tsv \\\n         \\\n         \\\n        2611_se_db1.bracken.kraken2.report.txt ERR3201952_se_db1.bracken.kraken2.report.txt 2613_se_db1.bracken.kraken2.report.txt 2612_se_db1.bracken.kraken2.report.txt\n\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:TAXPASTA_MERGE\":\n        taxpasta: $(taxpasta --version)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6180,7 +6180,7 @@
                 "id": "107",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "combine_bracken_outputs.py \\\n         \\\n        --files 2611_se_db1.bracken.tsv 2613_se_db1.bracken.tsv 2612_se_db1.bracken.tsv \\\n        -o bracken_db1_combined_reports.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:BRACKEN_COMBINEBRACKENOUTPUTS\":\n        combine_bracken_output: 2.7\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6238,7 +6238,7 @@
                 "id": "112",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "taxpasta merge \\\n        -p bracken -o bracken_db1.tsv \\\n         \\\n         \\\n        2611_se_db1.bracken.tsv 2613_se_db1.bracken.tsv 2612_se_db1.bracken.tsv\n\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:TAXPASTA_MERGE\":\n        taxpasta: $(taxpasta --version)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6296,7 +6296,7 @@
                 "id": "113",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "taxpasta merge \\\n        -p kaiju -o kaiju_db5.tsv \\\n         \\\n         \\\n        2611_se_db5.kaijutable.txt 2613_se_db5.kaijutable.txt ERR3201952_se_db5.kaijutable.txt 2612_se_db5.kaijutable.txt\n\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:TAXPASTA_MERGE\":\n        taxpasta: $(taxpasta --version)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6360,7 +6360,7 @@
                 "id": "111",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "taxpasta merge \\\n        -p kraken2 -o kraken2_db2.tsv \\\n         \\\n         \\\n        2611_se_db2.kraken2.kraken2.report.txt ERR3201952_se_db2.kraken2.kraken2.report.txt 2613_se_db2.kraken2.kraken2.report.txt 2612_se_db2.kraken2.kraken2.report.txt\n\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:TAXPASTA_MERGE\":\n        taxpasta: $(taxpasta --version)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6424,7 +6424,7 @@
                 "id": "116",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "combine_kreports.py \\\n        -r 2613_se_db3.centrifuge.txt 2612_se_db3.centrifuge.txt ERR3201952_se_db3.centrifuge.txt \\\n        -o centrifuge_db3_combined_reports.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:KRAKENTOOLS_COMBINEKREPORTS_CENTRIFUGE\":\n        combine_kreports.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6485,7 +6485,7 @@
                 "id": "115",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "taxpasta merge \\\n        -p centrifuge -o centrifuge_db3.tsv \\\n         \\\n         \\\n        2613_se_db3.centrifuge.txt ERR3201952_se_db3.centrifuge.txt 2612_se_db3.centrifuge.txt\n\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:TAXPASTA_MERGE\":\n        taxpasta: $(taxpasta --version)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6543,7 +6543,7 @@
                 "id": "118",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "combine_kreports.py \\\n        -r 2612_se_db2.kraken2.kraken2.report.txt 2611_se_db2.kraken2.kraken2.report.txt 2613_se_db2.kraken2.kraken2.report.txt ERR3201952_se_db2.kraken2.kraken2.report.txt \\\n        -o kraken2_db2_combined_reports.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:KRAKENTOOLS_COMBINEKREPORTS_KRAKEN\":\n        combine_kreports.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6610,7 +6610,7 @@
                 "id": "117",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "combine_kreports.py \\\n        -r 2612_se_db1.bracken.kraken2.report.txt 2611_se_db1.bracken.kraken2.report.txt 2613_se_db1.bracken.kraken2.report.txt ERR3201952_se_db1.bracken.kraken2.report.txt \\\n        -o kraken2_db1_combined_reports.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:KRAKENTOOLS_COMBINEKREPORTS_KRAKEN\":\n        combine_kreports.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6677,7 +6677,7 @@
                 "id": "106",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "kreport2krona.py \\\n        -r 2612_se_db3.centrifuge.txt \\\n        -o 2612_se.txt \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRAKENTOOLS_KREPORT2KRONA\":\n        kreport2krona.py: 1.2\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6726,7 +6726,7 @@
                 "id": "114",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "taxpasta merge \\\n        -p metaphlan -o metaphlan_db4.tsv \\\n         \\\n         \\\n        2613_se_db4.metaphlan3_profile.txt ERR3201952_se_db4.metaphlan3_profile.txt 2612_se_db4.metaphlan3_profile.txt\n\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:STANDARDISATION_PROFILES:TAXPASTA_MERGE\":\n        taxpasta: $(taxpasta --version)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6784,7 +6784,7 @@
                 "id": "119",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2613_se_db3.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2613_se_db3.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2613_se_db3.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6828,7 +6828,7 @@
                 "id": "120",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt ERR3201952_se_db3.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" ERR3201952_se_db3.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" ERR3201952_se_db3.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6872,7 +6872,7 @@
                 "id": "121",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "# Copy the file to a new name\n    cp uncleaned.krona.txt 2612_se_db3.txt\n\n    # Remove ugly 'x__' prefixes for each of the taxonomic levels\n    LEVELS=(d k p c o f g s)\n    for L in \"${LEVELS[@]}\"; do\n        sed -i \"s/${L}__//g\" 2612_se_db3.txt\n    done\n\n    # Remove underscores that are standing in place of spaces\n    sed -i \"s/_/ /g\" 2612_se_db3.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_CLEANUP\":\n        sed: $(echo $(sed --version 2>&1) | sed 's/^.*GNU sed) //; s/ .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6916,7 +6916,7 @@
                 "id": "122",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ktImportText  \\\n         \\\n        -o kraken2_db1.html \\\n        2611_se_db1.txt ERR3201952_se_db1.txt 2613_se_db1.txt 2612_se_db1.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_KTIMPORTTEXT\":\n        krona: $( echo $(ktImportText 2>&1) | sed 's/^.*KronaTools //g; s/- ktImportText.*$//g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6976,7 +6976,7 @@
                 "id": "125",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ktImportText  \\\n         \\\n        -o centrifuge_db3.html \\\n        2613_se_db3.txt ERR3201952_se_db3.txt 2612_se_db3.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_KTIMPORTTEXT\":\n        krona: $( echo $(ktImportText 2>&1) | sed 's/^.*KronaTools //g; s/- ktImportText.*$//g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7030,7 +7030,7 @@
                 "id": "124",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ktImportText  \\\n         \\\n        -o kaiju_db5.html \\\n        2611_se_db5.txt 2613_se_db5.txt ERR3201952_se_db5.txt 2612_se_db5.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_KTIMPORTTEXT\":\n        krona: $( echo $(ktImportText 2>&1) | sed 's/^.*KronaTools //g; s/- ktImportText.*$//g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7090,7 +7090,7 @@
                 "id": "123",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ktImportText  \\\n         \\\n        -o kraken2_db2.html \\\n        2611_se_db2.txt ERR3201952_se_db2.txt 2613_se_db2.txt 2612_se_db2.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:VISUALIZATION_KRONA:KRONA_KTIMPORTTEXT\":\n        krona: $( echo $(ktImportText 2>&1) | sed 's/^.*KronaTools //g; s/- ktImportText.*$//g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7150,7 +7150,7 @@
                 "id": "126",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "def args = task.ext.args ?: ''\ntemplate 'dumpsoftwareversions.py'"
                 },
                 "parents": [
@@ -7237,7 +7237,7 @@
                 "id": "127",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "multiqc \\\n        --force \\\n         \\\n        --config multiqc_config.yml \\\n         \\\n        .\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_TAXPROFILER:TAXPROFILER:MULTIQC\":\n        multiqc: $( multiqc --version | sed -e \"s/multiqc, version //g\" )\n    END_VERSIONS"
                 },
                 "parents": [

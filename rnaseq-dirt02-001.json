@@ -18,7 +18,7 @@
                 "id": "1",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "check_samplesheet.py \\\n        samplesheet_test.csv \\\n        samplesheet.valid.csv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:INPUT_CHECK:SAMPLESHEET_CHECK\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -62,7 +62,7 @@
                 "id": "3",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip \\\n        -f \\\n         \\\n        genes.gtf.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:PREPARE_GENOME:GUNZIP_GTF\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -103,7 +103,7 @@
                 "id": "2",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip \\\n        -f \\\n         \\\n        gfp.fa.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:PREPARE_GENOME:GUNZIP_ADDITIONAL_FASTA\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -144,7 +144,7 @@
                 "id": "4",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "mkdir output\n\n    ## Ensures --strip-components only applied when top level of tar contents is a directory\n    ## If just files or multiple directories, place all in output\n    if [[ $(tar -tzf salmon.tar.gz | grep -o -P \"^.*?\\/\" | uniq | wc -l) -eq 1 ]]; then\n        tar \\\n            -C output --strip-components 1 \\\n            -xzvf \\\n             \\\n            salmon.tar.gz \\\n            --no-same-owner\n    else\n        tar \\\n            -C output \\\n            -xzvf \\\n             \\\n            salmon.tar.gz \\\n            --no-same-owner\n    fi\n\n    mv output salmon\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:PREPARE_GENOME:UNTAR_SALMON_INDEX\":\n        untar: $(echo $(tar --version 2>&1) | sed 's/^.*(GNU tar) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -186,7 +186,7 @@
                 "id": "10",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "fq subsample \\\n        --record-count 1000000 --seed 1 \\\n        SRR6357073_1.fastq.gz \\\n        --r1-dst RAP1_UNINDUCED_REP1.subsampled.fastq.gz \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:FASTQ_SUBSAMPLE_FQ_SALMON:FQ_SUBSAMPLE\":\n        fq: $(echo $(fq subsample --version | sed 's/fq-subsample //g'))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -230,7 +230,7 @@
                 "id": "11",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" SRR6357072_1.fastq.gz WT_REP2_1.gz SRR6357072_2.fastq.gz WT_REP2_2.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 WT_REP2_1.gz WT_REP2_2.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -299,7 +299,7 @@
                 "id": "12",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  WT_REP2_1.fastq.gz ] && ln -s SRR6357072_1.fastq.gz WT_REP2_1.fastq.gz\n        [ ! -f  WT_REP2_2.fastq.gz ] && ln -s SRR6357072_2.fastq.gz WT_REP2_2.fastq.gz\n        trim_galore \\\n            --fastqc_args '-t 1' \\\n            --cores 1 \\\n            --paired \\\n            --gzip \\\n            WT_REP2_1.fastq.gz \\\n            WT_REP2_2.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:TRIMGALORE\":\n            trimgalore: $(echo $(trim_galore --version 2>&1) | sed 's/^.*version //; s/Last.*$//')\n            cutadapt: $(cutadapt --version)\n        END_VERSIONS"
                 },
                 "parents": [
@@ -394,7 +394,7 @@
                 "id": "8",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  RAP1_IAA_30M_REP1_1.fastq.gz ] && ln -s SRR6357076_1.fastq.gz RAP1_IAA_30M_REP1_1.fastq.gz\n        [ ! -f  RAP1_IAA_30M_REP1_2.fastq.gz ] && ln -s SRR6357076_2.fastq.gz RAP1_IAA_30M_REP1_2.fastq.gz\n        trim_galore \\\n            --fastqc_args '-t 1' \\\n            --cores 1 \\\n            --paired \\\n            --gzip \\\n            RAP1_IAA_30M_REP1_1.fastq.gz \\\n            RAP1_IAA_30M_REP1_2.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:TRIMGALORE\":\n            trimgalore: $(echo $(trim_galore --version 2>&1) | sed 's/^.*version //; s/Last.*$//')\n            cutadapt: $(cutadapt --version)\n        END_VERSIONS"
                 },
                 "parents": [
@@ -489,7 +489,7 @@
                 "id": "9",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" SRR6357076_1.fastq.gz RAP1_IAA_30M_REP1_1.gz SRR6357076_2.fastq.gz RAP1_IAA_30M_REP1_2.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 RAP1_IAA_30M_REP1_1.gz RAP1_IAA_30M_REP1_2.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -558,7 +558,7 @@
                 "id": "5",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "fasta2gtf.py \\\n        -o gfp.gtf \\\n        -b gene_biotype \\\n        gfp.fa\n\n    cat genome.fasta gfp.fa > genome_gfp.fasta\n    cat genes.gtf gfp.gtf > genome_gfp.gtf\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:PREPARE_GENOME:CAT_ADDITIONAL_FASTA\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -636,7 +636,7 @@
                 "id": "6",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cat input1/SRR6357074_1.fastq.gz input2/SRR6357075_1.fastq.gz > RAP1_UNINDUCED_REP2.merged.fastq.gz\n\n            cat <<-END_VERSIONS > versions.yml\n            \"NFCORE_RNASEQ:RNASEQ:CAT_FASTQ\":\n                cat: $(echo $(cat --version 2>&1) | sed 's/^.*coreutils) //; s/ .*$//')\n            END_VERSIONS"
                 },
                 "parents": [
@@ -687,7 +687,7 @@
                 "id": "7",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cat input1/SRR6357070_1.fastq.gz input3/SRR6357071_1.fastq.gz > WT_REP1_1.merged.fastq.gz\n            cat input2/SRR6357070_2.fastq.gz input4/SRR6357071_2.fastq.gz > WT_REP1_2.merged.fastq.gz\n\n            cat <<-END_VERSIONS > versions.yml\n            \"NFCORE_RNASEQ:RNASEQ:CAT_FASTQ\":\n                cat: $(echo $(cat --version 2>&1) | sed 's/^.*coreutils) //; s/ .*$//')\n            END_VERSIONS"
                 },
                 "parents": [
@@ -756,7 +756,7 @@
                 "id": "13",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools faidx genome_gfp.fasta\n    cut -f 1,2 genome_gfp.fasta.fai > genome_gfp.fasta.sizes\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:PREPARE_GENOME:CUSTOM_GETCHROMSIZES\":\n        getchromsizes: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -809,7 +809,7 @@
                 "id": "17",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gtf2bed \\\n        genome_gfp.gtf \\\n        > genome_gfp.bed\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:PREPARE_GENOME:GTF2BED\":\n        perl: $(echo $(perl --version 2>&1) | sed 's/.*v\\(.*\\)) built.*/\\1/')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -856,7 +856,7 @@
                 "id": "16",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools faidx genome_gfp.fasta\n        NUM_BASES=`gawk '{sum = sum + $2}END{if ((log(sum)/log(2))/2 - 1 > 14) {printf \"%.0f\", 14} else {printf \"%.0f\", (log(sum)/log(2))/2 - 1}}' genome_gfp.fasta.fai`\n\n        mkdir star\n        STAR \\\n            --runMode genomeGenerate \\\n            --genomeDir star/ \\\n            --genomeFastaFiles genome_gfp.fasta \\\n            --sjdbGTFfile genome_gfp.gtf \\\n            --runThreadN 1 \\\n            --genomeSAindexNbases $NUM_BASES \\\n            --limitGenomeGenerateRAM 6342450944 \\\n            \n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:PREPARE_GENOME:STAR_GENOMEGENERATE\":\n            star: $(STAR --version | sed -e \"s/STAR_//g\")\n            samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n            gawk: $(echo $(gawk --version 2>&1) | sed 's/^.*GNU Awk //; s/, .*$//')\n        END_VERSIONS"
                 },
                 "parents": [
@@ -905,7 +905,7 @@
                 "id": "14",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bbsplit.sh \\\n                -Xmx6g \\\n                ref_primary=genome_gfp.fasta \\\n                ref_sarscov2=GCA_009858895.3_ASM985889v3_genomic.200409.fna ref_human=chr22_23800000-23980000.fa \\\n                path=bbsplit \\\n                threads=1 \\\n                build=1\n\n            cat <<-END_VERSIONS > versions.yml\n            \"NFCORE_RNASEQ:RNASEQ:PREPARE_GENOME:BBMAP_BBSPLIT\":\n                bbmap: $(bbversion.sh | grep -v \"Duplicate cpuset\")\n            END_VERSIONS"
                 },
                 "parents": [
@@ -960,7 +960,7 @@
                 "id": "15",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=A \\\n        --index salmon \\\n        -r RAP1_UNINDUCED_REP1.subsampled.fastq.gz \\\n        --skipQuant \\\n        -o RAP1_UNINDUCED_REP1\n\n    if [ -f RAP1_UNINDUCED_REP1/aux_info/meta_info.json ]; then\n        cp RAP1_UNINDUCED_REP1/aux_info/meta_info.json \"RAP1_UNINDUCED_REP1_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:FASTQ_SUBSAMPLE_FQ_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1030,7 +1030,7 @@
                 "id": "19",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" RAP1_UNINDUCED_REP2.merged.fastq.gz RAP1_UNINDUCED_REP2.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 RAP1_UNINDUCED_REP2.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1081,7 +1081,7 @@
                 "id": "18",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  RAP1_UNINDUCED_REP2.fastq.gz ] && ln -s RAP1_UNINDUCED_REP2.merged.fastq.gz RAP1_UNINDUCED_REP2.fastq.gz\n        trim_galore \\\n            --fastqc_args '-t 1' \\\n            --cores 1 \\\n            --gzip \\\n            RAP1_UNINDUCED_REP2.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:TRIMGALORE\":\n            trimgalore: $(echo $(trim_galore --version 2>&1) | sed 's/^.*version //; s/Last.*$//')\n            cutadapt: $(cutadapt --version)\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1146,7 +1146,7 @@
                 "id": "20",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "fq subsample \\\n        --record-count 1000000 --seed 1 \\\n        WT_REP1_1.merged.fastq.gz WT_REP1_2.merged.fastq.gz \\\n        --r1-dst WT_REP1.subsampled_R1.fastq.gz \\\n        --r2-dst WT_REP1.subsampled_R2.fastq.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:FASTQ_SUBSAMPLE_FQ_SALMON:FQ_SUBSAMPLE\":\n        fq: $(echo $(fq subsample --version | sed 's/fq-subsample //g'))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1202,7 +1202,7 @@
                 "id": "22",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bbsplit.sh \\\n            -Xmx6g \\\n            path=bbsplit \\\n            threads=1 \\\n            in=RAP1_IAA_30M_REP1_1_val_1.fq.gz in2=RAP1_IAA_30M_REP1_2_val_2.fq.gz \\\n            basename=RAP1_IAA_30M_REP1_%_#.fastq.gz \\\n            refstats=RAP1_IAA_30M_REP1.stats.txt \\\n            build=1 ambiguous2=all maxindel=150000\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:BBMAP_BBSPLIT\":\n            bbmap: $(bbversion.sh | grep -v \"Duplicate cpuset\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1301,7 +1301,7 @@
                 "id": "21",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bbsplit.sh \\\n            -Xmx6g \\\n            path=bbsplit \\\n            threads=1 \\\n            in=WT_REP2_1_val_1.fq.gz in2=WT_REP2_2_val_2.fq.gz \\\n            basename=WT_REP2_%_#.fastq.gz \\\n            refstats=WT_REP2.stats.txt \\\n            build=1 ambiguous2=all maxindel=150000\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:BBMAP_BBSPLIT\":\n            bbmap: $(bbversion.sh | grep -v \"Duplicate cpuset\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1400,7 +1400,7 @@
                 "id": "23",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" SRR6357073_1.fastq.gz RAP1_UNINDUCED_REP1.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 RAP1_UNINDUCED_REP1.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1451,7 +1451,7 @@
                 "id": "24",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  RAP1_UNINDUCED_REP1.fastq.gz ] && ln -s SRR6357073_1.fastq.gz RAP1_UNINDUCED_REP1.fastq.gz\n        trim_galore \\\n            --fastqc_args '-t 1' \\\n            --cores 1 \\\n            --gzip \\\n            RAP1_UNINDUCED_REP1.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:TRIMGALORE\":\n            trimgalore: $(echo $(trim_galore --version 2>&1) | sed 's/^.*version //; s/Last.*$//')\n            cutadapt: $(cutadapt --version)\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1516,7 +1516,7 @@
                 "id": "25",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bbsplit.sh \\\n            -Xmx6g \\\n            path=bbsplit \\\n            threads=1 \\\n            in=RAP1_UNINDUCED_REP2_trimmed.fq.gz \\\n            basename=RAP1_UNINDUCED_REP2_%.fastq.gz \\\n            refstats=RAP1_UNINDUCED_REP2.stats.txt \\\n            build=1 ambiguous2=all maxindel=150000\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:BBMAP_BBSPLIT\":\n            bbmap: $(bbversion.sh | grep -v \"Duplicate cpuset\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -1591,7 +1591,7 @@
                 "id": "26",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=A \\\n        --index salmon \\\n        -1 WT_REP1.subsampled_R1.fastq.gz -2 WT_REP1.subsampled_R2.fastq.gz \\\n        --skipQuant \\\n        -o WT_REP1\n\n    if [ -f WT_REP1/aux_info/meta_info.json ]; then\n        cp WT_REP1/aux_info/meta_info.json \"WT_REP1_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:FASTQ_SUBSAMPLE_FQ_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1667,7 +1667,7 @@
                 "id": "28",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=ISR \\\n        --index salmon \\\n        -1 RAP1_IAA_30M_REP1_primary_1.fastq.gz -2 RAP1_IAA_30M_REP1_primary_2.fastq.gz \\\n         \\\n        -o RAP1_IAA_30M_REP1\n\n    if [ -f RAP1_IAA_30M_REP1/aux_info/meta_info.json ]; then\n        cp RAP1_IAA_30M_REP1/aux_info/meta_info.json \"RAP1_IAA_30M_REP1_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1744,7 +1744,7 @@
                 "id": "27",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "STAR \\\n        --genomeDir star \\\n        --readFilesIn RAP1_IAA_30M_REP1_primary_1.fastq.gz RAP1_IAA_30M_REP1_primary_2.fastq.gz  \\\n        --runThreadN 1 \\\n        --outFileNamePrefix RAP1_IAA_30M_REP1. \\\n         \\\n        --sjdbGTFfile genome_gfp.gtf \\\n        --outSAMattrRGline ID:RAP1_IAA_30M_REP1 'SM:RAP1_IAA_30M_REP1'   \\\n        --quantMode TranscriptomeSAM --twopassMode Basic --outSAMtype BAM Unsorted --readFilesCommand zcat --runRNGseed 0 --outFilterMultimapNmax 20 --alignSJDBoverhangMin 1 --outSAMattributes NH HI AS NM MD --quantTranscriptomeBan Singleend --outSAMstrandField intronMotif\n\n    \n\n    if [ -f RAP1_IAA_30M_REP1.Unmapped.out.mate1 ]; then\n        mv RAP1_IAA_30M_REP1.Unmapped.out.mate1 RAP1_IAA_30M_REP1.unmapped_1.fastq\n        gzip RAP1_IAA_30M_REP1.unmapped_1.fastq\n    fi\n    if [ -f RAP1_IAA_30M_REP1.Unmapped.out.mate2 ]; then\n        mv RAP1_IAA_30M_REP1.Unmapped.out.mate2 RAP1_IAA_30M_REP1.unmapped_2.fastq\n        gzip RAP1_IAA_30M_REP1.unmapped_2.fastq\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN\":\n        star: $(STAR --version | sed -e \"s/STAR_//g\")\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        gawk: $(echo $(gawk --version 2>&1) | sed 's/^.*GNU Awk //; s/, .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1841,7 +1841,7 @@
                 "id": "30",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=ISR \\\n        --index salmon \\\n        -1 WT_REP2_primary_1.fastq.gz -2 WT_REP2_primary_2.fastq.gz \\\n         \\\n        -o WT_REP2\n\n    if [ -f WT_REP2/aux_info/meta_info.json ]; then\n        cp WT_REP2/aux_info/meta_info.json \"WT_REP2_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1918,7 +1918,7 @@
                 "id": "29",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "STAR \\\n        --genomeDir star \\\n        --readFilesIn WT_REP2_primary_1.fastq.gz WT_REP2_primary_2.fastq.gz  \\\n        --runThreadN 1 \\\n        --outFileNamePrefix WT_REP2. \\\n         \\\n        --sjdbGTFfile genome_gfp.gtf \\\n        --outSAMattrRGline ID:WT_REP2 'SM:WT_REP2'   \\\n        --quantMode TranscriptomeSAM --twopassMode Basic --outSAMtype BAM Unsorted --readFilesCommand zcat --runRNGseed 0 --outFilterMultimapNmax 20 --alignSJDBoverhangMin 1 --outSAMattributes NH HI AS NM MD --quantTranscriptomeBan Singleend --outSAMstrandField intronMotif\n\n    \n\n    if [ -f WT_REP2.Unmapped.out.mate1 ]; then\n        mv WT_REP2.Unmapped.out.mate1 WT_REP2.unmapped_1.fastq\n        gzip WT_REP2.unmapped_1.fastq\n    fi\n    if [ -f WT_REP2.Unmapped.out.mate2 ]; then\n        mv WT_REP2.Unmapped.out.mate2 WT_REP2.unmapped_2.fastq\n        gzip WT_REP2.unmapped_2.fastq\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN\":\n        star: $(STAR --version | sed -e \"s/STAR_//g\")\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        gawk: $(echo $(gawk --version 2>&1) | sed 's/^.*GNU Awk //; s/, .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2015,7 +2015,7 @@
                 "id": "31",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bbsplit.sh \\\n            -Xmx6g \\\n            path=bbsplit \\\n            threads=1 \\\n            in=RAP1_UNINDUCED_REP1_trimmed.fq.gz \\\n            basename=RAP1_UNINDUCED_REP1_%.fastq.gz \\\n            refstats=RAP1_UNINDUCED_REP1.stats.txt \\\n            build=1 ambiguous2=all maxindel=150000\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:BBMAP_BBSPLIT\":\n            bbmap: $(bbversion.sh | grep -v \"Duplicate cpuset\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2090,7 +2090,7 @@
                 "id": "33",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=SR \\\n        --index salmon \\\n        -r RAP1_UNINDUCED_REP2_primary.fastq.gz \\\n         \\\n        -o RAP1_UNINDUCED_REP2\n\n    if [ -f RAP1_UNINDUCED_REP2/aux_info/meta_info.json ]; then\n        cp RAP1_UNINDUCED_REP2/aux_info/meta_info.json \"RAP1_UNINDUCED_REP2_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2161,7 +2161,7 @@
                 "id": "32",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "STAR \\\n        --genomeDir star \\\n        --readFilesIn RAP1_UNINDUCED_REP2_primary.fastq.gz  \\\n        --runThreadN 1 \\\n        --outFileNamePrefix RAP1_UNINDUCED_REP2. \\\n         \\\n        --sjdbGTFfile genome_gfp.gtf \\\n        --outSAMattrRGline ID:RAP1_UNINDUCED_REP2 'SM:RAP1_UNINDUCED_REP2'   \\\n        --quantMode TranscriptomeSAM --twopassMode Basic --outSAMtype BAM Unsorted --readFilesCommand zcat --runRNGseed 0 --outFilterMultimapNmax 20 --alignSJDBoverhangMin 1 --outSAMattributes NH HI AS NM MD --quantTranscriptomeBan Singleend --outSAMstrandField intronMotif\n\n    \n\n    if [ -f RAP1_UNINDUCED_REP2.Unmapped.out.mate1 ]; then\n        mv RAP1_UNINDUCED_REP2.Unmapped.out.mate1 RAP1_UNINDUCED_REP2.unmapped_1.fastq\n        gzip RAP1_UNINDUCED_REP2.unmapped_1.fastq\n    fi\n    if [ -f RAP1_UNINDUCED_REP2.Unmapped.out.mate2 ]; then\n        mv RAP1_UNINDUCED_REP2.Unmapped.out.mate2 RAP1_UNINDUCED_REP2.unmapped_2.fastq\n        gzip RAP1_UNINDUCED_REP2.unmapped_2.fastq\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN\":\n        star: $(STAR --version | sed -e \"s/STAR_//g\")\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        gawk: $(echo $(gawk --version 2>&1) | sed 's/^.*GNU Awk //; s/, .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2252,7 +2252,7 @@
                 "id": "35",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "printf \"%s %s\\n\" WT_REP1_1.merged.fastq.gz WT_REP1_1.gz WT_REP1_2.merged.fastq.gz WT_REP1_2.gz | while read old_name new_name; do\n        [ -f \"${new_name}\" ] || ln -s $old_name $new_name\n    done\n    fastqc --quiet --threads 1 WT_REP1_1.gz WT_REP1_2.gz\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:FASTQC\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2321,7 +2321,7 @@
                 "id": "34",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  WT_REP1_1.fastq.gz ] && ln -s WT_REP1_1.merged.fastq.gz WT_REP1_1.fastq.gz\n        [ ! -f  WT_REP1_2.fastq.gz ] && ln -s WT_REP1_2.merged.fastq.gz WT_REP1_2.fastq.gz\n        trim_galore \\\n            --fastqc_args '-t 1' \\\n            --cores 1 \\\n            --paired \\\n            --gzip \\\n            WT_REP1_1.fastq.gz \\\n            WT_REP1_2.fastq.gz\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:TRIMGALORE\":\n            trimgalore: $(echo $(trim_galore --version 2>&1) | sed 's/^.*version //; s/Last.*$//')\n            cutadapt: $(cutadapt --version)\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2416,7 +2416,7 @@
                 "id": "36",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o RAP1_IAA_30M_REP1.sorted.bam -T RAP1_IAA_30M_REP1.sorted RAP1_IAA_30M_REP1.Aligned.out.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2463,7 +2463,7 @@
                 "id": "37",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=ISR \\\n        -t transcriptome.fasta \\\n        -a RAP1_IAA_30M_REP1.Aligned.toTranscriptome.out.bam \\\n         \\\n        -o RAP1_IAA_30M_REP1\n\n    if [ -f RAP1_IAA_30M_REP1/aux_info/meta_info.json ]; then\n        cp RAP1_IAA_30M_REP1/aux_info/meta_info.json \"RAP1_IAA_30M_REP1_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2532,7 +2532,7 @@
                 "id": "38",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o WT_REP2.sorted.bam -T WT_REP2.sorted WT_REP2.Aligned.out.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2579,7 +2579,7 @@
                 "id": "39",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=ISR \\\n        -t transcriptome.fasta \\\n        -a WT_REP2.Aligned.toTranscriptome.out.bam \\\n         \\\n        -o WT_REP2\n\n    if [ -f WT_REP2/aux_info/meta_info.json ]; then\n        cp WT_REP2/aux_info/meta_info.json \"WT_REP2_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2648,7 +2648,7 @@
                 "id": "40",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=U \\\n        --index salmon \\\n        -r RAP1_UNINDUCED_REP1_primary.fastq.gz \\\n         \\\n        -o RAP1_UNINDUCED_REP1\n\n    if [ -f RAP1_UNINDUCED_REP1/aux_info/meta_info.json ]; then\n        cp RAP1_UNINDUCED_REP1/aux_info/meta_info.json \"RAP1_UNINDUCED_REP1_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2719,7 +2719,7 @@
                 "id": "41",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "STAR \\\n        --genomeDir star \\\n        --readFilesIn RAP1_UNINDUCED_REP1_primary.fastq.gz  \\\n        --runThreadN 1 \\\n        --outFileNamePrefix RAP1_UNINDUCED_REP1. \\\n         \\\n        --sjdbGTFfile genome_gfp.gtf \\\n        --outSAMattrRGline ID:RAP1_UNINDUCED_REP1 'SM:RAP1_UNINDUCED_REP1'   \\\n        --quantMode TranscriptomeSAM --twopassMode Basic --outSAMtype BAM Unsorted --readFilesCommand zcat --runRNGseed 0 --outFilterMultimapNmax 20 --alignSJDBoverhangMin 1 --outSAMattributes NH HI AS NM MD --quantTranscriptomeBan Singleend --outSAMstrandField intronMotif\n\n    \n\n    if [ -f RAP1_UNINDUCED_REP1.Unmapped.out.mate1 ]; then\n        mv RAP1_UNINDUCED_REP1.Unmapped.out.mate1 RAP1_UNINDUCED_REP1.unmapped_1.fastq\n        gzip RAP1_UNINDUCED_REP1.unmapped_1.fastq\n    fi\n    if [ -f RAP1_UNINDUCED_REP1.Unmapped.out.mate2 ]; then\n        mv RAP1_UNINDUCED_REP1.Unmapped.out.mate2 RAP1_UNINDUCED_REP1.unmapped_2.fastq\n        gzip RAP1_UNINDUCED_REP1.unmapped_2.fastq\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN\":\n        star: $(STAR --version | sed -e \"s/STAR_//g\")\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        gawk: $(echo $(gawk --version 2>&1) | sed 's/^.*GNU Awk //; s/, .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2810,7 +2810,7 @@
                 "id": "42",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o RAP1_UNINDUCED_REP2.sorted.bam -T RAP1_UNINDUCED_REP2.sorted RAP1_UNINDUCED_REP2.Aligned.out.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2857,7 +2857,7 @@
                 "id": "43",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=SR \\\n        -t transcriptome.fasta \\\n        -a RAP1_UNINDUCED_REP2.Aligned.toTranscriptome.out.bam \\\n         \\\n        -o RAP1_UNINDUCED_REP2\n\n    if [ -f RAP1_UNINDUCED_REP2/aux_info/meta_info.json ]; then\n        cp RAP1_UNINDUCED_REP2/aux_info/meta_info.json \"RAP1_UNINDUCED_REP2_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2926,7 +2926,7 @@
                 "id": "44",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bbsplit.sh \\\n            -Xmx6g \\\n            path=bbsplit \\\n            threads=1 \\\n            in=WT_REP1_1_val_1.fq.gz in2=WT_REP1_2_val_2.fq.gz \\\n            basename=WT_REP1_%_#.fastq.gz \\\n            refstats=WT_REP1.stats.txt \\\n            build=1 ambiguous2=all maxindel=150000\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:BBMAP_BBSPLIT\":\n            bbmap: $(bbversion.sh | grep -v \"Duplicate cpuset\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -3025,7 +3025,7 @@
                 "id": "45",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        RAP1_IAA_30M_REP1.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3070,7 +3070,7 @@
                 "id": "46",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "picard \\\n        -Xmx6g \\\n        MarkDuplicates \\\n        --ASSUME_SORTED true --REMOVE_DUPLICATES false --VALIDATION_STRINGENCY LENIENT --TMP_DIR tmp \\\n        --INPUT RAP1_IAA_30M_REP1.sorted.bam \\\n        --OUTPUT RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        --REFERENCE_SEQUENCE genome_gfp.fasta \\\n        --METRICS_FILE RAP1_IAA_30M_REP1.markdup.sorted.MarkDuplicates.metrics.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:PICARD_MARKDUPLICATES\":\n        picard: $(echo $(picard MarkDuplicates --version 2>&1) | grep -o 'Version:.*' | cut -f2- -d:)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3150,7 +3150,7 @@
                 "id": "47",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        WT_REP2.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3195,7 +3195,7 @@
                 "id": "48",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "picard \\\n        -Xmx6g \\\n        MarkDuplicates \\\n        --ASSUME_SORTED true --REMOVE_DUPLICATES false --VALIDATION_STRINGENCY LENIENT --TMP_DIR tmp \\\n        --INPUT WT_REP2.sorted.bam \\\n        --OUTPUT WT_REP2.markdup.sorted.bam \\\n        --REFERENCE_SEQUENCE genome_gfp.fasta \\\n        --METRICS_FILE WT_REP2.markdup.sorted.MarkDuplicates.metrics.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:PICARD_MARKDUPLICATES\":\n        picard: $(echo $(picard MarkDuplicates --version 2>&1) | grep -o 'Version:.*' | cut -f2- -d:)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3275,7 +3275,7 @@
                 "id": "49",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o RAP1_UNINDUCED_REP1.sorted.bam -T RAP1_UNINDUCED_REP1.sorted RAP1_UNINDUCED_REP1.Aligned.out.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3322,7 +3322,7 @@
                 "id": "50",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=U \\\n        -t transcriptome.fasta \\\n        -a RAP1_UNINDUCED_REP1.Aligned.toTranscriptome.out.bam \\\n         \\\n        -o RAP1_UNINDUCED_REP1\n\n    if [ -f RAP1_UNINDUCED_REP1/aux_info/meta_info.json ]; then\n        cp RAP1_UNINDUCED_REP1/aux_info/meta_info.json \"RAP1_UNINDUCED_REP1_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3391,7 +3391,7 @@
                 "id": "51",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        RAP1_UNINDUCED_REP2.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3436,7 +3436,7 @@
                 "id": "52",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "picard \\\n        -Xmx6g \\\n        MarkDuplicates \\\n        --ASSUME_SORTED true --REMOVE_DUPLICATES false --VALIDATION_STRINGENCY LENIENT --TMP_DIR tmp \\\n        --INPUT RAP1_UNINDUCED_REP2.sorted.bam \\\n        --OUTPUT RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        --REFERENCE_SEQUENCE genome_gfp.fasta \\\n        --METRICS_FILE RAP1_UNINDUCED_REP2.markdup.sorted.MarkDuplicates.metrics.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:PICARD_MARKDUPLICATES\":\n        picard: $(echo $(picard MarkDuplicates --version 2>&1) | grep -o 'Version:.*' | cut -f2- -d:)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3516,7 +3516,7 @@
                 "id": "53",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=ISR \\\n        --index salmon \\\n        -1 WT_REP1_primary_1.fastq.gz -2 WT_REP1_primary_2.fastq.gz \\\n         \\\n        -o WT_REP1\n\n    if [ -f WT_REP1/aux_info/meta_info.json ]; then\n        cp WT_REP1/aux_info/meta_info.json \"WT_REP1_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3593,7 +3593,7 @@
                 "id": "54",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "STAR \\\n        --genomeDir star \\\n        --readFilesIn WT_REP1_primary_1.fastq.gz WT_REP1_primary_2.fastq.gz  \\\n        --runThreadN 1 \\\n        --outFileNamePrefix WT_REP1. \\\n         \\\n        --sjdbGTFfile genome_gfp.gtf \\\n        --outSAMattrRGline ID:WT_REP1 'SM:WT_REP1'   \\\n        --quantMode TranscriptomeSAM --twopassMode Basic --outSAMtype BAM Unsorted --readFilesCommand zcat --runRNGseed 0 --outFilterMultimapNmax 20 --alignSJDBoverhangMin 1 --outSAMattributes NH HI AS NM MD --quantTranscriptomeBan Singleend --outSAMstrandField intronMotif\n\n    \n\n    if [ -f WT_REP1.Unmapped.out.mate1 ]; then\n        mv WT_REP1.Unmapped.out.mate1 WT_REP1.unmapped_1.fastq\n        gzip WT_REP1.unmapped_1.fastq\n    fi\n    if [ -f WT_REP1.Unmapped.out.mate2 ]; then\n        mv WT_REP1.Unmapped.out.mate2 WT_REP1.unmapped_2.fastq\n        gzip WT_REP1.unmapped_2.fastq\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN\":\n        star: $(STAR --version | sed -e \"s/STAR_//g\")\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n        gawk: $(echo $(gawk --version 2>&1) | sed 's/^.*GNU Awk //; s/, .*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3690,7 +3690,7 @@
                 "id": "56",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        genomecov \\\n        -ibam RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        -bg \\\n        -strand + \\\n        -split -du \\\n        | bedtools sort > RAP1_IAA_30M_REP1.reverse.bedGraph\n\n    bedtools \\\n        genomecov \\\n        -ibam RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        -bg \\\n        -strand - \\\n        -split -du \\\n        | bedtools sort > RAP1_IAA_30M_REP1.forward.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDTOOLS_GENOMECOV\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3740,7 +3740,7 @@
                 "id": "59",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "stringtie \\\n        RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        --rf \\\n        -G genome_gfp.gtf \\\n        -o RAP1_IAA_30M_REP1.transcripts.gtf \\\n        -A RAP1_IAA_30M_REP1.gene.abundance.txt \\\n        -C RAP1_IAA_30M_REP1.coverage.gtf \\\n        -b RAP1_IAA_30M_REP1.ballgown \\\n        -p 1 \\\n        -v -e\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:STRINGTIE_STRINGTIE\":\n        stringtie: $(stringtie --version 2>&1)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3807,7 +3807,7 @@
                 "id": "57",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "unset DISPLAY\n    mkdir tmp\n    export _JAVA_OPTIONS=-Djava.io.tmpdir=./tmp\n    qualimap \\\n        --java-mem-size=6G \\\n        rnaseq \\\n         \\\n        -bam RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        -gtf genome_gfp.gtf \\\n        -p strand-specific-reverse \\\n        -pe \\\n        -outdir RAP1_IAA_30M_REP1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUALIMAP_RNASEQ\":\n        qualimap: $(echo $(qualimap 2>&1) | sed 's/^.*QualiMap v.//; s/Built.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3857,7 +3857,7 @@
                 "id": "58",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        RAP1_IAA_30M_REP1.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3909,7 +3909,7 @@
                 "id": "55",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dupradar.r \\\n        RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        RAP1_IAA_30M_REP1 \\\n        genome_gfp.gtf \\\n        2 \\\n        paired \\\n        1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:DUPRADAR\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-dupradar: $(Rscript -e \"library(dupRadar); cat(as.character(packageVersion('dupRadar')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3995,7 +3995,7 @@
                 "id": "60",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "featureCounts \\\n        -B -C -g gene_biotype -t exon \\\n        -p \\\n        -T 1 \\\n        -a genome_gfp.gtf \\\n        -s 2 \\\n        -o RAP1_IAA_30M_REP1.featureCounts.txt \\\n        RAP1_IAA_30M_REP1.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:SUBREAD_FEATURECOUNTS\":\n        subread: $( echo $(featureCounts -v 2>&1) | sed -e \"s/featureCounts v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4051,7 +4051,7 @@
                 "id": "64",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dupradar.r \\\n        WT_REP2.markdup.sorted.bam \\\n        WT_REP2 \\\n        genome_gfp.gtf \\\n        2 \\\n        paired \\\n        1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:DUPRADAR\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-dupradar: $(Rscript -e \"library(dupRadar); cat(as.character(packageVersion('dupRadar')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4137,7 +4137,7 @@
                 "id": "65",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        genomecov \\\n        -ibam WT_REP2.markdup.sorted.bam \\\n        -bg \\\n        -strand + \\\n        -split -du \\\n        | bedtools sort > WT_REP2.reverse.bedGraph\n\n    bedtools \\\n        genomecov \\\n        -ibam WT_REP2.markdup.sorted.bam \\\n        -bg \\\n        -strand - \\\n        -split -du \\\n        | bedtools sort > WT_REP2.forward.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDTOOLS_GENOMECOV\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4187,7 +4187,7 @@
                 "id": "66",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "featureCounts \\\n        -B -C -g gene_biotype -t exon \\\n        -p \\\n        -T 1 \\\n        -a genome_gfp.gtf \\\n        -s 2 \\\n        -o WT_REP2.featureCounts.txt \\\n        WT_REP2.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:SUBREAD_FEATURECOUNTS\":\n        subread: $( echo $(featureCounts -v 2>&1) | sed -e \"s/featureCounts v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4243,7 +4243,7 @@
                 "id": "61",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "stringtie \\\n        WT_REP2.markdup.sorted.bam \\\n        --rf \\\n        -G genome_gfp.gtf \\\n        -o WT_REP2.transcripts.gtf \\\n        -A WT_REP2.gene.abundance.txt \\\n        -C WT_REP2.coverage.gtf \\\n        -b WT_REP2.ballgown \\\n        -p 1 \\\n        -v -e\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:STRINGTIE_STRINGTIE\":\n        stringtie: $(stringtie --version 2>&1)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4310,7 +4310,7 @@
                 "id": "62",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "unset DISPLAY\n    mkdir tmp\n    export _JAVA_OPTIONS=-Djava.io.tmpdir=./tmp\n    qualimap \\\n        --java-mem-size=6G \\\n        rnaseq \\\n         \\\n        -bam WT_REP2.markdup.sorted.bam \\\n        -gtf genome_gfp.gtf \\\n        -p strand-specific-reverse \\\n        -pe \\\n        -outdir WT_REP2\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUALIMAP_RNASEQ\":\n        qualimap: $(echo $(qualimap 2>&1) | sed 's/^.*QualiMap v.//; s/Built.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4360,7 +4360,7 @@
                 "id": "63",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        WT_REP2.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4412,7 +4412,7 @@
                 "id": "67",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        RAP1_UNINDUCED_REP1.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4457,7 +4457,7 @@
                 "id": "68",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "picard \\\n        -Xmx6g \\\n        MarkDuplicates \\\n        --ASSUME_SORTED true --REMOVE_DUPLICATES false --VALIDATION_STRINGENCY LENIENT --TMP_DIR tmp \\\n        --INPUT RAP1_UNINDUCED_REP1.sorted.bam \\\n        --OUTPUT RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        --REFERENCE_SEQUENCE genome_gfp.fasta \\\n        --METRICS_FILE RAP1_UNINDUCED_REP1.markdup.sorted.MarkDuplicates.metrics.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:PICARD_MARKDUPLICATES\":\n        picard: $(echo $(picard MarkDuplicates --version 2>&1) | grep -o 'Version:.*' | cut -f2- -d:)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4537,7 +4537,7 @@
                 "id": "73",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        RAP1_UNINDUCED_REP2.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4589,7 +4589,7 @@
                 "id": "69",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "unset DISPLAY\n    mkdir tmp\n    export _JAVA_OPTIONS=-Djava.io.tmpdir=./tmp\n    qualimap \\\n        --java-mem-size=6G \\\n        rnaseq \\\n         \\\n        -bam RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        -gtf genome_gfp.gtf \\\n        -p strand-specific-reverse \\\n         \\\n        -outdir RAP1_UNINDUCED_REP2\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUALIMAP_RNASEQ\":\n        qualimap: $(echo $(qualimap 2>&1) | sed 's/^.*QualiMap v.//; s/Built.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4639,7 +4639,7 @@
                 "id": "71",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        genomecov \\\n        -ibam RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        -bg \\\n        -strand + \\\n        -split -du \\\n        | bedtools sort > RAP1_UNINDUCED_REP2.reverse.bedGraph\n\n    bedtools \\\n        genomecov \\\n        -ibam RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        -bg \\\n        -strand - \\\n        -split -du \\\n        | bedtools sort > RAP1_UNINDUCED_REP2.forward.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDTOOLS_GENOMECOV\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4689,7 +4689,7 @@
                 "id": "72",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "stringtie \\\n        RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        --rf \\\n        -G genome_gfp.gtf \\\n        -o RAP1_UNINDUCED_REP2.transcripts.gtf \\\n        -A RAP1_UNINDUCED_REP2.gene.abundance.txt \\\n        -C RAP1_UNINDUCED_REP2.coverage.gtf \\\n        -b RAP1_UNINDUCED_REP2.ballgown \\\n        -p 1 \\\n        -v -e\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:STRINGTIE_STRINGTIE\":\n        stringtie: $(stringtie --version 2>&1)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4756,7 +4756,7 @@
                 "id": "70",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dupradar.r \\\n        RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        RAP1_UNINDUCED_REP2 \\\n        genome_gfp.gtf \\\n        2 \\\n        single \\\n        1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:DUPRADAR\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-dupradar: $(Rscript -e \"library(dupRadar); cat(as.character(packageVersion('dupRadar')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4842,7 +4842,7 @@
                 "id": "74",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "featureCounts \\\n        -B -C -g gene_biotype -t exon \\\n         \\\n        -T 1 \\\n        -a genome_gfp.gtf \\\n        -s 2 \\\n        -o RAP1_UNINDUCED_REP2.featureCounts.txt \\\n        RAP1_UNINDUCED_REP2.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:SUBREAD_FEATURECOUNTS\":\n        subread: $( echo $(featureCounts -v 2>&1) | sed -e \"s/featureCounts v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4898,7 +4898,7 @@
                 "id": "75",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_tx2gene.py \\\n        --gtf genome_gfp.gtf \\\n        --salmon salmon \\\n        --id gene_id \\\n        --extra gene_name \\\n        -o salmon_tx2gene.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_TX2GENE\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4976,7 +4976,7 @@
                 "id": "76",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools sort  -@ 1 -o WT_REP1.sorted.bam -T WT_REP1.sorted WT_REP1.Aligned.out.bam\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5023,7 +5023,7 @@
                 "id": "77",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon quant \\\n        --geneMap genome_gfp.gtf \\\n        --threads 1 \\\n        --libType=ISR \\\n        -t transcriptome.fasta \\\n        -a WT_REP1.Aligned.toTranscriptome.out.bam \\\n         \\\n        -o WT_REP1\n\n    if [ -f WT_REP1/aux_info/meta_info.json ]; then\n        cp WT_REP1/aux_info/meta_info.json \"WT_REP1_meta_info.json\"\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_QUANT\":\n        salmon: $(echo $(salmon --version) | sed -e \"s/salmon //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5092,7 +5092,7 @@
                 "id": "79",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        RAP1_IAA_30M_REP1.reverse.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_IAA_30M_REP1.clip.reverse.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5141,7 +5141,7 @@
                 "id": "78",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        RAP1_IAA_30M_REP1.forward.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_IAA_30M_REP1.clip.forward.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5191,7 +5191,7 @@
                 "id": "86",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bam_stat.py \\\n        -i RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n         \\\n        > RAP1_IAA_30M_REP1.bam_stat.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_BAMSTAT\":\n        rseqc: $(bam_stat.py --version | sed -e \"s/bam_stat.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5235,7 +5235,7 @@
                 "id": "84",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "read_distribution.py \\\n        -i RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        > RAP1_IAA_30M_REP1.read_distribution.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDISTRIBUTION\":\n        rseqc: $(read_distribution.py --version | sed -e \"s/read_distribution.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5286,7 +5286,7 @@
                 "id": "80",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "read_duplication.py \\\n        -i RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        -o RAP1_IAA_30M_REP1 \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDUPLICATION\":\n        rseqc: $(read_duplication.py --version | sed -e \"s/read_duplication.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5348,7 +5348,7 @@
                 "id": "82",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "infer_experiment.py \\\n        -i RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n         \\\n        > RAP1_IAA_30M_REP1.infer_experiment.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INFEREXPERIMENT\":\n        rseqc: $(infer_experiment.py --version | sed -e \"s/infer_experiment.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5400,7 +5400,7 @@
                 "id": "85",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "inner_distance.py \\\n            -i RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n            -r genome_gfp.bed \\\n            -o RAP1_IAA_30M_REP1 \\\n             \\\n            > stdout.txt\n        head -n 2 stdout.txt > RAP1_IAA_30M_REP1.inner_distance_mean.txt\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INNERDISTANCE\":\n            rseqc: $(inner_distance.py --version | sed -e \"s/inner_distance.py //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -5475,7 +5475,7 @@
                 "id": "83",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "junction_saturation.py \\\n        -i RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        -o RAP1_IAA_30M_REP1 \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONSATURATION\":\n        rseqc: $(junction_saturation.py --version | sed -e \"s/junction_saturation.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5532,7 +5532,7 @@
                 "id": "81",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "junction_annotation.py \\\n        -i RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        -o RAP1_IAA_30M_REP1 \\\n         \\\n        2> RAP1_IAA_30M_REP1.junction_annotation.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONANNOTATION\":\n        rseqc: $(junction_annotation.py --version | sed -e \"s/junction_annotation.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5619,7 +5619,7 @@
                 "id": "87",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cut -f 1,7 RAP1_IAA_30M_REP1.featureCounts.txt | tail -n +3 | cat biotypes_header.txt - >> RAP1_IAA_30M_REP1.biotype_counts_mqc.tsv\n\n    mqc_features_stat.py \\\n        RAP1_IAA_30M_REP1.biotype_counts_mqc.tsv \\\n        -s RAP1_IAA_30M_REP1 \\\n        -f rRNA \\\n        -o RAP1_IAA_30M_REP1.biotype_counts_rrna_mqc.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:MULTIQC_CUSTOM_BIOTYPE\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5674,7 +5674,7 @@
                 "id": "89",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        WT_REP2.forward.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        WT_REP2.clip.forward.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5724,7 +5724,7 @@
                 "id": "88",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        WT_REP2.reverse.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        WT_REP2.clip.reverse.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5773,7 +5773,7 @@
                 "id": "90",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cut -f 1,7 WT_REP2.featureCounts.txt | tail -n +3 | cat biotypes_header.txt - >> WT_REP2.biotype_counts_mqc.tsv\n\n    mqc_features_stat.py \\\n        WT_REP2.biotype_counts_mqc.tsv \\\n        -s WT_REP2 \\\n        -f rRNA \\\n        -o WT_REP2.biotype_counts_rrna_mqc.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:MULTIQC_CUSTOM_BIOTYPE\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5828,7 +5828,7 @@
                 "id": "96",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "junction_annotation.py \\\n        -i WT_REP2.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        -o WT_REP2 \\\n         \\\n        2> WT_REP2.junction_annotation.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONANNOTATION\":\n        rseqc: $(junction_annotation.py --version | sed -e \"s/junction_annotation.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5915,7 +5915,7 @@
                 "id": "91",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bam_stat.py \\\n        -i WT_REP2.markdup.sorted.bam \\\n         \\\n        > WT_REP2.bam_stat.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_BAMSTAT\":\n        rseqc: $(bam_stat.py --version | sed -e \"s/bam_stat.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5959,7 +5959,7 @@
                 "id": "92",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "read_duplication.py \\\n        -i WT_REP2.markdup.sorted.bam \\\n        -o WT_REP2 \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDUPLICATION\":\n        rseqc: $(read_duplication.py --version | sed -e \"s/read_duplication.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6021,7 +6021,7 @@
                 "id": "97",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "infer_experiment.py \\\n        -i WT_REP2.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n         \\\n        > WT_REP2.infer_experiment.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INFEREXPERIMENT\":\n        rseqc: $(infer_experiment.py --version | sed -e \"s/infer_experiment.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6073,7 +6073,7 @@
                 "id": "94",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "read_distribution.py \\\n        -i WT_REP2.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        > WT_REP2.read_distribution.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDISTRIBUTION\":\n        rseqc: $(read_distribution.py --version | sed -e \"s/read_distribution.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6124,7 +6124,7 @@
                 "id": "95",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "inner_distance.py \\\n            -i WT_REP2.markdup.sorted.bam \\\n            -r genome_gfp.bed \\\n            -o WT_REP2 \\\n             \\\n            > stdout.txt\n        head -n 2 stdout.txt > WT_REP2.inner_distance_mean.txt\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INNERDISTANCE\":\n            rseqc: $(inner_distance.py --version | sed -e \"s/inner_distance.py //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -6199,7 +6199,7 @@
                 "id": "93",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "junction_saturation.py \\\n        -i WT_REP2.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        -o WT_REP2 \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONSATURATION\":\n        rseqc: $(junction_saturation.py --version | sed -e \"s/junction_saturation.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6256,7 +6256,7 @@
                 "id": "98",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        genomecov \\\n        -ibam RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        -bg \\\n        -strand + \\\n        -split -du \\\n        | bedtools sort > RAP1_UNINDUCED_REP1.forward.bedGraph\n\n    bedtools \\\n        genomecov \\\n        -ibam RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        -bg \\\n        -strand - \\\n        -split -du \\\n        | bedtools sort > RAP1_UNINDUCED_REP1.reverse.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDTOOLS_GENOMECOV\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6306,7 +6306,7 @@
                 "id": "100",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dupradar.r \\\n        RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        RAP1_UNINDUCED_REP1 \\\n        genome_gfp.gtf \\\n        0 \\\n        single \\\n        1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:DUPRADAR\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-dupradar: $(Rscript -e \"library(dupRadar); cat(as.character(packageVersion('dupRadar')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6392,7 +6392,7 @@
                 "id": "99",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "stringtie \\\n        RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n         \\\n        -G genome_gfp.gtf \\\n        -o RAP1_UNINDUCED_REP1.transcripts.gtf \\\n        -A RAP1_UNINDUCED_REP1.gene.abundance.txt \\\n        -C RAP1_UNINDUCED_REP1.coverage.gtf \\\n        -b RAP1_UNINDUCED_REP1.ballgown \\\n        -p 1 \\\n        -v -e\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:STRINGTIE_STRINGTIE\":\n        stringtie: $(stringtie --version 2>&1)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6459,7 +6459,7 @@
                 "id": "102",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "unset DISPLAY\n    mkdir tmp\n    export _JAVA_OPTIONS=-Djava.io.tmpdir=./tmp\n    qualimap \\\n        --java-mem-size=6G \\\n        rnaseq \\\n         \\\n        -bam RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        -gtf genome_gfp.gtf \\\n        -p non-strand-specific \\\n         \\\n        -outdir RAP1_UNINDUCED_REP1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUALIMAP_RNASEQ\":\n        qualimap: $(echo $(qualimap 2>&1) | sed 's/^.*QualiMap v.//; s/Built.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6509,7 +6509,7 @@
                 "id": "101",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        RAP1_UNINDUCED_REP1.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6561,7 +6561,7 @@
                 "id": "103",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "featureCounts \\\n        -B -C -g gene_biotype -t exon \\\n         \\\n        -T 1 \\\n        -a genome_gfp.gtf \\\n        -s 0 \\\n        -o RAP1_UNINDUCED_REP1.featureCounts.txt \\\n        RAP1_UNINDUCED_REP1.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:SUBREAD_FEATURECOUNTS\":\n        subread: $( echo $(featureCounts -v 2>&1) | sed -e \"s/featureCounts v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6617,7 +6617,7 @@
                 "id": "108",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "read_duplication.py \\\n        -i RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        -o RAP1_UNINDUCED_REP2 \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDUPLICATION\":\n        rseqc: $(read_duplication.py --version | sed -e \"s/read_duplication.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6679,7 +6679,7 @@
                 "id": "106",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "read_distribution.py \\\n        -i RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        > RAP1_UNINDUCED_REP2.read_distribution.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDISTRIBUTION\":\n        rseqc: $(read_distribution.py --version | sed -e \"s/read_distribution.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6730,7 +6730,7 @@
                 "id": "110",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "infer_experiment.py \\\n        -i RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n         \\\n        > RAP1_UNINDUCED_REP2.infer_experiment.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INFEREXPERIMENT\":\n        rseqc: $(infer_experiment.py --version | sed -e \"s/infer_experiment.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6782,7 +6782,7 @@
                 "id": "104",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "junction_annotation.py \\\n        -i RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        -o RAP1_UNINDUCED_REP2 \\\n         \\\n        2> RAP1_UNINDUCED_REP2.junction_annotation.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONANNOTATION\":\n        rseqc: $(junction_annotation.py --version | sed -e \"s/junction_annotation.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6869,7 +6869,7 @@
                 "id": "109",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "junction_saturation.py \\\n        -i RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        -o RAP1_UNINDUCED_REP2 \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONSATURATION\":\n        rseqc: $(junction_saturation.py --version | sed -e \"s/junction_saturation.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6926,7 +6926,7 @@
                 "id": "105",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INNERDISTANCE\":\n            rseqc: $(inner_distance.py --version | sed -e \"s/inner_distance.py //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -6971,7 +6971,7 @@
                 "id": "107",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bam_stat.py \\\n        -i RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n         \\\n        > RAP1_UNINDUCED_REP2.bam_stat.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_BAMSTAT\":\n        rseqc: $(bam_stat.py --version | sed -e \"s/bam_stat.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7015,7 +7015,7 @@
                 "id": "111",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        RAP1_UNINDUCED_REP2.forward.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_UNINDUCED_REP2.clip.forward.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7065,7 +7065,7 @@
                 "id": "112",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        RAP1_UNINDUCED_REP2.reverse.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_UNINDUCED_REP2.clip.reverse.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7114,7 +7114,7 @@
                 "id": "113",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cut -f 1,7 RAP1_UNINDUCED_REP2.featureCounts.txt | tail -n +3 | cat biotypes_header.txt - >> RAP1_UNINDUCED_REP2.biotype_counts_mqc.tsv\n\n    mqc_features_stat.py \\\n        RAP1_UNINDUCED_REP2.biotype_counts_mqc.tsv \\\n        -s RAP1_UNINDUCED_REP2 \\\n        -f rRNA \\\n        -o RAP1_UNINDUCED_REP2.biotype_counts_rrna_mqc.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:MULTIQC_CUSTOM_BIOTYPE\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7169,7 +7169,7 @@
                 "id": "114",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_tximport.r \\\n        NULL \\\n        salmon \\\n        salmon.merged\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_TXIMPORT\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-tximeta: $(Rscript -e \"library(tximeta); cat(as.character(packageVersion('tximeta')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7277,7 +7277,7 @@
                 "id": "116",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "picard \\\n        -Xmx6g \\\n        MarkDuplicates \\\n        --ASSUME_SORTED true --REMOVE_DUPLICATES false --VALIDATION_STRINGENCY LENIENT --TMP_DIR tmp \\\n        --INPUT WT_REP1.sorted.bam \\\n        --OUTPUT WT_REP1.markdup.sorted.bam \\\n        --REFERENCE_SEQUENCE genome_gfp.fasta \\\n        --METRICS_FILE WT_REP1.markdup.sorted.MarkDuplicates.metrics.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:PICARD_MARKDUPLICATES\":\n        picard: $(echo $(picard MarkDuplicates --version 2>&1) | grep -o 'Version:.*' | cut -f2- -d:)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7357,7 +7357,7 @@
                 "id": "115",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        WT_REP1.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7402,7 +7402,7 @@
                 "id": "117",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_tx2gene.py \\\n        --gtf genome_gfp.gtf \\\n        --salmon salmon \\\n        --id gene_id \\\n        --extra gene_name \\\n        -o salmon_tx2gene.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_TX2GENE\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7480,7 +7480,7 @@
                 "id": "118",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        RAP1_IAA_30M_REP1.clip.reverse.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_IAA_30M_REP1.reverse.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7527,7 +7527,7 @@
                 "id": "119",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        RAP1_IAA_30M_REP1.clip.forward.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_IAA_30M_REP1.forward.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7576,7 +7576,7 @@
                 "id": "120",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        WT_REP2.clip.forward.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        WT_REP2.forward.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7625,7 +7625,7 @@
                 "id": "121",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        WT_REP2.clip.reverse.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        WT_REP2.reverse.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7672,7 +7672,7 @@
                 "id": "122",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        RAP1_UNINDUCED_REP1.forward.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_UNINDUCED_REP1.clip.forward.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7722,7 +7722,7 @@
                 "id": "123",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        RAP1_UNINDUCED_REP1.reverse.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_UNINDUCED_REP1.clip.reverse.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7771,7 +7771,7 @@
                 "id": "126",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "junction_saturation.py \\\n        -i RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        -o RAP1_UNINDUCED_REP1 \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONSATURATION\":\n        rseqc: $(junction_saturation.py --version | sed -e \"s/junction_saturation.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7828,7 +7828,7 @@
                 "id": "124",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "infer_experiment.py \\\n        -i RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n         \\\n        > RAP1_UNINDUCED_REP1.infer_experiment.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INFEREXPERIMENT\":\n        rseqc: $(infer_experiment.py --version | sed -e \"s/infer_experiment.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7880,7 +7880,7 @@
                 "id": "128",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bam_stat.py \\\n        -i RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n         \\\n        > RAP1_UNINDUCED_REP1.bam_stat.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_BAMSTAT\":\n        rseqc: $(bam_stat.py --version | sed -e \"s/bam_stat.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7924,7 +7924,7 @@
                 "id": "130",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INNERDISTANCE\":\n            rseqc: $(inner_distance.py --version | sed -e \"s/inner_distance.py //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -7969,7 +7969,7 @@
                 "id": "129",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "read_distribution.py \\\n        -i RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        > RAP1_UNINDUCED_REP1.read_distribution.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDISTRIBUTION\":\n        rseqc: $(read_distribution.py --version | sed -e \"s/read_distribution.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8020,7 +8020,7 @@
                 "id": "127",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "junction_annotation.py \\\n        -i RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        -o RAP1_UNINDUCED_REP1 \\\n         \\\n        2> RAP1_UNINDUCED_REP1.junction_annotation.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONANNOTATION\":\n        rseqc: $(junction_annotation.py --version | sed -e \"s/junction_annotation.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8107,7 +8107,7 @@
                 "id": "125",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "read_duplication.py \\\n        -i RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        -o RAP1_UNINDUCED_REP1 \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDUPLICATION\":\n        rseqc: $(read_duplication.py --version | sed -e \"s/read_duplication.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8169,7 +8169,7 @@
                 "id": "131",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cut -f 1,7 RAP1_UNINDUCED_REP1.featureCounts.txt | tail -n +3 | cat biotypes_header.txt - >> RAP1_UNINDUCED_REP1.biotype_counts_mqc.tsv\n\n    mqc_features_stat.py \\\n        RAP1_UNINDUCED_REP1.biotype_counts_mqc.tsv \\\n        -s RAP1_UNINDUCED_REP1 \\\n        -f rRNA \\\n        -o RAP1_UNINDUCED_REP1.biotype_counts_rrna_mqc.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:MULTIQC_CUSTOM_BIOTYPE\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8224,7 +8224,7 @@
                 "id": "132",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        RAP1_UNINDUCED_REP2.clip.forward.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_UNINDUCED_REP2.forward.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8273,7 +8273,7 @@
                 "id": "133",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        RAP1_UNINDUCED_REP2.clip.reverse.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_UNINDUCED_REP2.reverse.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8320,7 +8320,7 @@
                 "id": "135",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_summarizedexperiment.r \\\n        NULL \\\n        salmon.merged.gene_counts_length_scaled.tsv \\\n        salmon.merged.gene_tpm.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_SE_GENE_LENGTH_SCALED\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-summarizedexperiment: $(Rscript -e \"library(SummarizedExperiment); cat(as.character(packageVersion('SummarizedExperiment')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8373,7 +8373,7 @@
                 "id": "138",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_summarizedexperiment.r \\\n        NULL \\\n        salmon.merged.transcript_counts.tsv \\\n        salmon.merged.transcript_tpm.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_SE_TRANSCRIPT\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-summarizedexperiment: $(Rscript -e \"library(SummarizedExperiment); cat(as.character(packageVersion('SummarizedExperiment')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8426,7 +8426,7 @@
                 "id": "134",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_summarizedexperiment.r \\\n        NULL \\\n        salmon.merged.gene_counts.tsv \\\n        salmon.merged.gene_tpm.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_SE_GENE\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-summarizedexperiment: $(Rscript -e \"library(SummarizedExperiment); cat(as.character(packageVersion('SummarizedExperiment')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8481,7 +8481,7 @@
                 "id": "137",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_summarizedexperiment.r \\\n        NULL \\\n        salmon.merged.gene_counts_scaled.tsv \\\n        salmon.merged.gene_tpm.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_SALMON:SALMON_SE_GENE_SCALED\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-summarizedexperiment: $(Rscript -e \"library(SummarizedExperiment); cat(as.character(packageVersion('SummarizedExperiment')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8534,7 +8534,7 @@
                 "id": "136",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "deseq2_qc.r \\\n        --count_file salmon.merged.gene_counts_length_scaled.tsv \\\n        --outdir ./ \\\n        --cores 1 \\\n        --id_col 1 --sample_suffix '' --outprefix deseq2 --count_col 3 --vst TRUE\n\n    if [ -f \"R_sessionInfo.log\" ]; then\n        sed \"s/deseq2_pca/salmon_deseq2_pca/g\" <deseq2_pca_header.txt >tmp.txt\n        sed -i -e \"s/DESeq2 PCA/SALMON DESeq2 PCA/g\" tmp.txt\n        cat tmp.txt *.pca.vals.txt > salmon.pca.vals_mqc.tsv\n\n        sed \"s/deseq2_clustering/salmon_deseq2_clustering/g\" <deseq2_clustering_header.txt >tmp.txt\n        sed -i -e \"s/DESeq2 sample/SALMON DESeq2 sample/g\" tmp.txt\n        cat tmp.txt *.sample.dists.txt > salmon.sample.dists_mqc.tsv\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:DESEQ2_QC_SALMON\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-deseq2: $(Rscript -e \"library(DESeq2); cat(as.character(packageVersion('DESeq2')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8631,7 +8631,7 @@
                 "id": "139",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedtools \\\n        genomecov \\\n        -ibam WT_REP1.markdup.sorted.bam \\\n        -bg \\\n        -strand + \\\n        -split -du \\\n        | bedtools sort > WT_REP1.reverse.bedGraph\n\n    bedtools \\\n        genomecov \\\n        -ibam WT_REP1.markdup.sorted.bam \\\n        -bg \\\n        -strand - \\\n        -split -du \\\n        | bedtools sort > WT_REP1.forward.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDTOOLS_GENOMECOV\":\n        bedtools: $(bedtools --version | sed -e \"s/bedtools v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8681,7 +8681,7 @@
                 "id": "142",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "dupradar.r \\\n        WT_REP1.markdup.sorted.bam \\\n        WT_REP1 \\\n        genome_gfp.gtf \\\n        2 \\\n        paired \\\n        1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:DUPRADAR\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-dupradar: $(Rscript -e \"library(dupRadar); cat(as.character(packageVersion('dupRadar')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8767,7 +8767,7 @@
                 "id": "140",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        index \\\n        -@ 0 \\\n         \\\n        WT_REP1.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:SAMTOOLS_INDEX\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8819,7 +8819,7 @@
                 "id": "141",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "unset DISPLAY\n    mkdir tmp\n    export _JAVA_OPTIONS=-Djava.io.tmpdir=./tmp\n    qualimap \\\n        --java-mem-size=6G \\\n        rnaseq \\\n         \\\n        -bam WT_REP1.markdup.sorted.bam \\\n        -gtf genome_gfp.gtf \\\n        -p strand-specific-reverse \\\n        -pe \\\n        -outdir WT_REP1\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUALIMAP_RNASEQ\":\n        qualimap: $(echo $(qualimap 2>&1) | sed 's/^.*QualiMap v.//; s/Built.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8869,7 +8869,7 @@
                 "id": "144",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "featureCounts \\\n        -B -C -g gene_biotype -t exon \\\n        -p \\\n        -T 1 \\\n        -a genome_gfp.gtf \\\n        -s 2 \\\n        -o WT_REP1.featureCounts.txt \\\n        WT_REP1.markdup.sorted.bam\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:SUBREAD_FEATURECOUNTS\":\n        subread: $( echo $(featureCounts -v 2>&1) | sed -e \"s/featureCounts v//g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8925,7 +8925,7 @@
                 "id": "143",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "stringtie \\\n        WT_REP1.markdup.sorted.bam \\\n        --rf \\\n        -G genome_gfp.gtf \\\n        -o WT_REP1.transcripts.gtf \\\n        -A WT_REP1.gene.abundance.txt \\\n        -C WT_REP1.coverage.gtf \\\n        -b WT_REP1.ballgown \\\n        -p 1 \\\n        -v -e\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:STRINGTIE_STRINGTIE\":\n        stringtie: $(stringtie --version 2>&1)\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8992,7 +8992,7 @@
                 "id": "152",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        RAP1_UNINDUCED_REP2.sorted.bam \\\n        > RAP1_UNINDUCED_REP2.sorted.bam.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9041,7 +9041,7 @@
                 "id": "146",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        RAP1_IAA_30M_REP1.sorted.bam \\\n        > RAP1_IAA_30M_REP1.sorted.bam.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9090,7 +9090,7 @@
                 "id": "149",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        WT_REP2.sorted.bam \\\n        > WT_REP2.sorted.bam.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9139,7 +9139,7 @@
                 "id": "157",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        WT_REP1.sorted.bam \\\n        > WT_REP1.sorted.bam.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9188,7 +9188,7 @@
                 "id": "155",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        RAP1_UNINDUCED_REP1.sorted.bam \\\n        > RAP1_UNINDUCED_REP1.sorted.bam.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9237,7 +9237,7 @@
                 "id": "150",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome_gfp.fasta \\\n        WT_REP2.sorted.bam \\\n        > WT_REP2.sorted.bam.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9293,7 +9293,7 @@
                 "id": "153",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        RAP1_UNINDUCED_REP1.sorted.bam \\\n        > RAP1_UNINDUCED_REP1.sorted.bam.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9342,7 +9342,7 @@
                 "id": "154",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome_gfp.fasta \\\n        RAP1_UNINDUCED_REP2.sorted.bam \\\n        > RAP1_UNINDUCED_REP2.sorted.bam.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9398,7 +9398,7 @@
                 "id": "147",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome_gfp.fasta \\\n        RAP1_IAA_30M_REP1.sorted.bam \\\n        > RAP1_IAA_30M_REP1.sorted.bam.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9454,7 +9454,7 @@
                 "id": "158",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome_gfp.fasta \\\n        RAP1_UNINDUCED_REP1.sorted.bam \\\n        > RAP1_UNINDUCED_REP1.sorted.bam.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9510,7 +9510,7 @@
                 "id": "145",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        RAP1_IAA_30M_REP1.sorted.bam \\\n        > RAP1_IAA_30M_REP1.sorted.bam.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9559,7 +9559,7 @@
                 "id": "151",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        RAP1_UNINDUCED_REP2.sorted.bam \\\n        > RAP1_UNINDUCED_REP2.sorted.bam.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9608,7 +9608,7 @@
                 "id": "148",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        WT_REP2.sorted.bam \\\n        > WT_REP2.sorted.bam.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9657,7 +9657,7 @@
                 "id": "156",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        WT_REP1.sorted.bam \\\n        > WT_REP1.sorted.bam.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9706,7 +9706,7 @@
                 "id": "159",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome_gfp.fasta \\\n        WT_REP1.sorted.bam \\\n        > WT_REP1.sorted.bam.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9762,7 +9762,7 @@
                 "id": "160",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_tximport.r \\\n        NULL \\\n        salmon \\\n        salmon.merged\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_TXIMPORT\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-tximeta: $(Rscript -e \"library(tximeta); cat(as.character(packageVersion('tximeta')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9870,7 +9870,7 @@
                 "id": "161",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        RAP1_UNINDUCED_REP1.clip.forward.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_UNINDUCED_REP1.forward.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9919,7 +9919,7 @@
                 "id": "162",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        RAP1_UNINDUCED_REP1.clip.reverse.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        RAP1_UNINDUCED_REP1.reverse.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9966,7 +9966,7 @@
                 "id": "164",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        WT_REP1.forward.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        WT_REP1.clip.forward.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10016,7 +10016,7 @@
                 "id": "163",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedClip \\\n        WT_REP1.reverse.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        WT_REP1.clip.reverse.bedGraph\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDCLIP\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10065,7 +10065,7 @@
                 "id": "165",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "inner_distance.py \\\n            -i WT_REP1.markdup.sorted.bam \\\n            -r genome_gfp.bed \\\n            -o WT_REP1 \\\n             \\\n            > stdout.txt\n        head -n 2 stdout.txt > WT_REP1.inner_distance_mean.txt\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INNERDISTANCE\":\n            rseqc: $(inner_distance.py --version | sed -e \"s/inner_distance.py //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -10140,7 +10140,7 @@
                 "id": "169",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bam_stat.py \\\n        -i WT_REP1.markdup.sorted.bam \\\n         \\\n        > WT_REP1.bam_stat.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_BAMSTAT\":\n        rseqc: $(bam_stat.py --version | sed -e \"s/bam_stat.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10184,7 +10184,7 @@
                 "id": "170",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "junction_saturation.py \\\n        -i WT_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        -o WT_REP1 \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONSATURATION\":\n        rseqc: $(junction_saturation.py --version | sed -e \"s/junction_saturation.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10241,7 +10241,7 @@
                 "id": "171",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "junction_annotation.py \\\n        -i WT_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        -o WT_REP1 \\\n         \\\n        2> WT_REP1.junction_annotation.log\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONANNOTATION\":\n        rseqc: $(junction_annotation.py --version | sed -e \"s/junction_annotation.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10328,7 +10328,7 @@
                 "id": "167",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "read_distribution.py \\\n        -i WT_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n        > WT_REP1.read_distribution.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDISTRIBUTION\":\n        rseqc: $(read_distribution.py --version | sed -e \"s/read_distribution.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10379,7 +10379,7 @@
                 "id": "184",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        WT_REP1.markdup.sorted.bam \\\n        > WT_REP1.markdup.sorted.bam.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10429,7 +10429,7 @@
                 "id": "176",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        WT_REP2.markdup.sorted.bam \\\n        > WT_REP2.markdup.sorted.bam.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10479,7 +10479,7 @@
                 "id": "173",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome_gfp.fasta \\\n        RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        > RAP1_IAA_30M_REP1.markdup.sorted.bam.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10536,7 +10536,7 @@
                 "id": "177",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome_gfp.fasta \\\n        RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        > RAP1_UNINDUCED_REP2.markdup.sorted.bam.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10593,7 +10593,7 @@
                 "id": "174",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        > RAP1_IAA_30M_REP1.markdup.sorted.bam.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10643,7 +10643,7 @@
                 "id": "185",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome_gfp.fasta \\\n        WT_REP1.markdup.sorted.bam \\\n        > WT_REP1.markdup.sorted.bam.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10700,7 +10700,7 @@
                 "id": "179",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome_gfp.fasta \\\n        RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        > RAP1_UNINDUCED_REP1.markdup.sorted.bam.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10757,7 +10757,7 @@
                 "id": "186",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        WT_REP1.markdup.sorted.bam \\\n        > WT_REP1.markdup.sorted.bam.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10807,7 +10807,7 @@
                 "id": "175",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        stats \\\n        --threads 1 \\\n        --reference genome_gfp.fasta \\\n        WT_REP2.markdup.sorted.bam \\\n        > WT_REP2.markdup.sorted.bam.stats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10864,7 +10864,7 @@
                 "id": "180",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        > RAP1_UNINDUCED_REP1.markdup.sorted.bam.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10914,7 +10914,7 @@
                 "id": "178",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        > RAP1_UNINDUCED_REP2.markdup.sorted.bam.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10964,7 +10964,7 @@
                 "id": "168",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "read_duplication.py \\\n        -i WT_REP1.markdup.sorted.bam \\\n        -o WT_REP1 \\\n        \n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDUPLICATION\":\n        rseqc: $(read_duplication.py --version | sed -e \"s/read_duplication.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11026,7 +11026,7 @@
                 "id": "172",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        flagstat \\\n        --threads 1 \\\n        RAP1_IAA_30M_REP1.markdup.sorted.bam \\\n        > RAP1_IAA_30M_REP1.markdup.sorted.bam.flagstat\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11076,7 +11076,7 @@
                 "id": "166",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "infer_experiment.py \\\n        -i WT_REP1.markdup.sorted.bam \\\n        -r genome_gfp.bed \\\n         \\\n        > WT_REP1.infer_experiment.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INFEREXPERIMENT\":\n        rseqc: $(infer_experiment.py --version | sed -e \"s/infer_experiment.py //g\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11128,7 +11128,7 @@
                 "id": "183",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        RAP1_UNINDUCED_REP1.markdup.sorted.bam \\\n        > RAP1_UNINDUCED_REP1.markdup.sorted.bam.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11178,7 +11178,7 @@
                 "id": "182",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        RAP1_UNINDUCED_REP2.markdup.sorted.bam \\\n        > RAP1_UNINDUCED_REP2.markdup.sorted.bam.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11228,7 +11228,7 @@
                 "id": "181",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "samtools \\\n        idxstats \\\n        --threads 0 \\\n        WT_REP2.markdup.sorted.bam \\\n        > WT_REP2.markdup.sorted.bam.idxstats\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS\":\n        samtools: $(echo $(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11278,7 +11278,7 @@
                 "id": "187",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "cut -f 1,7 WT_REP1.featureCounts.txt | tail -n +3 | cat biotypes_header.txt - >> WT_REP1.biotype_counts_mqc.tsv\n\n    mqc_features_stat.py \\\n        WT_REP1.biotype_counts_mqc.tsv \\\n        -s WT_REP1 \\\n        -f rRNA \\\n        -o WT_REP1.biotype_counts_rrna_mqc.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:MULTIQC_CUSTOM_BIOTYPE\":\n        python: $(python --version | sed 's/Python //g')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11333,7 +11333,7 @@
                 "id": "188",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_summarizedexperiment.r \\\n        NULL \\\n        salmon.merged.gene_counts.tsv \\\n        salmon.merged.gene_tpm.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_SE_GENE\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-summarizedexperiment: $(Rscript -e \"library(SummarizedExperiment); cat(as.character(packageVersion('SummarizedExperiment')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11388,7 +11388,7 @@
                 "id": "192",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_summarizedexperiment.r \\\n        NULL \\\n        salmon.merged.transcript_counts.tsv \\\n        salmon.merged.transcript_tpm.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_SE_TRANSCRIPT\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-summarizedexperiment: $(Rscript -e \"library(SummarizedExperiment); cat(as.character(packageVersion('SummarizedExperiment')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11441,7 +11441,7 @@
                 "id": "191",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_summarizedexperiment.r \\\n        NULL \\\n        salmon.merged.gene_counts_scaled.tsv \\\n        salmon.merged.gene_tpm.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_SE_GENE_SCALED\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-summarizedexperiment: $(Rscript -e \"library(SummarizedExperiment); cat(as.character(packageVersion('SummarizedExperiment')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11494,7 +11494,7 @@
                 "id": "190",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "salmon_summarizedexperiment.r \\\n        NULL \\\n        salmon.merged.gene_counts_length_scaled.tsv \\\n        salmon.merged.gene_tpm.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_SE_GENE_LENGTH_SCALED\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-summarizedexperiment: $(Rscript -e \"library(SummarizedExperiment); cat(as.character(packageVersion('SummarizedExperiment')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11547,7 +11547,7 @@
                 "id": "189",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "deseq2_qc.r \\\n        --count_file salmon.merged.gene_counts_length_scaled.tsv \\\n        --outdir ./ \\\n        --cores 1 \\\n        --id_col 1 --sample_suffix '' --outprefix deseq2 --count_col 3 --vst TRUE\n\n    if [ -f \"R_sessionInfo.log\" ]; then\n        sed \"s/deseq2_pca/star_salmon_deseq2_pca/g\" <deseq2_pca_header.txt >tmp.txt\n        sed -i -e \"s/DESeq2 PCA/STAR_SALMON DESeq2 PCA/g\" tmp.txt\n        cat tmp.txt *.pca.vals.txt > star_salmon.pca.vals_mqc.tsv\n\n        sed \"s/deseq2_clustering/star_salmon_deseq2_clustering/g\" <deseq2_clustering_header.txt >tmp.txt\n        sed -i -e \"s/DESeq2 sample/STAR_SALMON DESeq2 sample/g\" tmp.txt\n        cat tmp.txt *.sample.dists.txt > star_salmon.sample.dists_mqc.tsv\n    fi\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:DESEQ2_QC_STAR_SALMON\":\n        r-base: $(echo $(R --version 2>&1) | sed 's/^.*R version //; s/ .*$//')\n        bioconductor-deseq2: $(Rscript -e \"library(DESeq2); cat(as.character(packageVersion('DESeq2')))\")\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11644,7 +11644,7 @@
                 "id": "193",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        WT_REP1.clip.forward.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        WT_REP1.forward.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11693,7 +11693,7 @@
                 "id": "194",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "bedGraphToBigWig \\\n        WT_REP1.clip.reverse.bedGraph \\\n        genome_gfp.fasta.sizes \\\n        WT_REP1.reverse.bigWig\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDGRAPHTOBIGWIG\":\n        ucsc: 377\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11740,7 +11740,7 @@
                 "id": "195",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "-"
                 },
                 "parents": [
@@ -11770,7 +11770,7 @@
                 "id": "196",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "def args = task.ext.args ?: ''\ntemplate 'dumpsoftwareversions.py'"
                 },
                 "parents": [
@@ -11868,7 +11868,7 @@
                 "id": "197",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "multiqc \\\n        -f \\\n         \\\n         \\\n        .\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_RNASEQ:RNASEQ:MULTIQC\":\n        multiqc: $( multiqc --version | sed -e \"s/multiqc, version //g\" )\n    END_VERSIONS"
                 },
                 "parents": [

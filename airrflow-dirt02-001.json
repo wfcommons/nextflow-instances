@@ -18,7 +18,7 @@
                 "id": "3",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "check_samplesheet.py Metadata_test_airr.tsv\n    cp Metadata_test_airr.tsv samplesheet.valid.tsv\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:FASTQ_INPUT_CHECK:SAMPLESHEET_CHECK\":\n        python: $( echo $(python --version | grep -o \"[0-9\\. ]\\+\") )\n        pandas: $(echo $(python -c \"import pkg_resources; print(pkg_resources.get_distribution('pandas').version)\"))\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -62,7 +62,7 @@
                 "id": "2",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "unzip imgtdb_base.zip\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:UNZIP_IMGT\":\n        unzip: $(echo $(unzip -help 2>&1) | sed 's/^.*UnZip //; s/ of.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -105,7 +105,7 @@
                 "id": "1",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "unzip igblast_base.zip\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:UNZIP_IGBLAST\":\n        unzip: $(echo $(unzip -help 2>&1) | sed 's/^.*UnZip //; s/ of.*$//')\n    END_VERSIONS"
                 },
                 "parents": [],
@@ -146,7 +146,7 @@
                 "id": "4",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample1_1.fastq.gz ] && ln -sf Sample1_dn_R1.fastq.gz Sample1_1.fastq.gz\n        [ ! -f  Sample1_2.fastq.gz ] && ln -sf Sample1_dn_R2.fastq.gz Sample1_2.fastq.gz\n        fastp \\\n            --in1 Sample1_1.fastq.gz \\\n            --in2 Sample1_2.fastq.gz \\\n            --out1 Sample1_1.fastp.fastq.gz \\\n            --out2 Sample1_2.fastp.fastq.gz \\\n            --json Sample1.fastp.json \\\n            --html Sample1.fastp.html \\\n             \\\n             \\\n             \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --disable_quality_filtering --disable_length_filtering true \\\n            2> Sample1.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -220,7 +220,7 @@
                 "id": "5",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample2_1.fastq.gz ] && ln -sf Sample2_m_R1.fastq.gz Sample2_1.fastq.gz\n        [ ! -f  Sample2_2.fastq.gz ] && ln -sf Sample2_m_R2.fastq.gz Sample2_2.fastq.gz\n        fastp \\\n            --in1 Sample2_1.fastq.gz \\\n            --in2 Sample2_2.fastq.gz \\\n            --out1 Sample2_1.fastp.fastq.gz \\\n            --out2 Sample2_2.fastp.fastq.gz \\\n            --json Sample2.fastp.json \\\n            --html Sample2.fastp.html \\\n             \\\n             \\\n             \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --disable_quality_filtering --disable_length_filtering true \\\n            2> Sample2.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -294,7 +294,7 @@
                 "id": "6",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample3_1.fastq.gz ] && ln -sf Sample3_n_R1.fastq.gz Sample3_1.fastq.gz\n        [ ! -f  Sample3_2.fastq.gz ] && ln -sf Sample3_n_R2.fastq.gz Sample3_2.fastq.gz\n        fastp \\\n            --in1 Sample3_1.fastq.gz \\\n            --in2 Sample3_2.fastq.gz \\\n            --out1 Sample3_1.fastp.fastq.gz \\\n            --out2 Sample3_2.fastp.fastq.gz \\\n            --json Sample3.fastp.json \\\n            --html Sample3.fastp.html \\\n             \\\n             \\\n             \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --disable_quality_filtering --disable_length_filtering true \\\n            2> Sample3.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -368,7 +368,7 @@
                 "id": "7",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample4_1.fastq.gz ] && ln -sf Sample4_p_R1.fastq.gz Sample4_1.fastq.gz\n        [ ! -f  Sample4_2.fastq.gz ] && ln -sf Sample4_p_R2.fastq.gz Sample4_2.fastq.gz\n        fastp \\\n            --in1 Sample4_1.fastq.gz \\\n            --in2 Sample4_2.fastq.gz \\\n            --out1 Sample4_1.fastp.fastq.gz \\\n            --out2 Sample4_2.fastp.fastq.gz \\\n            --json Sample4.fastp.json \\\n            --html Sample4.fastp.html \\\n             \\\n             \\\n             \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --disable_quality_filtering --disable_length_filtering true \\\n            2> Sample4.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -442,7 +442,7 @@
                 "id": "8",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample5_1.fastq.gz ] && ln -sf Sample5_dn_R1.fastq.gz Sample5_1.fastq.gz\n        [ ! -f  Sample5_2.fastq.gz ] && ln -sf Sample5_dn_R2.fastq.gz Sample5_2.fastq.gz\n        fastp \\\n            --in1 Sample5_1.fastq.gz \\\n            --in2 Sample5_2.fastq.gz \\\n            --out1 Sample5_1.fastp.fastq.gz \\\n            --out2 Sample5_2.fastp.fastq.gz \\\n            --json Sample5.fastp.json \\\n            --html Sample5.fastp.html \\\n             \\\n             \\\n             \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --disable_quality_filtering --disable_length_filtering true \\\n            2> Sample5.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -516,7 +516,7 @@
                 "id": "9",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample6_1.fastq.gz ] && ln -sf Sample6_p_R1.fastq.gz Sample6_1.fastq.gz\n        [ ! -f  Sample6_2.fastq.gz ] && ln -sf Sample6_p_R2.fastq.gz Sample6_2.fastq.gz\n        fastp \\\n            --in1 Sample6_1.fastq.gz \\\n            --in2 Sample6_2.fastq.gz \\\n            --out1 Sample6_1.fastp.fastq.gz \\\n            --out2 Sample6_2.fastp.fastq.gz \\\n            --json Sample6.fastp.json \\\n            --html Sample6.fastp.html \\\n             \\\n             \\\n             \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --disable_quality_filtering --disable_length_filtering true \\\n            2> Sample6.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -590,7 +590,7 @@
                 "id": "10",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample7_1.fastq.gz ] && ln -sf Sample7_n_R1.fastq.gz Sample7_1.fastq.gz\n        [ ! -f  Sample7_2.fastq.gz ] && ln -sf Sample7_n_R2.fastq.gz Sample7_2.fastq.gz\n        fastp \\\n            --in1 Sample7_1.fastq.gz \\\n            --in2 Sample7_2.fastq.gz \\\n            --out1 Sample7_1.fastp.fastq.gz \\\n            --out2 Sample7_2.fastp.fastq.gz \\\n            --json Sample7.fastp.json \\\n            --html Sample7.fastp.html \\\n             \\\n             \\\n             \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --disable_quality_filtering --disable_length_filtering true \\\n            2> Sample7.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -664,7 +664,7 @@
                 "id": "11",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample8_1.fastq.gz ] && ln -sf Sample8_m_R1.fastq.gz Sample8_1.fastq.gz\n        [ ! -f  Sample8_2.fastq.gz ] && ln -sf Sample8_m_R2.fastq.gz Sample8_2.fastq.gz\n        fastp \\\n            --in1 Sample8_1.fastq.gz \\\n            --in2 Sample8_2.fastq.gz \\\n            --out1 Sample8_1.fastp.fastq.gz \\\n            --out2 Sample8_2.fastp.fastq.gz \\\n            --json Sample8.fastp.json \\\n            --html Sample8.fastp.html \\\n             \\\n             \\\n             \\\n            --thread 1 \\\n            --detect_adapter_for_pe \\\n            --disable_quality_filtering --disable_length_filtering true \\\n            2> Sample8.fastp.log\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTP\":\n            fastp: $(fastp --version 2>&1 | sed -e \"s/fastp //g\")\n        END_VERSIONS"
                 },
                 "parents": [
@@ -738,7 +738,7 @@
                 "id": "12",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "merge_R1_umi.py -R1 \"Sample1_1.fastp.fastq.gz\" -I1 \"Sample1_dn_I1.fastq.gz\" -o UMI_R1.fastq.gz --umi_start 6 --umi_length 8\n    mv \"UMI_R1.fastq.gz\" \"Sample1_UMI_R1.fastq.gz\"\n    mv \"Sample1_2.fastp.fastq.gz\" \"Sample1_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:MERGE_UMI\":\n        python: $( echo $(python --version | grep -o \"[0-9\\. ]\\+\") )\n        biopython: $(echo $(python -c \"import pkg_resources; print(pkg_resources.get_distribution('biopython').version)\"))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -800,7 +800,7 @@
                 "id": "13",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "merge_R1_umi.py -R1 \"Sample2_1.fastp.fastq.gz\" -I1 \"Sample2_m_I1.fastq.gz\" -o UMI_R1.fastq.gz --umi_start 6 --umi_length 8\n    mv \"UMI_R1.fastq.gz\" \"Sample2_UMI_R1.fastq.gz\"\n    mv \"Sample2_2.fastp.fastq.gz\" \"Sample2_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:MERGE_UMI\":\n        python: $( echo $(python --version | grep -o \"[0-9\\. ]\\+\") )\n        biopython: $(echo $(python -c \"import pkg_resources; print(pkg_resources.get_distribution('biopython').version)\"))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -862,7 +862,7 @@
                 "id": "14",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "merge_R1_umi.py -R1 \"Sample3_1.fastp.fastq.gz\" -I1 \"Sample3_n_I1.fastq.gz\" -o UMI_R1.fastq.gz --umi_start 6 --umi_length 8\n    mv \"UMI_R1.fastq.gz\" \"Sample3_UMI_R1.fastq.gz\"\n    mv \"Sample3_2.fastp.fastq.gz\" \"Sample3_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:MERGE_UMI\":\n        python: $( echo $(python --version | grep -o \"[0-9\\. ]\\+\") )\n        biopython: $(echo $(python -c \"import pkg_resources; print(pkg_resources.get_distribution('biopython').version)\"))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -924,7 +924,7 @@
                 "id": "15",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "merge_R1_umi.py -R1 \"Sample4_1.fastp.fastq.gz\" -I1 \"Sample4_p_I1.fastq.gz\" -o UMI_R1.fastq.gz --umi_start 6 --umi_length 8\n    mv \"UMI_R1.fastq.gz\" \"Sample4_UMI_R1.fastq.gz\"\n    mv \"Sample4_2.fastp.fastq.gz\" \"Sample4_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:MERGE_UMI\":\n        python: $( echo $(python --version | grep -o \"[0-9\\. ]\\+\") )\n        biopython: $(echo $(python -c \"import pkg_resources; print(pkg_resources.get_distribution('biopython').version)\"))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -986,7 +986,7 @@
                 "id": "16",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "merge_R1_umi.py -R1 \"Sample5_1.fastp.fastq.gz\" -I1 \"Sample5_dn_I1.fastq.gz\" -o UMI_R1.fastq.gz --umi_start 6 --umi_length 8\n    mv \"UMI_R1.fastq.gz\" \"Sample5_UMI_R1.fastq.gz\"\n    mv \"Sample5_2.fastp.fastq.gz\" \"Sample5_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:MERGE_UMI\":\n        python: $( echo $(python --version | grep -o \"[0-9\\. ]\\+\") )\n        biopython: $(echo $(python -c \"import pkg_resources; print(pkg_resources.get_distribution('biopython').version)\"))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1048,7 +1048,7 @@
                 "id": "17",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "merge_R1_umi.py -R1 \"Sample6_1.fastp.fastq.gz\" -I1 \"Sample6_p_I1.fastq.gz\" -o UMI_R1.fastq.gz --umi_start 6 --umi_length 8\n    mv \"UMI_R1.fastq.gz\" \"Sample6_UMI_R1.fastq.gz\"\n    mv \"Sample6_2.fastp.fastq.gz\" \"Sample6_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:MERGE_UMI\":\n        python: $( echo $(python --version | grep -o \"[0-9\\. ]\\+\") )\n        biopython: $(echo $(python -c \"import pkg_resources; print(pkg_resources.get_distribution('biopython').version)\"))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1110,7 +1110,7 @@
                 "id": "18",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "merge_R1_umi.py -R1 \"Sample7_1.fastp.fastq.gz\" -I1 \"Sample7_n_I1.fastq.gz\" -o UMI_R1.fastq.gz --umi_start 6 --umi_length 8\n    mv \"UMI_R1.fastq.gz\" \"Sample7_UMI_R1.fastq.gz\"\n    mv \"Sample7_2.fastp.fastq.gz\" \"Sample7_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:MERGE_UMI\":\n        python: $( echo $(python --version | grep -o \"[0-9\\. ]\\+\") )\n        biopython: $(echo $(python -c \"import pkg_resources; print(pkg_resources.get_distribution('biopython').version)\"))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1172,7 +1172,7 @@
                 "id": "19",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "merge_R1_umi.py -R1 \"Sample8_1.fastp.fastq.gz\" -I1 \"Sample8_m_I1.fastq.gz\" -o UMI_R1.fastq.gz --umi_start 6 --umi_length 8\n    mv \"UMI_R1.fastq.gz\" \"Sample8_UMI_R1.fastq.gz\"\n    mv \"Sample8_2.fastp.fastq.gz\" \"Sample8_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:MERGE_UMI\":\n        python: $( echo $(python --version | grep -o \"[0-9\\. ]\\+\") )\n        biopython: $(echo $(python -c \"import pkg_resources; print(pkg_resources.get_distribution('biopython').version)\"))\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1234,7 +1234,7 @@
                 "id": "20",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip -f \"Sample1_UMI_R1.fastq.gz\"\n    gunzip -f \"Sample1_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:GUNZIP_UMI\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1289,7 +1289,7 @@
                 "id": "21",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip -f \"Sample2_UMI_R1.fastq.gz\"\n    gunzip -f \"Sample2_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:GUNZIP_UMI\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1344,7 +1344,7 @@
                 "id": "22",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip -f \"Sample3_UMI_R1.fastq.gz\"\n    gunzip -f \"Sample3_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:GUNZIP_UMI\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1399,7 +1399,7 @@
                 "id": "23",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip -f \"Sample4_UMI_R1.fastq.gz\"\n    gunzip -f \"Sample4_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:GUNZIP_UMI\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1454,7 +1454,7 @@
                 "id": "24",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip -f \"Sample5_UMI_R1.fastq.gz\"\n    gunzip -f \"Sample5_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:GUNZIP_UMI\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1509,7 +1509,7 @@
                 "id": "25",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip -f \"Sample6_UMI_R1.fastq.gz\"\n    gunzip -f \"Sample6_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:GUNZIP_UMI\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1564,7 +1564,7 @@
                 "id": "26",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip -f \"Sample7_UMI_R1.fastq.gz\"\n    gunzip -f \"Sample7_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:GUNZIP_UMI\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1619,7 +1619,7 @@
                 "id": "27",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "gunzip -f \"Sample8_UMI_R1.fastq.gz\"\n    gunzip -f \"Sample8_R2.fastq.gz\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:GUNZIP_UMI\":\n        gunzip: $(echo $(gunzip --version 2>&1) | sed 's/^.*(gzip) //; s/ Copyright.*$//')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1674,7 +1674,7 @@
                 "id": "28",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "FilterSeq.py quality -s Sample1_UMI_R1.fastq -q 20 --outname \"Sample1_R1\" --log \"Sample1_UMI_R1_R1.log\" --nproc 1 > \"Sample1_command_log.txt\"\n    FilterSeq.py quality -s Sample1_R2.fastq -q 20 --outname \"Sample1_R2\" --log \"Sample1_R2_R2.log\" --nproc 1 >> \"Sample1_command_log.txt\"\n    ParseLog.py -l \"Sample1_UMI_R1_R1.log\" \"Sample1_R2_R2.log\" -f ID QUALITY\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_FILTERSEQ_UMI\":\n        presto: $( FilterSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1760,7 +1760,7 @@
                 "id": "29",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "FilterSeq.py quality -s Sample2_UMI_R1.fastq -q 20 --outname \"Sample2_R1\" --log \"Sample2_UMI_R1_R1.log\" --nproc 1 > \"Sample2_command_log.txt\"\n    FilterSeq.py quality -s Sample2_R2.fastq -q 20 --outname \"Sample2_R2\" --log \"Sample2_R2_R2.log\" --nproc 1 >> \"Sample2_command_log.txt\"\n    ParseLog.py -l \"Sample2_UMI_R1_R1.log\" \"Sample2_R2_R2.log\" -f ID QUALITY\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_FILTERSEQ_UMI\":\n        presto: $( FilterSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1846,7 +1846,7 @@
                 "id": "30",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "FilterSeq.py quality -s Sample3_UMI_R1.fastq -q 20 --outname \"Sample3_R1\" --log \"Sample3_UMI_R1_R1.log\" --nproc 1 > \"Sample3_command_log.txt\"\n    FilterSeq.py quality -s Sample3_R2.fastq -q 20 --outname \"Sample3_R2\" --log \"Sample3_R2_R2.log\" --nproc 1 >> \"Sample3_command_log.txt\"\n    ParseLog.py -l \"Sample3_UMI_R1_R1.log\" \"Sample3_R2_R2.log\" -f ID QUALITY\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_FILTERSEQ_UMI\":\n        presto: $( FilterSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -1932,7 +1932,7 @@
                 "id": "31",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "FilterSeq.py quality -s Sample4_UMI_R1.fastq -q 20 --outname \"Sample4_R1\" --log \"Sample4_UMI_R1_R1.log\" --nproc 1 > \"Sample4_command_log.txt\"\n    FilterSeq.py quality -s Sample4_R2.fastq -q 20 --outname \"Sample4_R2\" --log \"Sample4_R2_R2.log\" --nproc 1 >> \"Sample4_command_log.txt\"\n    ParseLog.py -l \"Sample4_UMI_R1_R1.log\" \"Sample4_R2_R2.log\" -f ID QUALITY\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_FILTERSEQ_UMI\":\n        presto: $( FilterSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2018,7 +2018,7 @@
                 "id": "32",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "FilterSeq.py quality -s Sample5_UMI_R1.fastq -q 20 --outname \"Sample5_R1\" --log \"Sample5_UMI_R1_R1.log\" --nproc 1 > \"Sample5_command_log.txt\"\n    FilterSeq.py quality -s Sample5_R2.fastq -q 20 --outname \"Sample5_R2\" --log \"Sample5_R2_R2.log\" --nproc 1 >> \"Sample5_command_log.txt\"\n    ParseLog.py -l \"Sample5_UMI_R1_R1.log\" \"Sample5_R2_R2.log\" -f ID QUALITY\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_FILTERSEQ_UMI\":\n        presto: $( FilterSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2104,7 +2104,7 @@
                 "id": "33",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "FilterSeq.py quality -s Sample6_UMI_R1.fastq -q 20 --outname \"Sample6_R1\" --log \"Sample6_UMI_R1_R1.log\" --nproc 1 > \"Sample6_command_log.txt\"\n    FilterSeq.py quality -s Sample6_R2.fastq -q 20 --outname \"Sample6_R2\" --log \"Sample6_R2_R2.log\" --nproc 1 >> \"Sample6_command_log.txt\"\n    ParseLog.py -l \"Sample6_UMI_R1_R1.log\" \"Sample6_R2_R2.log\" -f ID QUALITY\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_FILTERSEQ_UMI\":\n        presto: $( FilterSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2190,7 +2190,7 @@
                 "id": "34",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "FilterSeq.py quality -s Sample7_UMI_R1.fastq -q 20 --outname \"Sample7_R1\" --log \"Sample7_UMI_R1_R1.log\" --nproc 1 > \"Sample7_command_log.txt\"\n    FilterSeq.py quality -s Sample7_R2.fastq -q 20 --outname \"Sample7_R2\" --log \"Sample7_R2_R2.log\" --nproc 1 >> \"Sample7_command_log.txt\"\n    ParseLog.py -l \"Sample7_UMI_R1_R1.log\" \"Sample7_R2_R2.log\" -f ID QUALITY\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_FILTERSEQ_UMI\":\n        presto: $( FilterSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2276,7 +2276,7 @@
                 "id": "35",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "FilterSeq.py quality -s Sample8_UMI_R1.fastq -q 20 --outname \"Sample8_R1\" --log \"Sample8_UMI_R1_R1.log\" --nproc 1 > \"Sample8_command_log.txt\"\n    FilterSeq.py quality -s Sample8_R2.fastq -q 20 --outname \"Sample8_R2\" --log \"Sample8_R2_R2.log\" --nproc 1 >> \"Sample8_command_log.txt\"\n    ParseLog.py -l \"Sample8_UMI_R1_R1.log\" \"Sample8_R2_R2.log\" -f ID QUALITY\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_FILTERSEQ_UMI\":\n        presto: $( FilterSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -2362,7 +2362,7 @@
                 "id": "36",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MaskPrimers.py score --nproc 1 -s Sample1_R1_quality-pass.fastq -p C_primers.fasta --start 8 --barcode  --maxerror 0.2 --mode cut --outname Sample1_R1 --log Sample1_R1.log > \"Sample1_command_log.txt\"\n        MaskPrimers.py score --nproc 1 -s Sample1_R2_quality-pass.fastq -p V_primers.fasta --start 0  --maxerror 0.2 --mode cut --outname Sample1_R2 --log Sample1_R2.log >> \"Sample1_command_log.txt\"\n        ParseLog.py -l \"Sample1_R1.log\" \"Sample1_R2.log\" -f ID PRIMER ERROR\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_MASKPRIMERS_UMI\":\n            presto: $( MaskPrimers.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2460,7 +2460,7 @@
                 "id": "37",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MaskPrimers.py score --nproc 1 -s Sample2_R1_quality-pass.fastq -p C_primers.fasta --start 8 --barcode  --maxerror 0.2 --mode cut --outname Sample2_R1 --log Sample2_R1.log > \"Sample2_command_log.txt\"\n        MaskPrimers.py score --nproc 1 -s Sample2_R2_quality-pass.fastq -p V_primers.fasta --start 0  --maxerror 0.2 --mode cut --outname Sample2_R2 --log Sample2_R2.log >> \"Sample2_command_log.txt\"\n        ParseLog.py -l \"Sample2_R1.log\" \"Sample2_R2.log\" -f ID PRIMER ERROR\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_MASKPRIMERS_UMI\":\n            presto: $( MaskPrimers.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2558,7 +2558,7 @@
                 "id": "38",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MaskPrimers.py score --nproc 1 -s Sample3_R1_quality-pass.fastq -p C_primers.fasta --start 8 --barcode  --maxerror 0.2 --mode cut --outname Sample3_R1 --log Sample3_R1.log > \"Sample3_command_log.txt\"\n        MaskPrimers.py score --nproc 1 -s Sample3_R2_quality-pass.fastq -p V_primers.fasta --start 0  --maxerror 0.2 --mode cut --outname Sample3_R2 --log Sample3_R2.log >> \"Sample3_command_log.txt\"\n        ParseLog.py -l \"Sample3_R1.log\" \"Sample3_R2.log\" -f ID PRIMER ERROR\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_MASKPRIMERS_UMI\":\n            presto: $( MaskPrimers.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2656,7 +2656,7 @@
                 "id": "39",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MaskPrimers.py score --nproc 1 -s Sample4_R1_quality-pass.fastq -p C_primers.fasta --start 8 --barcode  --maxerror 0.2 --mode cut --outname Sample4_R1 --log Sample4_R1.log > \"Sample4_command_log.txt\"\n        MaskPrimers.py score --nproc 1 -s Sample4_R2_quality-pass.fastq -p V_primers.fasta --start 0  --maxerror 0.2 --mode cut --outname Sample4_R2 --log Sample4_R2.log >> \"Sample4_command_log.txt\"\n        ParseLog.py -l \"Sample4_R1.log\" \"Sample4_R2.log\" -f ID PRIMER ERROR\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_MASKPRIMERS_UMI\":\n            presto: $( MaskPrimers.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2754,7 +2754,7 @@
                 "id": "40",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MaskPrimers.py score --nproc 1 -s Sample5_R1_quality-pass.fastq -p C_primers.fasta --start 8 --barcode  --maxerror 0.2 --mode cut --outname Sample5_R1 --log Sample5_R1.log > \"Sample5_command_log.txt\"\n        MaskPrimers.py score --nproc 1 -s Sample5_R2_quality-pass.fastq -p V_primers.fasta --start 0  --maxerror 0.2 --mode cut --outname Sample5_R2 --log Sample5_R2.log >> \"Sample5_command_log.txt\"\n        ParseLog.py -l \"Sample5_R1.log\" \"Sample5_R2.log\" -f ID PRIMER ERROR\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_MASKPRIMERS_UMI\":\n            presto: $( MaskPrimers.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2852,7 +2852,7 @@
                 "id": "41",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MaskPrimers.py score --nproc 1 -s Sample6_R1_quality-pass.fastq -p C_primers.fasta --start 8 --barcode  --maxerror 0.2 --mode cut --outname Sample6_R1 --log Sample6_R1.log > \"Sample6_command_log.txt\"\n        MaskPrimers.py score --nproc 1 -s Sample6_R2_quality-pass.fastq -p V_primers.fasta --start 0  --maxerror 0.2 --mode cut --outname Sample6_R2 --log Sample6_R2.log >> \"Sample6_command_log.txt\"\n        ParseLog.py -l \"Sample6_R1.log\" \"Sample6_R2.log\" -f ID PRIMER ERROR\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_MASKPRIMERS_UMI\":\n            presto: $( MaskPrimers.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -2950,7 +2950,7 @@
                 "id": "42",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MaskPrimers.py score --nproc 1 -s Sample7_R1_quality-pass.fastq -p C_primers.fasta --start 8 --barcode  --maxerror 0.2 --mode cut --outname Sample7_R1 --log Sample7_R1.log > \"Sample7_command_log.txt\"\n        MaskPrimers.py score --nproc 1 -s Sample7_R2_quality-pass.fastq -p V_primers.fasta --start 0  --maxerror 0.2 --mode cut --outname Sample7_R2 --log Sample7_R2.log >> \"Sample7_command_log.txt\"\n        ParseLog.py -l \"Sample7_R1.log\" \"Sample7_R2.log\" -f ID PRIMER ERROR\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_MASKPRIMERS_UMI\":\n            presto: $( MaskPrimers.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -3048,7 +3048,7 @@
                 "id": "43",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MaskPrimers.py score --nproc 1 -s Sample8_R1_quality-pass.fastq -p C_primers.fasta --start 8 --barcode  --maxerror 0.2 --mode cut --outname Sample8_R1 --log Sample8_R1.log > \"Sample8_command_log.txt\"\n        MaskPrimers.py score --nproc 1 -s Sample8_R2_quality-pass.fastq -p V_primers.fasta --start 0  --maxerror 0.2 --mode cut --outname Sample8_R2 --log Sample8_R2.log >> \"Sample8_command_log.txt\"\n        ParseLog.py -l \"Sample8_R1.log\" \"Sample8_R2.log\" -f ID PRIMER ERROR\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_MASKPRIMERS_UMI\":\n            presto: $( MaskPrimers.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -3146,7 +3146,7 @@
                 "id": "44",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample1_R1.fastq' -2 'Sample1_R2.fastq' --1f BARCODE --coord illumina > \"Sample1_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3208,7 +3208,7 @@
                 "id": "45",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample2_R1.fastq' -2 'Sample2_R2.fastq' --1f BARCODE --coord illumina > \"Sample2_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3270,7 +3270,7 @@
                 "id": "46",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample3_R1.fastq' -2 'Sample3_R2.fastq' --1f BARCODE --coord illumina > \"Sample3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3332,7 +3332,7 @@
                 "id": "47",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample4_R1.fastq' -2 'Sample4_R2.fastq' --1f BARCODE --coord illumina > \"Sample4_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3394,7 +3394,7 @@
                 "id": "48",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample5_R1.fastq' -2 'Sample5_R2.fastq' --1f BARCODE --coord illumina > \"Sample5_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3456,7 +3456,7 @@
                 "id": "49",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample6_R1.fastq' -2 'Sample6_R2.fastq' --1f BARCODE --coord illumina > \"Sample6_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3518,7 +3518,7 @@
                 "id": "50",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample7_R1.fastq' -2 'Sample7_R2.fastq' --1f BARCODE --coord illumina > \"Sample7_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3580,7 +3580,7 @@
                 "id": "51",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample8_R1.fastq' -2 'Sample8_R2.fastq' --1f BARCODE --coord illumina > \"Sample8_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3642,7 +3642,7 @@
                 "id": "52",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ClusterSets.py set --nproc 1 -s Sample1_R1_pair-pass.fastq --outname Sample1_R1 --exec vsearch --log Sample1_R1.log > \"Sample1_command_log.txt\"\n    ClusterSets.py set --nproc 1 -s Sample1_R2_pair-pass.fastq --outname Sample1_R2 --exec vsearch --log Sample1_R2.log >> \"Sample1_command_log.txt\"\n    ParseLog.py -l \"Sample1_R1.log\" \"Sample1_R2.log\" -f ID BARCODE SEQCOUNT CLUSTERS\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_CLUSTERSETS_UMI\":\n        presto: $( ClusterSets.py --version | awk -F' '  '{print $2}' )\n        vsearch: $( vsearch --version &> vsearch.txt; cat vsearch.txt | head -n 1 | grep -o 'v[0-9\\.]\\+' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3728,7 +3728,7 @@
                 "id": "53",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ClusterSets.py set --nproc 1 -s Sample2_R1_pair-pass.fastq --outname Sample2_R1 --exec vsearch --log Sample2_R1.log > \"Sample2_command_log.txt\"\n    ClusterSets.py set --nproc 1 -s Sample2_R2_pair-pass.fastq --outname Sample2_R2 --exec vsearch --log Sample2_R2.log >> \"Sample2_command_log.txt\"\n    ParseLog.py -l \"Sample2_R1.log\" \"Sample2_R2.log\" -f ID BARCODE SEQCOUNT CLUSTERS\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_CLUSTERSETS_UMI\":\n        presto: $( ClusterSets.py --version | awk -F' '  '{print $2}' )\n        vsearch: $( vsearch --version &> vsearch.txt; cat vsearch.txt | head -n 1 | grep -o 'v[0-9\\.]\\+' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3814,7 +3814,7 @@
                 "id": "54",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ClusterSets.py set --nproc 1 -s Sample3_R1_pair-pass.fastq --outname Sample3_R1 --exec vsearch --log Sample3_R1.log > \"Sample3_command_log.txt\"\n    ClusterSets.py set --nproc 1 -s Sample3_R2_pair-pass.fastq --outname Sample3_R2 --exec vsearch --log Sample3_R2.log >> \"Sample3_command_log.txt\"\n    ParseLog.py -l \"Sample3_R1.log\" \"Sample3_R2.log\" -f ID BARCODE SEQCOUNT CLUSTERS\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_CLUSTERSETS_UMI\":\n        presto: $( ClusterSets.py --version | awk -F' '  '{print $2}' )\n        vsearch: $( vsearch --version &> vsearch.txt; cat vsearch.txt | head -n 1 | grep -o 'v[0-9\\.]\\+' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3900,7 +3900,7 @@
                 "id": "55",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ClusterSets.py set --nproc 1 -s Sample4_R1_pair-pass.fastq --outname Sample4_R1 --exec vsearch --log Sample4_R1.log > \"Sample4_command_log.txt\"\n    ClusterSets.py set --nproc 1 -s Sample4_R2_pair-pass.fastq --outname Sample4_R2 --exec vsearch --log Sample4_R2.log >> \"Sample4_command_log.txt\"\n    ParseLog.py -l \"Sample4_R1.log\" \"Sample4_R2.log\" -f ID BARCODE SEQCOUNT CLUSTERS\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_CLUSTERSETS_UMI\":\n        presto: $( ClusterSets.py --version | awk -F' '  '{print $2}' )\n        vsearch: $( vsearch --version &> vsearch.txt; cat vsearch.txt | head -n 1 | grep -o 'v[0-9\\.]\\+' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -3986,7 +3986,7 @@
                 "id": "56",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ClusterSets.py set --nproc 1 -s Sample5_R1_pair-pass.fastq --outname Sample5_R1 --exec vsearch --log Sample5_R1.log > \"Sample5_command_log.txt\"\n    ClusterSets.py set --nproc 1 -s Sample5_R2_pair-pass.fastq --outname Sample5_R2 --exec vsearch --log Sample5_R2.log >> \"Sample5_command_log.txt\"\n    ParseLog.py -l \"Sample5_R1.log\" \"Sample5_R2.log\" -f ID BARCODE SEQCOUNT CLUSTERS\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_CLUSTERSETS_UMI\":\n        presto: $( ClusterSets.py --version | awk -F' '  '{print $2}' )\n        vsearch: $( vsearch --version &> vsearch.txt; cat vsearch.txt | head -n 1 | grep -o 'v[0-9\\.]\\+' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4072,7 +4072,7 @@
                 "id": "57",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ClusterSets.py set --nproc 1 -s Sample6_R1_pair-pass.fastq --outname Sample6_R1 --exec vsearch --log Sample6_R1.log > \"Sample6_command_log.txt\"\n    ClusterSets.py set --nproc 1 -s Sample6_R2_pair-pass.fastq --outname Sample6_R2 --exec vsearch --log Sample6_R2.log >> \"Sample6_command_log.txt\"\n    ParseLog.py -l \"Sample6_R1.log\" \"Sample6_R2.log\" -f ID BARCODE SEQCOUNT CLUSTERS\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_CLUSTERSETS_UMI\":\n        presto: $( ClusterSets.py --version | awk -F' '  '{print $2}' )\n        vsearch: $( vsearch --version &> vsearch.txt; cat vsearch.txt | head -n 1 | grep -o 'v[0-9\\.]\\+' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4158,7 +4158,7 @@
                 "id": "58",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ClusterSets.py set --nproc 1 -s Sample7_R1_pair-pass.fastq --outname Sample7_R1 --exec vsearch --log Sample7_R1.log > \"Sample7_command_log.txt\"\n    ClusterSets.py set --nproc 1 -s Sample7_R2_pair-pass.fastq --outname Sample7_R2 --exec vsearch --log Sample7_R2.log >> \"Sample7_command_log.txt\"\n    ParseLog.py -l \"Sample7_R1.log\" \"Sample7_R2.log\" -f ID BARCODE SEQCOUNT CLUSTERS\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_CLUSTERSETS_UMI\":\n        presto: $( ClusterSets.py --version | awk -F' '  '{print $2}' )\n        vsearch: $( vsearch --version &> vsearch.txt; cat vsearch.txt | head -n 1 | grep -o 'v[0-9\\.]\\+' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4244,7 +4244,7 @@
                 "id": "59",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ClusterSets.py set --nproc 1 -s Sample8_R1_pair-pass.fastq --outname Sample8_R1 --exec vsearch --log Sample8_R1.log > \"Sample8_command_log.txt\"\n    ClusterSets.py set --nproc 1 -s Sample8_R2_pair-pass.fastq --outname Sample8_R2 --exec vsearch --log Sample8_R2.log >> \"Sample8_command_log.txt\"\n    ParseLog.py -l \"Sample8_R1.log\" \"Sample8_R2.log\" -f ID BARCODE SEQCOUNT CLUSTERS\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_CLUSTERSETS_UMI\":\n        presto: $( ClusterSets.py --version | awk -F' '  '{print $2}' )\n        vsearch: $( vsearch --version &> vsearch.txt; cat vsearch.txt | head -n 1 | grep -o 'v[0-9\\.]\\+' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4330,7 +4330,7 @@
                 "id": "60",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample1_R1_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat > \"Sample1_command_log.txt\"\n    ParseHeaders.py copy -s Sample1_R2_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat >> \"Sample1_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSE_CLUSTER_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4391,7 +4391,7 @@
                 "id": "61",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample2_R1_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat > \"Sample2_command_log.txt\"\n    ParseHeaders.py copy -s Sample2_R2_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat >> \"Sample2_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSE_CLUSTER_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4452,7 +4452,7 @@
                 "id": "62",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample3_R1_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat > \"Sample3_command_log.txt\"\n    ParseHeaders.py copy -s Sample3_R2_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat >> \"Sample3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSE_CLUSTER_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4513,7 +4513,7 @@
                 "id": "63",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample4_R1_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat > \"Sample4_command_log.txt\"\n    ParseHeaders.py copy -s Sample4_R2_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat >> \"Sample4_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSE_CLUSTER_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4574,7 +4574,7 @@
                 "id": "64",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample5_R1_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat > \"Sample5_command_log.txt\"\n    ParseHeaders.py copy -s Sample5_R2_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat >> \"Sample5_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSE_CLUSTER_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4635,7 +4635,7 @@
                 "id": "65",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample6_R1_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat > \"Sample6_command_log.txt\"\n    ParseHeaders.py copy -s Sample6_R2_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat >> \"Sample6_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSE_CLUSTER_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4696,7 +4696,7 @@
                 "id": "66",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample7_R1_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat > \"Sample7_command_log.txt\"\n    ParseHeaders.py copy -s Sample7_R2_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat >> \"Sample7_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSE_CLUSTER_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4757,7 +4757,7 @@
                 "id": "67",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample8_R1_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat > \"Sample8_command_log.txt\"\n    ParseHeaders.py copy -s Sample8_R2_cluster-pass.fastq -f BARCODE -k CLUSTER --act cat >> \"Sample8_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSE_CLUSTER_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4818,7 +4818,7 @@
                 "id": "68",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BuildConsensus.py -s Sample1_R1_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample1_R1 --log Sample1_R1.log > \"Sample1_command_log.txt\"\n    BuildConsensus.py -s Sample1_R2_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample1_R2 --log Sample1_R2.log >> \"Sample1_command_log.txt\"\n    ParseLog.py -l \"Sample1_R1.log\" \"Sample1_R2.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_BUILDCONSENSUS_UMI\":\n        presto: $( BuildConsensus.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4904,7 +4904,7 @@
                 "id": "69",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BuildConsensus.py -s Sample2_R1_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample2_R1 --log Sample2_R1.log > \"Sample2_command_log.txt\"\n    BuildConsensus.py -s Sample2_R2_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample2_R2 --log Sample2_R2.log >> \"Sample2_command_log.txt\"\n    ParseLog.py -l \"Sample2_R1.log\" \"Sample2_R2.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_BUILDCONSENSUS_UMI\":\n        presto: $( BuildConsensus.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -4990,7 +4990,7 @@
                 "id": "70",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BuildConsensus.py -s Sample3_R1_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample3_R1 --log Sample3_R1.log > \"Sample3_command_log.txt\"\n    BuildConsensus.py -s Sample3_R2_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample3_R2 --log Sample3_R2.log >> \"Sample3_command_log.txt\"\n    ParseLog.py -l \"Sample3_R1.log\" \"Sample3_R2.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_BUILDCONSENSUS_UMI\":\n        presto: $( BuildConsensus.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5076,7 +5076,7 @@
                 "id": "71",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BuildConsensus.py -s Sample4_R1_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample4_R1 --log Sample4_R1.log > \"Sample4_command_log.txt\"\n    BuildConsensus.py -s Sample4_R2_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample4_R2 --log Sample4_R2.log >> \"Sample4_command_log.txt\"\n    ParseLog.py -l \"Sample4_R1.log\" \"Sample4_R2.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_BUILDCONSENSUS_UMI\":\n        presto: $( BuildConsensus.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5162,7 +5162,7 @@
                 "id": "72",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BuildConsensus.py -s Sample5_R1_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample5_R1 --log Sample5_R1.log > \"Sample5_command_log.txt\"\n    BuildConsensus.py -s Sample5_R2_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample5_R2 --log Sample5_R2.log >> \"Sample5_command_log.txt\"\n    ParseLog.py -l \"Sample5_R1.log\" \"Sample5_R2.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_BUILDCONSENSUS_UMI\":\n        presto: $( BuildConsensus.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5248,7 +5248,7 @@
                 "id": "73",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BuildConsensus.py -s Sample6_R1_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample6_R1 --log Sample6_R1.log > \"Sample6_command_log.txt\"\n    BuildConsensus.py -s Sample6_R2_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample6_R2 --log Sample6_R2.log >> \"Sample6_command_log.txt\"\n    ParseLog.py -l \"Sample6_R1.log\" \"Sample6_R2.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_BUILDCONSENSUS_UMI\":\n        presto: $( BuildConsensus.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5334,7 +5334,7 @@
                 "id": "74",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BuildConsensus.py -s Sample7_R1_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample7_R1 --log Sample7_R1.log > \"Sample7_command_log.txt\"\n    BuildConsensus.py -s Sample7_R2_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample7_R2 --log Sample7_R2.log >> \"Sample7_command_log.txt\"\n    ParseLog.py -l \"Sample7_R1.log\" \"Sample7_R2.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_BUILDCONSENSUS_UMI\":\n        presto: $( BuildConsensus.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5420,7 +5420,7 @@
                 "id": "75",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "BuildConsensus.py -s Sample8_R1_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample8_R1 --log Sample8_R1.log > \"Sample8_command_log.txt\"\n    BuildConsensus.py -s Sample8_R2_cluster-pass_reheader.fastq --bf CLUSTER --nproc 1 --pf PRIMER --prcons 0.6 --maxerror 0.1 --maxgap 0.5 --outname Sample8_R2 --log Sample8_R2.log >> \"Sample8_command_log.txt\"\n    ParseLog.py -l \"Sample8_R1.log\" \"Sample8_R2.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_BUILDCONSENSUS_UMI\":\n        presto: $( BuildConsensus.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5506,7 +5506,7 @@
                 "id": "76",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample1_R1.fastq' -2 'Sample1_R2.fastq' --coord presto > \"Sample1_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_POSTCONSENSUS_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5568,7 +5568,7 @@
                 "id": "77",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample2_R1.fastq' -2 'Sample2_R2.fastq' --coord presto > \"Sample2_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_POSTCONSENSUS_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5630,7 +5630,7 @@
                 "id": "78",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample3_R1.fastq' -2 'Sample3_R2.fastq' --coord presto > \"Sample3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_POSTCONSENSUS_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5692,7 +5692,7 @@
                 "id": "79",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample4_R1.fastq' -2 'Sample4_R2.fastq' --coord presto > \"Sample4_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_POSTCONSENSUS_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5754,7 +5754,7 @@
                 "id": "80",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample5_R1.fastq' -2 'Sample5_R2.fastq' --coord presto > \"Sample5_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_POSTCONSENSUS_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5816,7 +5816,7 @@
                 "id": "81",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample6_R1.fastq' -2 'Sample6_R2.fastq' --coord presto > \"Sample6_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_POSTCONSENSUS_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5878,7 +5878,7 @@
                 "id": "82",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample7_R1.fastq' -2 'Sample7_R2.fastq' --coord presto > \"Sample7_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_POSTCONSENSUS_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -5940,7 +5940,7 @@
                 "id": "83",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "PairSeq.py -1 'Sample8_R1.fastq' -2 'Sample8_R2.fastq' --coord presto > \"Sample8_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_POSTCONSENSUS_PAIRSEQ_UMI\":\n        presto: $( PairSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6002,7 +6002,7 @@
                 "id": "84",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssemblePairs.py align -1 Sample1_R1_pair-pass.fastq -2 Sample1_R2_pair-pass.fastq --nproc 1 \\\n        --coord presto --rc tail --1f CONSCOUNT PRCONS --2f CONSCOUNT PRCONS \\\n        --outname Sample1 --log Sample1.log > Sample1_command_log.txt\n    ParseLog.py -l \"Sample1.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT LENGTH OVERLAP ERROR PVALUE\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_ASSEMBLEPAIRS_UMI\":\n        presto: $( AssemblePairs.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6071,7 +6071,7 @@
                 "id": "85",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssemblePairs.py align -1 Sample2_R1_pair-pass.fastq -2 Sample2_R2_pair-pass.fastq --nproc 1 \\\n        --coord presto --rc tail --1f CONSCOUNT PRCONS --2f CONSCOUNT PRCONS \\\n        --outname Sample2 --log Sample2.log > Sample2_command_log.txt\n    ParseLog.py -l \"Sample2.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT LENGTH OVERLAP ERROR PVALUE\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_ASSEMBLEPAIRS_UMI\":\n        presto: $( AssemblePairs.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6140,7 +6140,7 @@
                 "id": "86",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssemblePairs.py align -1 Sample3_R1_pair-pass.fastq -2 Sample3_R2_pair-pass.fastq --nproc 1 \\\n        --coord presto --rc tail --1f CONSCOUNT PRCONS --2f CONSCOUNT PRCONS \\\n        --outname Sample3 --log Sample3.log > Sample3_command_log.txt\n    ParseLog.py -l \"Sample3.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT LENGTH OVERLAP ERROR PVALUE\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_ASSEMBLEPAIRS_UMI\":\n        presto: $( AssemblePairs.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6209,7 +6209,7 @@
                 "id": "87",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssemblePairs.py align -1 Sample4_R1_pair-pass.fastq -2 Sample4_R2_pair-pass.fastq --nproc 1 \\\n        --coord presto --rc tail --1f CONSCOUNT PRCONS --2f CONSCOUNT PRCONS \\\n        --outname Sample4 --log Sample4.log > Sample4_command_log.txt\n    ParseLog.py -l \"Sample4.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT LENGTH OVERLAP ERROR PVALUE\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_ASSEMBLEPAIRS_UMI\":\n        presto: $( AssemblePairs.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6278,7 +6278,7 @@
                 "id": "88",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssemblePairs.py align -1 Sample5_R1_pair-pass.fastq -2 Sample5_R2_pair-pass.fastq --nproc 1 \\\n        --coord presto --rc tail --1f CONSCOUNT PRCONS --2f CONSCOUNT PRCONS \\\n        --outname Sample5 --log Sample5.log > Sample5_command_log.txt\n    ParseLog.py -l \"Sample5.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT LENGTH OVERLAP ERROR PVALUE\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_ASSEMBLEPAIRS_UMI\":\n        presto: $( AssemblePairs.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6347,7 +6347,7 @@
                 "id": "89",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssemblePairs.py align -1 Sample6_R1_pair-pass.fastq -2 Sample6_R2_pair-pass.fastq --nproc 1 \\\n        --coord presto --rc tail --1f CONSCOUNT PRCONS --2f CONSCOUNT PRCONS \\\n        --outname Sample6 --log Sample6.log > Sample6_command_log.txt\n    ParseLog.py -l \"Sample6.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT LENGTH OVERLAP ERROR PVALUE\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_ASSEMBLEPAIRS_UMI\":\n        presto: $( AssemblePairs.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6416,7 +6416,7 @@
                 "id": "90",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssemblePairs.py align -1 Sample7_R1_pair-pass.fastq -2 Sample7_R2_pair-pass.fastq --nproc 1 \\\n        --coord presto --rc tail --1f CONSCOUNT PRCONS --2f CONSCOUNT PRCONS \\\n        --outname Sample7 --log Sample7.log > Sample7_command_log.txt\n    ParseLog.py -l \"Sample7.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT LENGTH OVERLAP ERROR PVALUE\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_ASSEMBLEPAIRS_UMI\":\n        presto: $( AssemblePairs.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6485,7 +6485,7 @@
                 "id": "91",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssemblePairs.py align -1 Sample8_R1_pair-pass.fastq -2 Sample8_R2_pair-pass.fastq --nproc 1 \\\n        --coord presto --rc tail --1f CONSCOUNT PRCONS --2f CONSCOUNT PRCONS \\\n        --outname Sample8 --log Sample8.log > Sample8_command_log.txt\n    ParseLog.py -l \"Sample8.log\" -f ID BARCODE SEQCOUNT PRIMER PRCOUNT PRCONS PRFREQ CONSCOUNT LENGTH OVERLAP ERROR PVALUE\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_ASSEMBLEPAIRS_UMI\":\n        presto: $( AssemblePairs.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6554,7 +6554,7 @@
                 "id": "92",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample1.fastq ] && ln -s Sample1_assemble-pass.fastq Sample1_ASSEMBLED.fastq\n    fastqc --quiet --threads 1 Sample1_ASSEMBLED.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTQC_POSTASSEMBLY_UMI\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6603,7 +6603,7 @@
                 "id": "93",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py collapse -s Sample1_assemble-pass.fastq -o \"Sample1_assemble-pass_reheader-pass.fastq\" -f CONSCOUNT --act min\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_COLLAPSE_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6646,7 +6646,7 @@
                 "id": "95",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py collapse -s Sample2_assemble-pass.fastq -o \"Sample2_assemble-pass_reheader-pass.fastq\" -f CONSCOUNT --act min\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_COLLAPSE_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6689,7 +6689,7 @@
                 "id": "94",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample2.fastq ] && ln -s Sample2_assemble-pass.fastq Sample2_ASSEMBLED.fastq\n    fastqc --quiet --threads 1 Sample2_ASSEMBLED.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTQC_POSTASSEMBLY_UMI\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6738,7 +6738,7 @@
                 "id": "96",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample3.fastq ] && ln -s Sample3_assemble-pass.fastq Sample3_ASSEMBLED.fastq\n    fastqc --quiet --threads 1 Sample3_ASSEMBLED.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTQC_POSTASSEMBLY_UMI\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6787,7 +6787,7 @@
                 "id": "97",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py collapse -s Sample3_assemble-pass.fastq -o \"Sample3_assemble-pass_reheader-pass.fastq\" -f CONSCOUNT --act min\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_COLLAPSE_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6830,7 +6830,7 @@
                 "id": "99",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample4.fastq ] && ln -s Sample4_assemble-pass.fastq Sample4_ASSEMBLED.fastq\n    fastqc --quiet --threads 1 Sample4_ASSEMBLED.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTQC_POSTASSEMBLY_UMI\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6879,7 +6879,7 @@
                 "id": "98",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py collapse -s Sample4_assemble-pass.fastq -o \"Sample4_assemble-pass_reheader-pass.fastq\" -f CONSCOUNT --act min\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_COLLAPSE_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6922,7 +6922,7 @@
                 "id": "100",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py collapse -s Sample5_assemble-pass.fastq -o \"Sample5_assemble-pass_reheader-pass.fastq\" -f CONSCOUNT --act min\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_COLLAPSE_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -6965,7 +6965,7 @@
                 "id": "101",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample5.fastq ] && ln -s Sample5_assemble-pass.fastq Sample5_ASSEMBLED.fastq\n    fastqc --quiet --threads 1 Sample5_ASSEMBLED.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTQC_POSTASSEMBLY_UMI\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7014,7 +7014,7 @@
                 "id": "103",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample6.fastq ] && ln -s Sample6_assemble-pass.fastq Sample6_ASSEMBLED.fastq\n    fastqc --quiet --threads 1 Sample6_ASSEMBLED.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTQC_POSTASSEMBLY_UMI\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7063,7 +7063,7 @@
                 "id": "102",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py collapse -s Sample6_assemble-pass.fastq -o \"Sample6_assemble-pass_reheader-pass.fastq\" -f CONSCOUNT --act min\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_COLLAPSE_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7106,7 +7106,7 @@
                 "id": "105",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py collapse -s Sample7_assemble-pass.fastq -o \"Sample7_assemble-pass_reheader-pass.fastq\" -f CONSCOUNT --act min\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_COLLAPSE_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7149,7 +7149,7 @@
                 "id": "104",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample7.fastq ] && ln -s Sample7_assemble-pass.fastq Sample7_ASSEMBLED.fastq\n    fastqc --quiet --threads 1 Sample7_ASSEMBLED.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTQC_POSTASSEMBLY_UMI\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7198,7 +7198,7 @@
                 "id": "106",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "[ ! -f  Sample8.fastq ] && ln -s Sample8_assemble-pass.fastq Sample8_ASSEMBLED.fastq\n    fastqc --quiet --threads 1 Sample8_ASSEMBLED.fastq\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:FASTQC_POSTASSEMBLY_UMI\":\n        fastqc: $( fastqc --version | sed -e \"s/FastQC v//g\" )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7247,7 +7247,7 @@
                 "id": "107",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py collapse -s Sample8_assemble-pass.fastq -o \"Sample8_assemble-pass_reheader-pass.fastq\" -f CONSCOUNT --act min\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_COLLAPSE_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7290,7 +7290,7 @@
                 "id": "108",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample1_assemble-pass_reheader-pass.fastq -o \"Sample1_assemble-pass_reheader-pass_reheader-pass.fastq\" -f PRCONS PRCONS --act first last -k C_PRIMER V_PRIMER\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_PRIMERS_UMI\":\n            presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -7333,7 +7333,7 @@
                 "id": "109",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample2_assemble-pass_reheader-pass.fastq -o \"Sample2_assemble-pass_reheader-pass_reheader-pass.fastq\" -f PRCONS PRCONS --act first last -k C_PRIMER V_PRIMER\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_PRIMERS_UMI\":\n            presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -7376,7 +7376,7 @@
                 "id": "110",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample3_assemble-pass_reheader-pass.fastq -o \"Sample3_assemble-pass_reheader-pass_reheader-pass.fastq\" -f PRCONS PRCONS --act first last -k C_PRIMER V_PRIMER\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_PRIMERS_UMI\":\n            presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -7419,7 +7419,7 @@
                 "id": "111",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample4_assemble-pass_reheader-pass.fastq -o \"Sample4_assemble-pass_reheader-pass_reheader-pass.fastq\" -f PRCONS PRCONS --act first last -k C_PRIMER V_PRIMER\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_PRIMERS_UMI\":\n            presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -7462,7 +7462,7 @@
                 "id": "112",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample5_assemble-pass_reheader-pass.fastq -o \"Sample5_assemble-pass_reheader-pass_reheader-pass.fastq\" -f PRCONS PRCONS --act first last -k C_PRIMER V_PRIMER\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_PRIMERS_UMI\":\n            presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -7505,7 +7505,7 @@
                 "id": "113",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample6_assemble-pass_reheader-pass.fastq -o \"Sample6_assemble-pass_reheader-pass_reheader-pass.fastq\" -f PRCONS PRCONS --act first last -k C_PRIMER V_PRIMER\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_PRIMERS_UMI\":\n            presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -7548,7 +7548,7 @@
                 "id": "114",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample7_assemble-pass_reheader-pass.fastq -o \"Sample7_assemble-pass_reheader-pass_reheader-pass.fastq\" -f PRCONS PRCONS --act first last -k C_PRIMER V_PRIMER\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_PRIMERS_UMI\":\n            presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -7591,7 +7591,7 @@
                 "id": "115",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py copy -s Sample8_assemble-pass_reheader-pass.fastq -o \"Sample8_assemble-pass_reheader-pass_reheader-pass.fastq\" -f PRCONS PRCONS --act first last -k C_PRIMER V_PRIMER\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_PRIMERS_UMI\":\n            presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n        END_VERSIONS"
                 },
                 "parents": [
@@ -7634,7 +7634,7 @@
                 "id": "116",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py add -s Sample1_assemble-pass_reheader-pass_reheader-pass.fastq -o \"Sample1_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq\" -f sample_id subject_id species pcr_target_locus -u Sample1 Patient1 human IG\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_METADATA_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7677,7 +7677,7 @@
                 "id": "117",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py add -s Sample2_assemble-pass_reheader-pass_reheader-pass.fastq -o \"Sample2_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq\" -f sample_id subject_id species pcr_target_locus -u Sample2 Patient1 human IG\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_METADATA_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7720,7 +7720,7 @@
                 "id": "118",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py add -s Sample3_assemble-pass_reheader-pass_reheader-pass.fastq -o \"Sample3_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq\" -f sample_id subject_id species pcr_target_locus -u Sample3 Patient1 human IG\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_METADATA_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7763,7 +7763,7 @@
                 "id": "119",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py add -s Sample4_assemble-pass_reheader-pass_reheader-pass.fastq -o \"Sample4_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq\" -f sample_id subject_id species pcr_target_locus -u Sample4 Patient1 human IG\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_METADATA_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7806,7 +7806,7 @@
                 "id": "120",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py add -s Sample5_assemble-pass_reheader-pass_reheader-pass.fastq -o \"Sample5_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq\" -f sample_id subject_id species pcr_target_locus -u Sample5 Patient2 human IG\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_METADATA_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7849,7 +7849,7 @@
                 "id": "121",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py add -s Sample6_assemble-pass_reheader-pass_reheader-pass.fastq -o \"Sample6_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq\" -f sample_id subject_id species pcr_target_locus -u Sample6 Patient2 human IG\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_METADATA_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7892,7 +7892,7 @@
                 "id": "122",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py add -s Sample7_assemble-pass_reheader-pass_reheader-pass.fastq -o \"Sample7_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq\" -f sample_id subject_id species pcr_target_locus -u Sample7 Patient2 human IG\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_METADATA_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7935,7 +7935,7 @@
                 "id": "123",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseHeaders.py add -s Sample8_assemble-pass_reheader-pass_reheader-pass.fastq -o \"Sample8_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq\" -f sample_id subject_id species pcr_target_locus -u Sample8 Patient2 human IG\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_PARSEHEADERS_METADATA_UMI\":\n        presto: $( ParseHeaders.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -7978,7 +7978,7 @@
                 "id": "124",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "CollapseSeq.py -s Sample1_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq -n 20 --inner --uf PRCONS --cf CONSCOUNT --act sum --outname Sample1 --log Sample1.log > \"Sample1_command_log.txt\"\n    ParseLog.py -l \"Sample1.log\" -f HEADER DUPCOUNT CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_COLLAPSESEQ_UMI\":\n        presto: $( CollapseSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8040,7 +8040,7 @@
                 "id": "125",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "CollapseSeq.py -s Sample2_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq -n 20 --inner --uf PRCONS --cf CONSCOUNT --act sum --outname Sample2 --log Sample2.log > \"Sample2_command_log.txt\"\n    ParseLog.py -l \"Sample2.log\" -f HEADER DUPCOUNT CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_COLLAPSESEQ_UMI\":\n        presto: $( CollapseSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8102,7 +8102,7 @@
                 "id": "126",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "CollapseSeq.py -s Sample3_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq -n 20 --inner --uf PRCONS --cf CONSCOUNT --act sum --outname Sample3 --log Sample3.log > \"Sample3_command_log.txt\"\n    ParseLog.py -l \"Sample3.log\" -f HEADER DUPCOUNT CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_COLLAPSESEQ_UMI\":\n        presto: $( CollapseSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8164,7 +8164,7 @@
                 "id": "127",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "CollapseSeq.py -s Sample4_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq -n 20 --inner --uf PRCONS --cf CONSCOUNT --act sum --outname Sample4 --log Sample4.log > \"Sample4_command_log.txt\"\n    ParseLog.py -l \"Sample4.log\" -f HEADER DUPCOUNT CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_COLLAPSESEQ_UMI\":\n        presto: $( CollapseSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8226,7 +8226,7 @@
                 "id": "128",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "CollapseSeq.py -s Sample5_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq -n 20 --inner --uf PRCONS --cf CONSCOUNT --act sum --outname Sample5 --log Sample5.log > \"Sample5_command_log.txt\"\n    ParseLog.py -l \"Sample5.log\" -f HEADER DUPCOUNT CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_COLLAPSESEQ_UMI\":\n        presto: $( CollapseSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8288,7 +8288,7 @@
                 "id": "129",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "CollapseSeq.py -s Sample6_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq -n 20 --inner --uf PRCONS --cf CONSCOUNT --act sum --outname Sample6 --log Sample6.log > \"Sample6_command_log.txt\"\n    ParseLog.py -l \"Sample6.log\" -f HEADER DUPCOUNT CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_COLLAPSESEQ_UMI\":\n        presto: $( CollapseSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8350,7 +8350,7 @@
                 "id": "130",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "CollapseSeq.py -s Sample7_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq -n 20 --inner --uf PRCONS --cf CONSCOUNT --act sum --outname Sample7 --log Sample7.log > \"Sample7_command_log.txt\"\n    ParseLog.py -l \"Sample7.log\" -f HEADER DUPCOUNT CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_COLLAPSESEQ_UMI\":\n        presto: $( CollapseSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8412,7 +8412,7 @@
                 "id": "131",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "CollapseSeq.py -s Sample8_assemble-pass_reheader-pass_reheader-pass_reheader-pass.fastq -n 20 --inner --uf PRCONS --cf CONSCOUNT --act sum --outname Sample8 --log Sample8.log > \"Sample8_command_log.txt\"\n    ParseLog.py -l \"Sample8.log\" -f HEADER DUPCOUNT CONSCOUNT\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_COLLAPSESEQ_UMI\":\n        presto: $( CollapseSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8474,7 +8474,7 @@
                 "id": "132",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "SplitSeq.py group -s Sample1_collapse-unique.fastq \\\n    -f CONSCOUNT --num 2 \\\n    --outname Sample1 \\\n    --fasta > \"Sample1_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_SPLITSEQ_UMI\":\n        presto: $( SplitSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8524,7 +8524,7 @@
                 "id": "133",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "SplitSeq.py group -s Sample2_collapse-unique.fastq \\\n    -f CONSCOUNT --num 2 \\\n    --outname Sample2 \\\n    --fasta > \"Sample2_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_SPLITSEQ_UMI\":\n        presto: $( SplitSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8574,7 +8574,7 @@
                 "id": "134",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "SplitSeq.py group -s Sample3_collapse-unique.fastq \\\n    -f CONSCOUNT --num 2 \\\n    --outname Sample3 \\\n    --fasta > \"Sample3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_SPLITSEQ_UMI\":\n        presto: $( SplitSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8624,7 +8624,7 @@
                 "id": "135",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "SplitSeq.py group -s Sample4_collapse-unique.fastq \\\n    -f CONSCOUNT --num 2 \\\n    --outname Sample4 \\\n    --fasta > \"Sample4_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_SPLITSEQ_UMI\":\n        presto: $( SplitSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8674,7 +8674,7 @@
                 "id": "136",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "SplitSeq.py group -s Sample5_collapse-unique.fastq \\\n    -f CONSCOUNT --num 2 \\\n    --outname Sample5 \\\n    --fasta > \"Sample5_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_SPLITSEQ_UMI\":\n        presto: $( SplitSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8724,7 +8724,7 @@
                 "id": "137",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "SplitSeq.py group -s Sample6_collapse-unique.fastq \\\n    -f CONSCOUNT --num 2 \\\n    --outname Sample6 \\\n    --fasta > \"Sample6_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_SPLITSEQ_UMI\":\n        presto: $( SplitSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8774,7 +8774,7 @@
                 "id": "138",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "SplitSeq.py group -s Sample7_collapse-unique.fastq \\\n    -f CONSCOUNT --num 2 \\\n    --outname Sample7 \\\n    --fasta > \"Sample7_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_SPLITSEQ_UMI\":\n        presto: $( SplitSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8824,7 +8824,7 @@
                 "id": "139",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "SplitSeq.py group -s Sample8_collapse-unique.fastq \\\n    -f CONSCOUNT --num 2 \\\n    --outname Sample8 \\\n    --fasta > \"Sample8_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:SEQUENCE_ASSEMBLY:PRESTO_UMI:PRESTO_SPLITSEQ_UMI\":\n        presto: $( SplitSeq.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8874,7 +8874,7 @@
                 "id": "140",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssignGenes.py igblast -s Sample1_atleast-2.fasta -b igblast_base --organism human --loci ig --format blast --nproc 1 --outname \"Sample1\" > \"Sample1\"_changeo_assigngenes_command_log.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_ASSIGNGENES\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( AssignGenes.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -8937,7 +8937,7 @@
                 "id": "141",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssignGenes.py igblast -s Sample2_atleast-2.fasta -b igblast_base --organism human --loci ig --format blast --nproc 1 --outname \"Sample2\" > \"Sample2\"_changeo_assigngenes_command_log.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_ASSIGNGENES\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( AssignGenes.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9000,7 +9000,7 @@
                 "id": "142",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssignGenes.py igblast -s Sample3_atleast-2.fasta -b igblast_base --organism human --loci ig --format blast --nproc 1 --outname \"Sample3\" > \"Sample3\"_changeo_assigngenes_command_log.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_ASSIGNGENES\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( AssignGenes.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9063,7 +9063,7 @@
                 "id": "143",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssignGenes.py igblast -s Sample4_atleast-2.fasta -b igblast_base --organism human --loci ig --format blast --nproc 1 --outname \"Sample4\" > \"Sample4\"_changeo_assigngenes_command_log.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_ASSIGNGENES\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( AssignGenes.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9126,7 +9126,7 @@
                 "id": "144",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssignGenes.py igblast -s Sample5_atleast-2.fasta -b igblast_base --organism human --loci ig --format blast --nproc 1 --outname \"Sample5\" > \"Sample5\"_changeo_assigngenes_command_log.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_ASSIGNGENES\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( AssignGenes.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9189,7 +9189,7 @@
                 "id": "145",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssignGenes.py igblast -s Sample6_atleast-2.fasta -b igblast_base --organism human --loci ig --format blast --nproc 1 --outname \"Sample6\" > \"Sample6\"_changeo_assigngenes_command_log.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_ASSIGNGENES\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( AssignGenes.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9252,7 +9252,7 @@
                 "id": "146",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssignGenes.py igblast -s Sample7_atleast-2.fasta -b igblast_base --organism human --loci ig --format blast --nproc 1 --outname \"Sample7\" > \"Sample7\"_changeo_assigngenes_command_log.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_ASSIGNGENES\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( AssignGenes.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9315,7 +9315,7 @@
                 "id": "147",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "AssignGenes.py igblast -s Sample8_atleast-2.fasta -b igblast_base --organism human --loci ig --format blast --nproc 1 --outname \"Sample8\" > \"Sample8\"_changeo_assigngenes_command_log.txt\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_ASSIGNGENES\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( AssignGenes.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9378,7 +9378,7 @@
                 "id": "148",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MakeDb.py igblast -i Sample1_igblast.fmt7 -s Sample1_atleast-2.fasta -r \\\n    imgtdb_base/human/vdj/ \\\n    --regions default --format airr --extended \\\n    --outname \"Sample1\" > \"Sample1_makedb_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_MAKEDB\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( MakeDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9442,7 +9442,7 @@
                 "id": "149",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MakeDb.py igblast -i Sample2_igblast.fmt7 -s Sample2_atleast-2.fasta -r \\\n    imgtdb_base/human/vdj/ \\\n    --regions default --format airr --extended \\\n    --outname \"Sample2\" > \"Sample2_makedb_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_MAKEDB\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( MakeDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9506,7 +9506,7 @@
                 "id": "150",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MakeDb.py igblast -i Sample3_igblast.fmt7 -s Sample3_atleast-2.fasta -r \\\n    imgtdb_base/human/vdj/ \\\n    --regions default --format airr --extended \\\n    --outname \"Sample3\" > \"Sample3_makedb_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_MAKEDB\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( MakeDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9570,7 +9570,7 @@
                 "id": "151",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MakeDb.py igblast -i Sample4_igblast.fmt7 -s Sample4_atleast-2.fasta -r \\\n    imgtdb_base/human/vdj/ \\\n    --regions default --format airr --extended \\\n    --outname \"Sample4\" > \"Sample4_makedb_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_MAKEDB\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( MakeDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9634,7 +9634,7 @@
                 "id": "152",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MakeDb.py igblast -i Sample5_igblast.fmt7 -s Sample5_atleast-2.fasta -r \\\n    imgtdb_base/human/vdj/ \\\n    --regions default --format airr --extended \\\n    --outname \"Sample5\" > \"Sample5_makedb_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_MAKEDB\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( MakeDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9698,7 +9698,7 @@
                 "id": "153",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MakeDb.py igblast -i Sample6_igblast.fmt7 -s Sample6_atleast-2.fasta -r \\\n    imgtdb_base/human/vdj/ \\\n    --regions default --format airr --extended \\\n    --outname \"Sample6\" > \"Sample6_makedb_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_MAKEDB\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( MakeDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9762,7 +9762,7 @@
                 "id": "154",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MakeDb.py igblast -i Sample7_igblast.fmt7 -s Sample7_atleast-2.fasta -r \\\n    imgtdb_base/human/vdj/ \\\n    --regions default --format airr --extended \\\n    --outname \"Sample7\" > \"Sample7_makedb_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_MAKEDB\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( MakeDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9826,7 +9826,7 @@
                 "id": "155",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "MakeDb.py igblast -i Sample8_igblast.fmt7 -s Sample8_atleast-2.fasta -r \\\n    imgtdb_base/human/vdj/ \\\n    --regions default --format airr --extended \\\n    --outname \"Sample8\" > \"Sample8_makedb_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_MAKEDB\":\n        igblastn: $( igblastn -version | grep -o \"igblast[0-9\\. ]\\+\" | grep -o \"[0-9\\. ]\\+\" )\n        changeo: $( MakeDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9890,7 +9890,7 @@
                 "id": "156",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_filter_quality.R --repertoire Sample1_db-pass.tsv --outname Sample1 > \"Sample1_fq_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_QUALITY\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        stringi: $(Rscript -e \"library(stringi); cat(paste(packageVersion('stringi'), collapse='.'))\")\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        DT: $(Rscript -e \"library(DT); cat(paste(packageVersion('DT'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9940,7 +9940,7 @@
                 "id": "157",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_filter_quality.R --repertoire Sample2_db-pass.tsv --outname Sample2 > \"Sample2_fq_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_QUALITY\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        stringi: $(Rscript -e \"library(stringi); cat(paste(packageVersion('stringi'), collapse='.'))\")\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        DT: $(Rscript -e \"library(DT); cat(paste(packageVersion('DT'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -9990,7 +9990,7 @@
                 "id": "158",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_filter_quality.R --repertoire Sample3_db-pass.tsv --outname Sample3 > \"Sample3_fq_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_QUALITY\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        stringi: $(Rscript -e \"library(stringi); cat(paste(packageVersion('stringi'), collapse='.'))\")\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        DT: $(Rscript -e \"library(DT); cat(paste(packageVersion('DT'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10040,7 +10040,7 @@
                 "id": "159",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_filter_quality.R --repertoire Sample4_db-pass.tsv --outname Sample4 > \"Sample4_fq_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_QUALITY\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        stringi: $(Rscript -e \"library(stringi); cat(paste(packageVersion('stringi'), collapse='.'))\")\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        DT: $(Rscript -e \"library(DT); cat(paste(packageVersion('DT'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10090,7 +10090,7 @@
                 "id": "160",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_filter_quality.R --repertoire Sample5_db-pass.tsv --outname Sample5 > \"Sample5_fq_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_QUALITY\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        stringi: $(Rscript -e \"library(stringi); cat(paste(packageVersion('stringi'), collapse='.'))\")\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        DT: $(Rscript -e \"library(DT); cat(paste(packageVersion('DT'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10140,7 +10140,7 @@
                 "id": "161",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_filter_quality.R --repertoire Sample6_db-pass.tsv --outname Sample6 > \"Sample6_fq_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_QUALITY\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        stringi: $(Rscript -e \"library(stringi); cat(paste(packageVersion('stringi'), collapse='.'))\")\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        DT: $(Rscript -e \"library(DT); cat(paste(packageVersion('DT'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10190,7 +10190,7 @@
                 "id": "162",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_filter_quality.R --repertoire Sample7_db-pass.tsv --outname Sample7 > \"Sample7_fq_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_QUALITY\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        stringi: $(Rscript -e \"library(stringi); cat(paste(packageVersion('stringi'), collapse='.'))\")\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        DT: $(Rscript -e \"library(DT); cat(paste(packageVersion('DT'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10240,7 +10240,7 @@
                 "id": "163",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_filter_quality.R --repertoire Sample8_db-pass.tsv --outname Sample8 > \"Sample8_fq_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_QUALITY\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        stringi: $(Rscript -e \"library(stringi); cat(paste(packageVersion('stringi'), collapse='.'))\")\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        DT: $(Rscript -e \"library(DT); cat(paste(packageVersion('DT'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10290,7 +10290,7 @@
                 "id": "164",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "log_parsing.py --cluster_sets\n\n        cat <<-END_VERSIONS > versions.yml\n        \"NFCORE_AIRRFLOW:AIRRFLOW:REPERTOIRE_ANALYSIS_REPORTING:PARSE_LOGS\":\n            python: $( echo $(python --version | grep -o \"[0-9\\. ]\\+\") )\n            pandas: $(echo $(python -c \"import pkg_resources; print(pkg_resources.get_distribution('pandas').version)\"))\n        END_VERSIONS"
                 },
                 "parents": [
@@ -10876,7 +10876,7 @@
                 "id": "165",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseDb.py split -d Sample1_quality-pass.tsv -f productive --outname Sample1 > \"Sample1_split_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_PARSEDB_SPLIT\":\n        changeo: $( ParseDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10926,7 +10926,7 @@
                 "id": "166",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseDb.py split -d Sample2_quality-pass.tsv -f productive --outname Sample2 > \"Sample2_split_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_PARSEDB_SPLIT\":\n        changeo: $( ParseDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -10976,7 +10976,7 @@
                 "id": "167",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseDb.py split -d Sample3_quality-pass.tsv -f productive --outname Sample3 > \"Sample3_split_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_PARSEDB_SPLIT\":\n        changeo: $( ParseDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11026,7 +11026,7 @@
                 "id": "168",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseDb.py split -d Sample4_quality-pass.tsv -f productive --outname Sample4 > \"Sample4_split_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_PARSEDB_SPLIT\":\n        changeo: $( ParseDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11076,7 +11076,7 @@
                 "id": "169",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseDb.py split -d Sample5_quality-pass.tsv -f productive --outname Sample5 > \"Sample5_split_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_PARSEDB_SPLIT\":\n        changeo: $( ParseDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11126,7 +11126,7 @@
                 "id": "170",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseDb.py split -d Sample6_quality-pass.tsv -f productive --outname Sample6 > \"Sample6_split_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_PARSEDB_SPLIT\":\n        changeo: $( ParseDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11176,7 +11176,7 @@
                 "id": "171",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseDb.py split -d Sample7_quality-pass.tsv -f productive --outname Sample7 > \"Sample7_split_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_PARSEDB_SPLIT\":\n        changeo: $( ParseDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11226,7 +11226,7 @@
                 "id": "172",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "ParseDb.py split -d Sample8_quality-pass.tsv -f productive --outname Sample8 > \"Sample8_split_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:CHANGEO_PARSEDB_SPLIT\":\n        changeo: $( ParseDb.py --version | awk -F' '  '{print $2}' )\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11276,7 +11276,7 @@
                 "id": "173",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_mod_3_junction.R --repertoire Sample1_productive-T.tsv --outname Sample1 > \"Sample1_jmod3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_JUNCTION_MOD3\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11326,7 +11326,7 @@
                 "id": "174",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_mod_3_junction.R --repertoire Sample2_productive-T.tsv --outname Sample2 > \"Sample2_jmod3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_JUNCTION_MOD3\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11376,7 +11376,7 @@
                 "id": "175",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_mod_3_junction.R --repertoire Sample3_productive-T.tsv --outname Sample3 > \"Sample3_jmod3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_JUNCTION_MOD3\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11426,7 +11426,7 @@
                 "id": "176",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_mod_3_junction.R --repertoire Sample4_productive-T.tsv --outname Sample4 > \"Sample4_jmod3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_JUNCTION_MOD3\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11476,7 +11476,7 @@
                 "id": "177",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_mod_3_junction.R --repertoire Sample5_productive-T.tsv --outname Sample5 > \"Sample5_jmod3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_JUNCTION_MOD3\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11526,7 +11526,7 @@
                 "id": "178",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_mod_3_junction.R --repertoire Sample6_productive-T.tsv --outname Sample6 > \"Sample6_jmod3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_JUNCTION_MOD3\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11576,7 +11576,7 @@
                 "id": "179",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_mod_3_junction.R --repertoire Sample7_productive-T.tsv --outname Sample7 > \"Sample7_jmod3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_JUNCTION_MOD3\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11626,7 +11626,7 @@
                 "id": "180",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_mod_3_junction.R --repertoire Sample8_productive-T.tsv --outname Sample8 > \"Sample8_jmod3_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:FILTER_JUNCTION_MOD3\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        airr: $(Rscript -e \"library(airr); cat(paste(packageVersion('airr'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11676,7 +11676,7 @@
                 "id": "181",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_add_metadata.R --repertoire \"Sample1_junction-pass.tsv\" --metadata \"samplesheet.valid.tsv\" --input_id \"Sample1\" --outname \"Sample1\" > \"Sample1_add-meta_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:ADD_META_TO_TAB\":\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11736,7 +11736,7 @@
                 "id": "182",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_add_metadata.R --repertoire \"Sample2_junction-pass.tsv\" --metadata \"samplesheet.valid.tsv\" --input_id \"Sample2\" --outname \"Sample2\" > \"Sample2_add-meta_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:ADD_META_TO_TAB\":\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11796,7 +11796,7 @@
                 "id": "183",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_add_metadata.R --repertoire \"Sample3_junction-pass.tsv\" --metadata \"samplesheet.valid.tsv\" --input_id \"Sample3\" --outname \"Sample3\" > \"Sample3_add-meta_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:ADD_META_TO_TAB\":\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11856,7 +11856,7 @@
                 "id": "184",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_add_metadata.R --repertoire \"Sample4_junction-pass.tsv\" --metadata \"samplesheet.valid.tsv\" --input_id \"Sample4\" --outname \"Sample4\" > \"Sample4_add-meta_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:ADD_META_TO_TAB\":\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11916,7 +11916,7 @@
                 "id": "185",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_add_metadata.R --repertoire \"Sample5_junction-pass.tsv\" --metadata \"samplesheet.valid.tsv\" --input_id \"Sample5\" --outname \"Sample5\" > \"Sample5_add-meta_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:ADD_META_TO_TAB\":\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -11976,7 +11976,7 @@
                 "id": "186",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_add_metadata.R --repertoire \"Sample6_junction-pass.tsv\" --metadata \"samplesheet.valid.tsv\" --input_id \"Sample6\" --outname \"Sample6\" > \"Sample6_add-meta_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:ADD_META_TO_TAB\":\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -12036,7 +12036,7 @@
                 "id": "187",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_add_metadata.R --repertoire \"Sample7_junction-pass.tsv\" --metadata \"samplesheet.valid.tsv\" --input_id \"Sample7\" --outname \"Sample7\" > \"Sample7_add-meta_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:ADD_META_TO_TAB\":\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -12096,7 +12096,7 @@
                 "id": "188",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "reveal_add_metadata.R --repertoire \"Sample8_junction-pass.tsv\" --metadata \"samplesheet.valid.tsv\" --input_id \"Sample8\" --outname \"Sample8\" > \"Sample8_add-meta_command_log.txt\"\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:VDJ_ANNOTATION:ADD_META_TO_TAB\":\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        optparse: $(Rscript -e \"library(optparse); cat(paste(packageVersion('optparse'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -12156,7 +12156,7 @@
                 "id": "189",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "echo \"Sample1_meta-pass.tsv\" > tabs.txt\n    Rscript -e \"enchantr::enchantr_report('collapse_duplicates', \\\n        report_params=list('input'='tabs.txt',\\\n        'collapseby'='sample_id',\\\n        'outdir'=getwd(),\\\n        'nproc'=1,\\\n        'outname'='Sample1',\\\n        'log'='Sample1_collapse_command_log'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:BULK_QC_AND_FILTER:COLLAPSE_DUPLICATES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr Sample1_collapse_report"
                 },
                 "parents": [
@@ -12213,7 +12213,7 @@
                 "id": "190",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "echo \"Sample2_meta-pass.tsv\" > tabs.txt\n    Rscript -e \"enchantr::enchantr_report('collapse_duplicates', \\\n        report_params=list('input'='tabs.txt',\\\n        'collapseby'='sample_id',\\\n        'outdir'=getwd(),\\\n        'nproc'=1,\\\n        'outname'='Sample2',\\\n        'log'='Sample2_collapse_command_log'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:BULK_QC_AND_FILTER:COLLAPSE_DUPLICATES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr Sample2_collapse_report"
                 },
                 "parents": [
@@ -12270,7 +12270,7 @@
                 "id": "191",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "echo \"Sample3_meta-pass.tsv\" > tabs.txt\n    Rscript -e \"enchantr::enchantr_report('collapse_duplicates', \\\n        report_params=list('input'='tabs.txt',\\\n        'collapseby'='sample_id',\\\n        'outdir'=getwd(),\\\n        'nproc'=1,\\\n        'outname'='Sample3',\\\n        'log'='Sample3_collapse_command_log'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:BULK_QC_AND_FILTER:COLLAPSE_DUPLICATES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr Sample3_collapse_report"
                 },
                 "parents": [
@@ -12327,7 +12327,7 @@
                 "id": "192",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "echo \"Sample4_meta-pass.tsv\" > tabs.txt\n    Rscript -e \"enchantr::enchantr_report('collapse_duplicates', \\\n        report_params=list('input'='tabs.txt',\\\n        'collapseby'='sample_id',\\\n        'outdir'=getwd(),\\\n        'nproc'=1,\\\n        'outname'='Sample4',\\\n        'log'='Sample4_collapse_command_log'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:BULK_QC_AND_FILTER:COLLAPSE_DUPLICATES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr Sample4_collapse_report"
                 },
                 "parents": [
@@ -12384,7 +12384,7 @@
                 "id": "193",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "echo \"Sample5_meta-pass.tsv\" > tabs.txt\n    Rscript -e \"enchantr::enchantr_report('collapse_duplicates', \\\n        report_params=list('input'='tabs.txt',\\\n        'collapseby'='sample_id',\\\n        'outdir'=getwd(),\\\n        'nproc'=1,\\\n        'outname'='Sample5',\\\n        'log'='Sample5_collapse_command_log'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:BULK_QC_AND_FILTER:COLLAPSE_DUPLICATES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr Sample5_collapse_report"
                 },
                 "parents": [
@@ -12441,7 +12441,7 @@
                 "id": "194",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "echo \"Sample6_meta-pass.tsv\" > tabs.txt\n    Rscript -e \"enchantr::enchantr_report('collapse_duplicates', \\\n        report_params=list('input'='tabs.txt',\\\n        'collapseby'='sample_id',\\\n        'outdir'=getwd(),\\\n        'nproc'=1,\\\n        'outname'='Sample6',\\\n        'log'='Sample6_collapse_command_log'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:BULK_QC_AND_FILTER:COLLAPSE_DUPLICATES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr Sample6_collapse_report"
                 },
                 "parents": [
@@ -12498,7 +12498,7 @@
                 "id": "195",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "echo \"Sample7_meta-pass.tsv\" > tabs.txt\n    Rscript -e \"enchantr::enchantr_report('collapse_duplicates', \\\n        report_params=list('input'='tabs.txt',\\\n        'collapseby'='sample_id',\\\n        'outdir'=getwd(),\\\n        'nproc'=1,\\\n        'outname'='Sample7',\\\n        'log'='Sample7_collapse_command_log'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:BULK_QC_AND_FILTER:COLLAPSE_DUPLICATES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr Sample7_collapse_report"
                 },
                 "parents": [
@@ -12555,7 +12555,7 @@
                 "id": "196",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "echo \"Sample8_meta-pass.tsv\" > tabs.txt\n    Rscript -e \"enchantr::enchantr_report('collapse_duplicates', \\\n        report_params=list('input'='tabs.txt',\\\n        'collapseby'='sample_id',\\\n        'outdir'=getwd(),\\\n        'nproc'=1,\\\n        'outname'='Sample8',\\\n        'log'='Sample8_collapse_command_log'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:BULK_QC_AND_FILTER:COLLAPSE_DUPLICATES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr Sample8_collapse_report"
                 },
                 "parents": [
@@ -12612,7 +12612,7 @@
                 "id": "197",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('find_threshold', \\\n        report_params=list('input'='find_threshold_tabs.txt',\\\n            'cloneby'='subject_id',\\\n            'crossby'='subject_id',\\\n            'singlecell'='single_cell',\\\n            'outdir'=getwd(),\\\n            'nproc'=1,\\\n            'outname'='all_reps',\\\n            'log'='all_reps_threshold_command_log',\\\n            'logo'='nf-core-airrflow_logo_reports.png'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:FIND_CLONAL_THRESHOLD\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n    mv enchantr all_reps_dist_report"
                 },
                 "parents": [
@@ -12682,7 +12682,7 @@
                 "id": "199",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('define_clones', \\\n                                        report_params=list('input'='Sample5_meta-pass_Sample5_collapse-pass.tsv,Sample6_meta-pass_Sample6_collapse-pass.tsv,Sample7_meta-pass_Sample7_collapse-pass.tsv,Sample8_meta-pass_Sample8_collapse-pass.tsv', \\\n                                        'imgt_db'='imgtdb_base', \\\n                                        'cloneby'='subject_id', \\\n                                        'force'=FALSE, \\\n                                        'threshold'=0.2370375, \\\n                                        'singlecell'='single_cell','outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='Patient2_clone_command_log' ,'linkage'='single','method'='nt','min_n'=30,'model'='hierarchical','outname'='','outputby'='sample_id','skip_convergence'='true'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DEFINE_CLONES_COMPUTE\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'Patient2_clone_report'"
                 },
                 "parents": [
@@ -12786,7 +12786,7 @@
                 "id": "198",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('define_clones', \\\n                                        report_params=list('input'='Sample1_meta-pass_Sample1_collapse-pass.tsv,Sample2_meta-pass_Sample2_collapse-pass.tsv,Sample3_meta-pass_Sample3_collapse-pass.tsv,Sample4_meta-pass_Sample4_collapse-pass.tsv', \\\n                                        'imgt_db'='imgtdb_base', \\\n                                        'cloneby'='subject_id', \\\n                                        'force'=FALSE, \\\n                                        'threshold'=0.2370375, \\\n                                        'singlecell'='single_cell','outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='Patient1_clone_command_log' ,'linkage'='single','method'='nt','min_n'=30,'model'='hierarchical','outname'='','outputby'='sample_id','skip_convergence'='true'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DEFINE_CLONES_COMPUTE\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'Patient1_clone_report'"
                 },
                 "parents": [
@@ -12890,7 +12890,7 @@
                 "id": "200",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('dowser_lineage', \\\n                                        report_params=list('input'='Sample5__clone-pass.tsv', \\\n                                        'exec'='/usr/local/bin/igphyml', \\\n                                        'outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='Sample5_dowser_command_log' ,'build'='igphyml'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DOWSER_LINEAGES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'Sample5_dowser_report'"
                 },
                 "parents": [
@@ -12938,7 +12938,7 @@
                 "id": "203",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('dowser_lineage', \\\n                                        report_params=list('input'='Sample8__clone-pass.tsv', \\\n                                        'exec'='/usr/local/bin/igphyml', \\\n                                        'outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='Sample8_dowser_command_log' ,'build'='igphyml'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DOWSER_LINEAGES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'Sample8_dowser_report'"
                 },
                 "parents": [
@@ -12986,7 +12986,7 @@
                 "id": "202",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('dowser_lineage', \\\n                                        report_params=list('input'='Sample7__clone-pass.tsv', \\\n                                        'exec'='/usr/local/bin/igphyml', \\\n                                        'outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='Sample7_dowser_command_log' ,'build'='igphyml'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DOWSER_LINEAGES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'Sample7_dowser_report'"
                 },
                 "parents": [
@@ -13034,7 +13034,7 @@
                 "id": "201",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('dowser_lineage', \\\n                                        report_params=list('input'='Sample6__clone-pass.tsv', \\\n                                        'exec'='/usr/local/bin/igphyml', \\\n                                        'outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='Sample6_dowser_command_log' ,'build'='igphyml'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DOWSER_LINEAGES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'Sample6_dowser_report'"
                 },
                 "parents": [
@@ -13082,7 +13082,7 @@
                 "id": "204",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('dowser_lineage', \\\n                                        report_params=list('input'='Sample1__clone-pass.tsv', \\\n                                        'exec'='/usr/local/bin/igphyml', \\\n                                        'outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='Sample1_dowser_command_log' ,'build'='igphyml'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DOWSER_LINEAGES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'Sample1_dowser_report'"
                 },
                 "parents": [
@@ -13130,7 +13130,7 @@
                 "id": "205",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('dowser_lineage', \\\n                                        report_params=list('input'='Sample2__clone-pass.tsv', \\\n                                        'exec'='/usr/local/bin/igphyml', \\\n                                        'outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='Sample2_dowser_command_log' ,'build'='igphyml'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DOWSER_LINEAGES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'Sample2_dowser_report'"
                 },
                 "parents": [
@@ -13178,7 +13178,7 @@
                 "id": "207",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('dowser_lineage', \\\n                                        report_params=list('input'='Sample4__clone-pass.tsv', \\\n                                        'exec'='/usr/local/bin/igphyml', \\\n                                        'outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='Sample4_dowser_command_log' ,'build'='igphyml'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DOWSER_LINEAGES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'Sample4_dowser_report'"
                 },
                 "parents": [
@@ -13226,7 +13226,7 @@
                 "id": "206",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('dowser_lineage', \\\n                                        report_params=list('input'='Sample3__clone-pass.tsv', \\\n                                        'exec'='/usr/local/bin/igphyml', \\\n                                        'outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='Sample3_dowser_command_log' ,'build'='igphyml'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DOWSER_LINEAGES\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'Sample3_dowser_report'"
                 },
                 "parents": [
@@ -13274,7 +13274,7 @@
                 "id": "208",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('define_clones', \\\n                                        report_params=list('input'='all_repertoires_cloned_tabs.txt', \\\n                                        'imgt_db'='imgtdb_base', \\\n                                        'cloneby'='subject_id', \\\n                                        'force'=FALSE, \\\n                                        'threshold'=0.2370375, \\\n                                        'singlecell'='single_cell','outdir'=getwd(), \\\n                                        'nproc'=1,\\\n                                        'log'='all_reps_clone_command_log' ,'linkage'='single','method'='nt','min_n'=30,'model'='hierarchical','outname'='','outputby'='sample_id','skip_convergence'='true'))\"\n\n    echo \"NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:DEFINE_CLONES_REPORT\": > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr 'all_reps_clone_report'"
                 },
                 "parents": [
@@ -13376,7 +13376,7 @@
                 "id": "209",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "Rscript -e \"enchantr::enchantr_report('file_size', \\\n        report_params=list('input'='all_logs_tabs.txt', 'metadata'='samplesheet.valid.tsv',\\\n        'outdir'=getwd()))\"\n\n    echo \"\"NFCORE_AIRRFLOW:AIRRFLOW:REPERTOIRE_ANALYSIS_REPORTING:REPORT_FILE_SIZE\":\" > versions.yml\n    Rscript -e \"cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))\" >> versions.yml\n\n    mv enchantr file_size_report"
                 },
                 "parents": [
@@ -13440,7 +13440,7 @@
                 "id": "210",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "execute_report.R --report_file repertoire_comparison.Rmd\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:REPERTOIRE_ANALYSIS_REPORTING:AIRRFLOW_REPORT\":\n        alakazam: $(Rscript -e \"library(alakazam); cat(paste(packageVersion('alakazam'), collapse='.'))\")\n        shazam: $(Rscript -e \"library(shazam); cat(paste(packageVersion('shazam'), collapse='.'))\")\n        stringr: $(Rscript -e \"library(stringr); cat(paste(packageVersion('stringr'), collapse='.'))\")\n        dplyr: $(Rscript -e \"library(dplyr); cat(paste(packageVersion('dplyr'), collapse='.'))\")\n        knitr: $(Rscript -e \"library(knitr); cat(paste(packageVersion('knitr'), collapse='.'))\")\n        R: $(echo $(R --version 2>&1) | awk -F' '  '{print $3}')\n    END_VERSIONS"
                 },
                 "parents": [
@@ -13538,7 +13538,7 @@
                 "id": "211",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "def args = task.ext.args ?: ''\ntemplate 'dumpsoftwareversions.py'"
                 },
                 "parents": [
@@ -13619,7 +13619,7 @@
                 "id": "212",
                 "type": "compute",
                 "command": {
-                    "program": "",
+                    "program": "<composite>",
                     "arguments": "multiqc \\\n        --force \\\n         \\\n        --config multiqc_config.yml \\\n         \\\n        .\n\n    cat <<-END_VERSIONS > versions.yml\n    \"NFCORE_AIRRFLOW:AIRRFLOW:MULTIQC\":\n        multiqc: $( multiqc --version | sed -e \"s/multiqc, version //g\" )\n    END_VERSIONS"
                 },
                 "parents": [
