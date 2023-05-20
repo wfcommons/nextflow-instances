@@ -5,6 +5,7 @@
     "schemaVersion": "1.4",
     "wms": {
         "name": "Nextflow",
+	"version": "23.04.1",
         "url": "https://www.nextflow.io/"
     },
     "workflow": {
