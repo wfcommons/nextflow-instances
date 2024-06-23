@@ -1,3 +1,10 @@
+**THIS REPOSITORY HAS BEEN ARCHIVED**
+
+Please, see the new instances using [WfFormat](https://github.com/wfcommons/WfFormat) in the new [WfInstances](https://github.com/wfcommons/WfInstances) repository.
+
+---
+
+
 ![Build](https://github.com/wfcommons/nextflow-instances/workflows/Build/badge.svg)
 [![DOI](https://zenodo.org/badge/403473293.svg)](https://zenodo.org/badge/latestdoi/403473293)
 
